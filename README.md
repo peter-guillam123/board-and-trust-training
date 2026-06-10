@@ -35,6 +35,13 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 10 June 2026 — Published to GitHub Pages
+
+Live at <https://peter-guillam123.github.io/board-and-trust-training/> — public
+repo, deployed by the Actions workflow on push to `main`. The unoptimised source
+PNGs and the local `.claude/` config are kept out of the repo via `.gitignore`;
+the site ships as `index.html` + `styles.css` + `deck-stage.js` + `images/`.
+
 ### 10 June 2026 — Moved "Four key rules" to after the thesis
 
 Relocated the editorial non-negotiables from slide 3 (right after the agenda) to
