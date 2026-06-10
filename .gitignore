@@ -1,0 +1,5 @@
+.DS_Store
+.claude/
+
+# Unoptimised source images — the deck serves the optimised copies in images/
+/*.png
