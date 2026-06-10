@@ -35,6 +35,18 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 10 June 2026 — Reworked the closing two slides for beauty
+
+Slide 25 ("First, you have to use it") was unfocused — four blocks of equal weight.
+Rebalanced for hierarchy: the prompt is now the elevated hero (subtle lift, larger
+type, the caret), the two principles are demoted to quiet grey supporting lines,
+and "It's non-negotiable" is the single bold. Columns now balance (~490px each).
+Slide 26 ("Pick a first project") reused the card-and-bubble shape one time too
+many; replaced it with a typographic numbered list — big colour-coded numerals
+(01 blue / 02 red / 03 green), heading + rationale, and the "I asked Claude to…"
+example as an italic quote with a matching left-rule. Together the pair now close
+the deck in a calmer, more editorial register.
+
 ### 10 June 2026 — Fixed intermittent prompt-typing freeze on reload
 
 On reload the slides slot in over several `slotchange` events, and `deck-stage`

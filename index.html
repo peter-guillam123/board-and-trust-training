@@ -462,54 +462,59 @@
      the left; the genie on-ramp (a real first prompt, typed in live)
      on the right.
      ============================================================ */
-  .slide--start .slide-title { font-size: 60px; margin-bottom: 38px; max-width: none; }
+  .slide--start .slide-title { font-size: 60px; margin-bottom: 30px; max-width: none; }
   .slide--start .slide-body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 76px;
+    grid-template-columns: 1fr 1.08fr;   /* right a touch wider — the prompt is the hero */
+    gap: 88px;
     align-items: center;
   }
+  /* Left — the argument. The lede carries it; the two principles defer. */
   .start-lede {
     font-family: var(--body);
-    font-size: 31px;
-    line-height: 1.5;
+    font-size: 35px;
+    line-height: 1.55;
     color: var(--ink-soft);
-    margin: 0 0 50px;
+    margin: 0 0 52px;
   }
   .start-lede strong { color: var(--ink); font-weight: 700; }
-  .start-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 30px; }
+  .start-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
   .start-points li {
     position: relative;
-    padding-left: 30px;
+    padding-left: 24px;
     font-family: var(--body);
-    font-size: 25px;
+    font-size: 20px;
     line-height: 1.45;
-    color: var(--ink-soft);
+    color: var(--ink-mute);
   }
   .start-points li::before {
     content: '';
     position: absolute;
-    left: 0; top: 13px;
-    width: 11px; height: 11px;
-    background: var(--news-red);
+    left: 0; top: 11px;
+    width: 7px; height: 7px;
+    background: var(--ink-mute);
   }
-  .start-points strong { color: var(--ink); font-weight: 700; }
+  .start-points strong { color: var(--ink-soft); font-weight: 600; }
+  /* Right — the on-ramp. The prompt is the hero, the genie line its lead-in. */
   .start-genie-intro {
     font-family: var(--body);
-    font-size: 26px;
+    font-size: 28px;
     line-height: 1.45;
     color: var(--ink-soft);
-    margin: 0 0 26px;
+    margin: 0 0 32px;
   }
   .start-genie-intro strong { color: var(--ink); font-weight: 700; }
-  .slide--start .prompt-box { padding: 32px 36px 34px; }
-  .slide--start .prompt-text { font-size: 25px; line-height: 1.55; }
+  .slide--start .prompt-box {
+    padding: 44px 46px 48px;
+    box-shadow: 0 16px 40px rgba(18,18,18,0.09);
+  }
+  .slide--start .prompt-text { font-size: 28px; line-height: 1.6; }
   .start-buy {
     font-family: var(--body);
-    font-size: 22px;
+    font-size: 21px;
     line-height: 1.4;
     color: var(--ink-mute);
-    margin: 28px 0 0;
+    margin: 34px 0 0;
   }
 
   /* ============================================================
@@ -880,20 +885,67 @@
   }
 
   /* ============================================================
-     Getting started — "Pick a first project": three ways in, each a
-     card with an "I asked Claude to…" example in a message bubble.
+     Getting started — "Pick a first project": three ways in, set as a
+     typographic numbered list (big numeral · heading + why · the
+     "I asked Claude to…" as an italic quote). A calmer, editorial close
+     — deliberately unlike the card grids earlier in the deck.
      ============================================================ */
-  .slide--ways .slide-title { font-size: 52px; margin-bottom: 16px; }
-  .slide--ways .slide-subtitle { font-family: var(--body); font-size: 24px; line-height: 1.4; color: var(--ink-mute); margin: 0 0 32px; max-width: 90ch; }
-  .slide--ways .aims { gap: 32px; }
-  .slide--ways .aim { min-height: 0; padding: 32px 30px 30px; gap: 16px; }
-  .slide--ways .aim h3 { font-size: 33px; line-height: 1.08; }
-  .slide--ways .aim > p { font-size: 23px; line-height: 1.42; }
-  .slide--ways .aim-num { font-size: 21px; }
-  /* bubbles fade in after their card */
-  [data-deck-active].slide--ways .aim:nth-child(1) .example-bubble { animation-delay: 560ms; }
-  [data-deck-active].slide--ways .aim:nth-child(2) .example-bubble { animation-delay: 660ms; }
-  [data-deck-active].slide--ways .aim:nth-child(3) .example-bubble { animation-delay: 760ms; }
+  .slide--ways .slide-title { font-size: 52px; margin-bottom: 14px; }
+  .slide--ways .slide-subtitle { font-family: var(--body); font-size: 24px; line-height: 1.4; color: var(--ink-mute); margin: 0 0 22px; max-width: 90ch; }
+  .slide--ways .slide-body { justify-content: center; }
+  .ways-list { list-style: none; margin: 0; padding: 0; }
+  .way {
+    display: grid;
+    grid-template-columns: 108px 1fr 1.3fr;
+    column-gap: 46px;
+    align-items: baseline;
+    padding: 32px 0;
+    border-top: 1px solid var(--paper-rule);
+  }
+  .way:last-child { border-bottom: 1px solid var(--paper-rule); }
+  .way-num {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 58px;
+    line-height: 0.85;
+    color: var(--guardian-blue);
+    letter-spacing: -0.01em;
+  }
+  .way:nth-child(2) .way-num { color: var(--news-red); }
+  .way:nth-child(3) .way-num { color: var(--eco-green); }
+  .way-main h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.08;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .way-why {
+    font-family: var(--body);
+    font-size: 20px;
+    line-height: 1.42;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .way-ask {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.46;
+    color: var(--ink);
+    margin: 0;
+    padding-left: 24px;
+    border-left: 3px solid var(--guardian-blue);
+  }
+  .way:nth-child(2) .way-ask { border-left-color: var(--news-red); }
+  .way:nth-child(3) .way-ask { border-left-color: var(--eco-green); }
+  /* reveal: rows rise in turn */
+  .way { opacity: 0; transform: translateY(16px); }
+  [data-deck-active].slide--ways .way { animation: cardIn 480ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active].slide--ways .way:nth-child(1) { animation-delay: 160ms; }
+  [data-deck-active].slide--ways .way:nth-child(2) { animation-delay: 300ms; }
+  [data-deck-active].slide--ways .way:nth-child(3) { animation-delay: 440ms; }
 
   /* ============================================================
      Chat stream — staggered "user message" bubbles, each a link to
@@ -940,7 +992,7 @@
     .ai-meta, .choice-card, .ax-dot, .ax-endpoint, .quad-card,
     .ax-pair .ax-card, .ax-frictions-head, .ax-frictions li, .example-bubble,
     .agenda-item, .fable-img, .fable-text, .feed-table tbody tr, .exchange,
-    .compare-table tbody tr, .chat-bubble {
+    .compare-table tbody tr, .chat-bubble, .way {
       opacity: 1 !important;
       transform: none !important;
       animation: none !important;
@@ -1878,26 +1930,32 @@
     <p class="slide-subtitle">The best first project is something you already know and care about. Three ways in:</p>
 
     <div class="slide-body">
-      <div class="aims">
-        <div class="aim">
-          <span class="aim-num">01</span>
-          <h3>A hobby</h3>
-          <p>Start where you're passionate. You know the territory, and you know where it's painful.</p>
-          <div class="example-bubble"><p>"I'm a keen photographer, so I asked Claude to build me a small Mac app that reads the forecast and tells me, the night before, whether tomorrow's golden hour is worth shooting."</p></div>
-        </div>
-        <div class="aim">
-          <span class="aim-num">02</span>
-          <h3>A child's homework</h3>
-          <p>Use it as assistant and tutor. You'll learn from your kids, learn to steer them past just getting the answer, and see what a teacher it can be.</p>
-          <div class="example-bubble"><p>"My daughter couldn't get expanding double brackets — honestly, neither could I. So I asked Claude to explain it in plain English, then build us interactive examples and quizzes."</p></div>
-        </div>
-        <div class="aim">
-          <span class="aim-num">03</span>
-          <h3>A week at work</h3>
-          <p>Take one real task and use AI at every step. You're finding where you want the machine — and where you don't. Not a long-term project; prep for one big thing.</p>
-          <div class="example-bubble"><p>"Before a meeting to settle a long-running project, I asked Claude to pull together three months of Chat, Mail, Docs and Slides — where we'd got to, what's still open, who owes what, and what I need to tie off myself."</p></div>
-        </div>
-      </div>
+      <ol class="ways-list">
+        <li class="way">
+          <span class="way-num">01</span>
+          <div class="way-main">
+            <h3>A hobby</h3>
+            <p class="way-why">Start where you're passionate. You know the territory, and you know where it's painful.</p>
+          </div>
+          <p class="way-ask">"I'm a keen photographer, so I asked Claude to build me a small Mac app that reads the forecast and tells me, the night before, whether tomorrow's golden hour is worth shooting."</p>
+        </li>
+        <li class="way">
+          <span class="way-num">02</span>
+          <div class="way-main">
+            <h3>A child's homework</h3>
+            <p class="way-why">Use it as assistant and tutor. You'll learn from your kids, learn to steer them past just getting the answer, and see what a teacher it can be.</p>
+          </div>
+          <p class="way-ask">"My daughter couldn't get expanding double brackets — honestly, neither could I. So I asked Claude to explain it in plain English, then build us interactive examples and quizzes."</p>
+        </li>
+        <li class="way">
+          <span class="way-num">03</span>
+          <div class="way-main">
+            <h3>A week at work</h3>
+            <p class="way-why">Take one real task and use AI at every step. You're finding where you want the machine — and where you don't. Not a long-term project; prep for one big thing.</p>
+          </div>
+          <p class="way-ask">"Before a meeting to settle a long-running project, I asked Claude to pull together three months of Chat, Mail, Docs and Slides — where we'd got to, what's still open, who owes what, and what I need to tie off myself."</p>
+        </li>
+      </ol>
     </div>
 
     <div class="slide-foot">
@@ -1979,7 +2037,7 @@
     const slide = e.detail.slide;
     if (!slide) return;
     promptTypingGen++;  // cancel any in-flight prompt typing on slide change
-    const els = slide.querySelectorAll('.aim, .flow-node, .flow-label, .flow-curve .line, .section-opener h1 em, .ai-meta, .ax-dot, .ax-endpoint, .quad-card, .ax-pair .ax-card, .ax-frictions-head, .ax-frictions li, .example-bubble, .agenda-item, .fable-img, .fable-text, .feed-table tbody tr, .exchange, .compare-table tbody tr, .chat-bubble');
+    const els = slide.querySelectorAll('.aim, .flow-node, .flow-label, .flow-curve .line, .section-opener h1 em, .ai-meta, .ax-dot, .ax-endpoint, .quad-card, .ax-pair .ax-card, .ax-frictions-head, .ax-frictions li, .example-bubble, .agenda-item, .fable-img, .fable-text, .feed-table tbody tr, .exchange, .compare-table tbody tr, .chat-bubble, .way');
     els.forEach((el) => {
       el.style.animation = 'none';
       void el.offsetWidth;
