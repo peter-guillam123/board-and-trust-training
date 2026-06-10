@@ -1926,10 +1926,16 @@
      and a blinking caret, replaying on each visit. The full text also
      lives in the markup, so print / no-JS still shows the whole prompt. */
   let promptTypingGen = 0;
+  const promptFullText = new WeakMap();   // each prompt's full text, captured once
   function runPromptTyping(slide, gen) {
     const typed = slide.querySelector('.prompt-text .typed');
     if (!typed) return;
-    const full = typed.textContent;       // the full prompt, from the markup
+    // Capture the full prompt the first time only. A re-entrant call (e.g. the
+    // double slidechange that fires as slides slot in on reload) must NOT re-read
+    // textContent here — a prior run may have cleared and half-typed it, and we'd
+    // then "complete" that fragment and stick. Read from the cache instead.
+    if (!promptFullText.has(typed)) promptFullText.set(typed, typed.textContent);
+    const full = promptFullText.get(typed);
     const typo = typed.dataset.typo;      // optional: a word typed wrong first…
     const fix = typed.dataset.fix;        // …then corrected to this (must occur in `full`)
     const cancelled = () => gen !== promptTypingGen;

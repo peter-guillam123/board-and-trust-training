@@ -35,6 +35,17 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 10 June 2026 — Fixed intermittent prompt-typing freeze on reload
+
+On reload the slides slot in over several `slotchange` events, and `deck-stage`
+fires a `slidechange` each time — re-triggering the prompt typing while a previous
+run is mid-flight. `runPromptTyping` re-read the full prompt from the DOM on every
+call, so a re-entrant call could capture a half-typed fragment as the "full" text
+and stick there (e.g. "Can you buil"). Now each prompt's full text is captured once
+in a `WeakMap` and read from there, so re-entrant calls always type the whole
+prompt. Reproduced deterministically (stuck at 5/224 chars under a forced overlap)
+and confirmed fixed (full 224); slides 18, 19 and 25 all type through cleanly.
+
 ### 10 June 2026 — Published to GitHub Pages
 
 Live at <https://peter-guillam123.github.io/board-and-trust-training/> — public
