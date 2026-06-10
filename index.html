@@ -511,11 +511,13 @@
   .slide--start .prompt-text { font-size: 28px; line-height: 1.6; }
   .start-buy {
     font-family: var(--body);
-    font-size: 21px;
+    font-size: 22px;
     line-height: 1.4;
-    color: var(--ink-mute);
-    margin: 34px 0 0;
+    color: var(--ink);
+    margin: 32px 0 0;
   }
+  .start-buy strong { font-weight: 700; }
+  .buy-arrow { color: var(--news-red); font-weight: 700; margin-right: 9px; }
 
   /* ============================================================
      Lifted from the Awayday deck (shared template) for the
@@ -1906,7 +1908,7 @@
           <p class="prompt-label">My very first prompt</p>
           <p class="prompt-text"><span class="typed">Can you build me a simple app on my machine? I can't code. I will need you to explain everything to me in simple language. Don't assume knowledge on my part. Redirect me if I ask for something stupid or there's a better way.</span><span class="caret"></span></p>
         </div>
-        <p class="start-buy">Buy Claude, and use the desktop app.</p>
+        <p class="start-buy"><span class="buy-arrow" aria-hidden="true">→</span><strong>Buy Claude</strong>, and use the desktop app.</p>
       </div>
     </div>
 
