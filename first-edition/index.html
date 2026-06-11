@@ -1,0 +1,2081 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<title>Advanced AI training — Board and Trust</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ============================================================
+     Reusable component styles for this deck.
+     Base patterns (.slide, .slide-title, .kicker, .slide-foot,
+     .rule-band, .aim etc.) live in styles.css. This block adds
+     slide-level polish plus four deck-specific components:
+       .aims.two       — a two-up card row
+       .expedition     — the planning-curve slide
+       .flow           — the four-step workflow timeline
+       .compare-table  — the human/machine division-of-labour table
+     ============================================================ */
+
+  /* Editorial red accent on the italic word in paper-slide titles */
+  .slide-title em {
+    color: var(--news-red);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* Soft 240ms crossfade between slides */
+  .slide {
+    transition: opacity 240ms ease, visibility 0s linear 240ms;
+  }
+  .slide[data-deck-active] {
+    transition: opacity 240ms ease, visibility 0s linear 0s;
+  }
+
+  /* Section-opener italic word lands a beat after the rest of the headline */
+  .section-opener h1 em { opacity: 0; }
+  [data-deck-active].section-opener h1 em {
+    animation: emReveal 700ms ease 550ms both;
+  }
+  @keyframes emReveal {
+    to { opacity: 1; }
+  }
+
+  /* Staggered fade-up reveal for card grids (.aim, .flow-step) */
+  .aim, .flow-label {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  [data-deck-active] .aim,
+  [data-deck-active] .flow-label {
+    animation: cardIn 420ms cubic-bezier(.2,.8,.2,1) both;
+  }
+  [data-deck-active] .aim:nth-child(1) { animation-delay: 120ms; }
+  [data-deck-active] .aim:nth-child(2) { animation-delay: 200ms; }
+  [data-deck-active] .aim:nth-child(3) { animation-delay: 280ms; }
+  [data-deck-active] .aim:nth-child(4) { animation-delay: 360ms; }
+  /* Timeline labels arrive after the curve has drawn most of the way */
+  [data-deck-active] .flow-label:nth-child(1) { animation-delay: 380ms; }
+  [data-deck-active] .flow-label:nth-child(2) { animation-delay: 520ms; }
+  [data-deck-active] .flow-label:nth-child(3) { animation-delay: 660ms; }
+  [data-deck-active] .flow-label:nth-child(4) { animation-delay: 800ms; }
+  @keyframes cardIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============================================================
+     Cover slide layout — framing + session row.
+     ============================================================ */
+  .cover .wordmark { font-size: 168px; }
+  .cover .wordmark .q-mark { color: var(--news-red); font-style: normal; font-weight: 700; }
+  .cover .wordmark em { color: var(--ink); }
+
+  .cover-meta-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .cover-framing {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    letter-spacing: 0;
+    max-width: 880px;
+    margin: 0;
+  }
+  .cover-stat-block { text-align: right; }
+  .cover-stat-block .stat-line {
+    font-family: var(--mono);
+    font-size: 24px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0;
+  }
+  .cover-stat-block .stat-line strong {
+    display: block;
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.05;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .cover .kicker .group-tag {
+    display: inline-block;
+    background: var(--news-red);
+    color: var(--paper);
+    padding: 4px 12px 6px;
+    margin-right: 14px;
+    letter-spacing: 0.16em;
+  }
+  .cover .slide-foot { border-top: none; padding-top: 0; }
+
+  /* Watermark shows only on the section opener; hidden elsewhere */
+  .slide:not(.section-opener) .slide-foot .wm { display: none; }
+
+  /* ============================================================
+     Two-up card row — a wider, taller variant of .aims for the
+     paired-concept slides (Quantum Leap, Mentor & Manager, Architect).
+     ============================================================ */
+  .aims.two {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 56px;
+  }
+  .aims.two .aim {
+    padding: 48px 48px 52px;
+    gap: 22px;
+  }
+  .aims.two .aim p { font-size: 30px; line-height: 1.5; }
+
+  /* Centre body content vertically on content slides so cards, the
+     curve, the timeline and the table sit balanced rather than
+     pinned to the top with an empty lower half. */
+  .slide-body { display: flex; flex-direction: column; justify-content: center; }
+  .aim { min-height: 300px; }
+  .aims.two .aim { min-height: 380px; }
+
+  /* Media cards — text on top, a full-width image band anchored at the
+     bottom of each column. Used on the magpie slide. */
+  .aims.media .aim { padding: 36px 32px 0; gap: 14px; overflow: hidden; }
+  .aims.media .aim h3 { font-size: 44px; }
+  .aims.media .aim p { font-size: 24px; line-height: 1.4; }
+  .aim-media {
+    margin-top: auto;
+    margin-left: -32px;
+    margin-right: -32px;
+    margin-bottom: 0;
+    width: calc(100% + 64px);
+    /* card column is 533px wide on the 1920 canvas; 300px = a true 16:9
+       band, so the 16:9 source images show in full with no crop */
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* ============================================================
+     The Strategic Expedition — a four-step timeline whose
+     connecting line descends left-to-right, carrying the
+     "start wide, then refine down" metaphor (this merges what
+     were two slides: the planning expedition and the workflow).
+     Nodes ride the curve; labels align on a baseline beneath.
+     The slide is a fixed 1920×1080 canvas, so the SVG viewBox
+     (0 0 1680 240) maps 1:1 to pixels and the nodes can be
+     placed by the same coordinates the curve passes through.
+     ============================================================ */
+  .flow { width: 100%; }
+  .flow-track { position: relative; height: 240px; }
+  .flow-curve { display: block; width: 100%; height: 240px; }
+  .flow-curve .line {
+    fill: none;
+    stroke: var(--guardian-blue);
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+  .flow-curve .fill { fill: rgba(5,41,98,0.06); stroke: none; }
+  [data-deck-active] .flow-curve .line {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: drawCurve 1150ms cubic-bezier(.4,0,.2,1) 200ms both;
+  }
+  @keyframes drawCurve { to { stroke-dashoffset: 0; } }
+
+  /* Numbered nodes, positioned to sit on the descending line */
+  .flow-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 5px solid var(--guardian-blue);
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--guardian-blue);
+    opacity: 0;
+  }
+  .flow-node.n1 { left: 12.5%; top: 50px;  }
+  .flow-node.n2 { left: 37.5%; top: 90px;  border-color: var(--news-red);  color: var(--news-red); }
+  .flow-node.n3 { left: 62.5%; top: 135px; border-color: var(--eco-green); color: var(--eco-green); }
+  .flow-node.n4 { left: 87.5%; top: 170px; }
+  [data-deck-active] .flow-node { animation: nodePop 440ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .flow-node.n1 { animation-delay: 340ms; }
+  [data-deck-active] .flow-node.n2 { animation-delay: 480ms; }
+  [data-deck-active] .flow-node.n3 { animation-delay: 620ms; }
+  [data-deck-active] .flow-node.n4 { animation-delay: 760ms; }
+  @keyframes nodePop {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(.4); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  .flow-labels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 30px;
+  }
+  .flow-label { text-align: center; padding: 0 28px; }
+  .flow-label h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .flow-label p {
+    font-family: var(--body);
+    font-size: 27px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ============================================================
+     Division of Labour — text comparison table.
+     Ink header, paper-deep zebra, blue display first column.
+     ============================================================ */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .compare-table thead th {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--ui);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    padding: 28px 36px;
+  }
+  .compare-table thead th:first-child { width: 24%; }
+  .compare-table tbody td {
+    padding: 30px 36px;
+    border-bottom: 1px solid var(--paper-rule);
+    font-family: var(--body);
+    font-size: 31px;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    vertical-align: middle;
+  }
+  .compare-table tbody tr:nth-child(odd) { background: var(--paper-deep); }
+  .compare-table tbody td:first-child {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 34px;
+    letter-spacing: -0.01em;
+    color: var(--guardian-blue);
+  }
+
+  /* ============================================================
+     Worked-example (case study) slides — denser than the hero
+     slides, so a smaller title, top-aligned body, compact ledes
+     and compact tables. Applied via .slide.case.
+     ============================================================ */
+  .slide.case .slide-title {
+    font-size: 50px;
+    line-height: 1.04;
+    margin-bottom: 22px;
+    max-width: 42ch;
+  }
+  .slide.case .slide-body {
+    justify-content: flex-start;
+    padding-top: 2px;
+  }
+  .case-lede {
+    font-family: var(--body);
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: 104ch;
+    margin: 0 0 14px;
+  }
+  .case-lede strong { color: var(--ink); font-weight: 700; }
+  .case-emph {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 25px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 8px 0 18px;
+  }
+
+  /* Slide 1 — "material fed in → what it triggered" two-up table */
+  .feed-table { width: 100%; border-collapse: collapse; margin-top: 72px; }
+  .feed-table thead th {
+    font-family: var(--ui);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: left;
+    padding: 0 26px 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .feed-table thead th:first-child { width: 46%; }
+  .feed-table tbody td {
+    padding: 24px 26px;
+    border-bottom: 1px solid var(--paper-rule);
+    font-family: var(--body);
+    font-size: 23px;
+    line-height: 1.34;
+    vertical-align: top;
+  }
+  .feed-table tbody td:first-child { color: var(--ink-soft); }
+  .feed-table tbody td:last-child {
+    color: var(--ink);
+    position: relative;
+    padding-left: 54px;
+  }
+  .feed-table tbody td:last-child::before {
+    content: '→';
+    position: absolute;
+    left: 22px;
+    top: 24px;
+    color: var(--news-red);
+    font-family: var(--ui);
+    font-weight: 700;
+  }
+  /* light reveal: rows fade up in turn */
+  .feed-table tbody tr { opacity: 0; transform: translateY(10px); }
+  [data-deck-active] .feed-table tbody tr { animation: cardIn 460ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .feed-table tbody tr:nth-child(1) { animation-delay: 200ms; }
+  [data-deck-active] .feed-table tbody tr:nth-child(2) { animation-delay: 290ms; }
+  [data-deck-active] .feed-table tbody tr:nth-child(3) { animation-delay: 380ms; }
+  [data-deck-active] .feed-table tbody tr:nth-child(4) { animation-delay: 470ms; }
+  [data-deck-active] .feed-table tbody tr:nth-child(5) { animation-delay: 560ms; }
+  [data-deck-active] .feed-table tbody tr:nth-child(6) { animation-delay: 650ms; }
+
+  /* Slide 2 — asked / suggested exchange rows */
+  .exchanges { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; gap: 0; margin-top: 4px; }
+  .exchange {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    background: var(--paper-deep);
+  }
+  .exchange .ask, .exchange .suggest { padding: 16px 26px 18px; }
+  .exchange .ask { border-left: 4px solid var(--ink-mute); }
+  .exchange .suggest { background: var(--paper); border-left: 4px solid var(--guardian-blue); }
+  .exchange .speaker {
+    font-family: var(--ui);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 7px;
+  }
+  .exchange .ask .speaker { color: var(--ink-mute); }
+  .exchange .suggest .speaker { color: var(--guardian-blue); }
+  .exchange p.line {
+    font-family: var(--body);
+    font-size: 20px;
+    line-height: 1.34;
+    color: var(--ink);
+    margin: 0;
+  }
+  .exchange .suggest p.line { color: var(--ink); }
+  /* light reveal: each exchange fades up in turn */
+  .exchange { opacity: 0; transform: translateY(14px); }
+  [data-deck-active] .exchange { animation: cardIn 460ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .exchange:nth-child(1) { animation-delay: 200ms; }
+  [data-deck-active] .exchange:nth-child(2) { animation-delay: 320ms; }
+  [data-deck-active] .exchange:nth-child(3) { animation-delay: 440ms; }
+
+  /* Slide 3 — benchmark comparison table (compact compare-table) */
+  .slide.case .compare-table thead th { font-size: 21px; padding: 14px 24px; letter-spacing: 0.05em; }
+  .slide.case .compare-table tbody td { font-size: 22px; line-height: 1.32; padding: 27px 24px; vertical-align: top; }
+  .slide.case .compare-table tbody td:first-child { font-size: 24px; white-space: nowrap; }
+  /* light reveal: comparison rows fade up in turn */
+  .compare-table tbody tr { opacity: 0; transform: translateY(10px); }
+  [data-deck-active] .compare-table tbody tr { animation: cardIn 460ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .compare-table tbody tr:nth-child(1) { animation-delay: 220ms; }
+  [data-deck-active] .compare-table tbody tr:nth-child(2) { animation-delay: 320ms; }
+  [data-deck-active] .compare-table tbody tr:nth-child(3) { animation-delay: 420ms; }
+  [data-deck-active] .compare-table tbody tr:nth-child(4) { animation-delay: 520ms; }
+  [data-deck-active] .compare-table tbody tr:nth-child(5) { animation-delay: 620ms; }
+
+  /* ============================================================
+     Building a bespoke newsfeed — split layout: the framed ISW
+     report screenshot beside the opening prompt, which types in
+     live (with a self-correction) via JS. Mirrors the Fable slide.
+     ============================================================ */
+  .slide--prompt .slide-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .isw-frame {
+    background: #fff;
+    border: 1px solid var(--paper-rule);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 18px 44px rgba(18,18,18,0.14);
+  }
+  .isw-img { display: block; width: 100%; height: auto; border-radius: 3px; }
+  .prompt-col .kicker { margin-bottom: 16px; }
+  .prompt-col .slide-title { font-size: 56px; margin-bottom: 28px; max-width: none; }
+  .prompt-box {
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-rule);
+    border-radius: 10px;
+    padding: 24px 30px 26px;
+  }
+  .prompt-label {
+    font-family: var(--mono);
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 14px;
+  }
+  .prompt-text {
+    font-family: var(--body);
+    font-size: 23px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+  }
+  .caret {
+    display: inline-block;
+    width: 3px;
+    height: 1.05em;
+    background: var(--news-red);
+    margin-left: 3px;
+    vertical-align: -0.18em;
+    animation: caretBlink 1.05s steps(1) infinite;
+  }
+  @keyframes caretBlink { 50% { opacity: 0; } }
+
+  /* ============================================================
+     Getting started — "First, you have to use it": the argument on
+     the left; the genie on-ramp (a real first prompt, typed in live)
+     on the right.
+     ============================================================ */
+  .slide--start .slide-title { font-size: 60px; margin-bottom: 30px; max-width: none; }
+  .slide--start .slide-body {
+    display: grid;
+    grid-template-columns: 1fr 1.08fr;   /* right a touch wider — the prompt is the hero */
+    gap: 88px;
+    align-items: center;
+  }
+  /* Left — the argument. The lede carries it; the two principles defer. */
+  .start-lede {
+    font-family: var(--body);
+    font-size: 35px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 52px;
+  }
+  .start-lede strong { color: var(--ink); font-weight: 700; }
+  .start-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+  .start-points li {
+    position: relative;
+    padding-left: 24px;
+    font-family: var(--body);
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--ink-mute);
+  }
+  .start-points li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 11px;
+    width: 7px; height: 7px;
+    background: var(--ink-mute);
+  }
+  .start-points strong { color: var(--ink-soft); font-weight: 600; }
+  /* Right — the on-ramp. The prompt is the hero, the genie line its lead-in. */
+  .start-genie-intro {
+    font-family: var(--body);
+    font-size: 28px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+  }
+  .start-genie-intro strong { color: var(--ink); font-weight: 700; }
+  .slide--start .prompt-box {
+    padding: 44px 46px 48px;
+    box-shadow: 0 16px 40px rgba(18,18,18,0.09);
+  }
+  .slide--start .prompt-text { font-size: 28px; line-height: 1.6; }
+  .start-buy {
+    font-family: var(--body);
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 32px 0 0;
+  }
+  .start-buy strong { font-weight: 700; }
+  .buy-arrow { color: var(--news-red); font-weight: 700; margin-right: 9px; }
+
+  /* ============================================================
+     Lifted from the Awayday deck (shared template) for the
+     "state of AI" run: in-card images, AI-choice step cards, and
+     the stat-panel + adoption-speed-chart kit. Only the rules the
+     four slides use are carried over.
+     ============================================================ */
+
+  /* In-card image — sits at the bottom of an .aim (Beyond chat) */
+  .aim-image { margin-top: auto; display: block; }
+  .aim-image img { display: block; width: 100%; height: auto; object-fit: contain; }
+
+  /* AI choice step-cards */
+  .slide--choice .slide-title { font-size: 56px; margin-bottom: 18px; max-width: none; }
+  .slide--choice .slide-subtitle { font-size: 26px; margin-bottom: 36px; max-width: 80ch; }
+  .slide--choice .slide-body { display: flex; flex-direction: column; justify-content: center; gap: 40px; }
+  .ai-choice { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 64px; }
+  .ai-meta { background: var(--paper-deep); border-left: 4px solid var(--guardian-blue); padding: 24px 36px 26px; display: flex; flex-direction: column; gap: 8px; opacity: 0; transform: translateY(14px); }
+  [data-deck-active] .ai-meta { animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) 520ms both; }
+  .ai-meta-eyebrow { font-family: var(--ui); font-weight: 700; font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--guardian-blue); margin: 0; }
+  .ai-meta-body { font-family: var(--body); font-size: 21px; line-height: 1.45; color: var(--ink-soft); margin: 0; }
+  .ai-meta-body em { color: var(--news-red); font-style: italic; }
+  .choice-card { background: var(--paper-deep); padding: 32px 36px 36px; border-top: 6px solid var(--guardian-blue); display: flex; flex-direction: column; justify-content: center; gap: 16px; position: relative; min-width: 0; }
+  .choice-card:nth-child(2) { border-top-color: var(--news-red); }
+  .choice-card:nth-child(3) { border-top-color: var(--eco-green); }
+  .choice-card:not(:last-child)::after { content: '\2192'; position: absolute; right: -48px; top: 50%; transform: translateY(-50%); font-family: var(--display); font-weight: 700; font-size: 48px; color: var(--ink-mute); line-height: 1; }
+  .choice-num { font-family: var(--display); font-weight: 700; font-size: 88px; line-height: 0.9; letter-spacing: -0.03em; color: var(--guardian-blue); margin-bottom: 4px; }
+  .choice-card:nth-child(2) .choice-num { color: var(--news-red); }
+  .choice-card:nth-child(3) .choice-num { color: var(--eco-green); }
+  .choice-card h3 { font-family: var(--display); font-weight: 500; font-size: 36px; line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); margin: 0; }
+  .choice-card p { font-family: var(--body); font-size: 22px; line-height: 1.45; color: var(--ink-soft); margin: 0; }
+
+  /* Stat-panel slides (AI scale) */
+  .slide--appendix .slide-title { font-size: 60px; margin-bottom: 18px; max-width: none; }
+  .slide--appendix .slide-subtitle { font-size: 26px; margin-bottom: 28px; max-width: 70ch; }
+  .slide--appendix .slide-body { display: flex; flex-direction: column; justify-content: flex-start; gap: 18px; }
+  .ax-hero { background: var(--guardian-blue); color: var(--paper); padding: 36px 44px 32px; display: flex; flex-direction: column; gap: 12px; }
+  .ax-hero-eyebrow { font-family: var(--ui); font-weight: 700; font-size: 20px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--guardian-yellow); margin: 0; }
+  .ax-hero-figure { font-family: var(--display); font-weight: 700; font-size: 200px; line-height: 0.9; letter-spacing: -0.04em; color: var(--paper); margin: 4px 0 8px; }
+  .ax-hero-body { font-family: var(--display); font-weight: 500; font-size: 28px; line-height: 1.18; color: rgba(244,239,230,0.92); max-width: 22ch; margin: 0; }
+  .ax-hero-row { display: grid; grid-template-columns: 1.45fr 1fr; gap: 22px; }
+  .ax-hero-row .ax-hero { padding-bottom: 28px; }
+  .ax-side-stack { display: flex; flex-direction: column; gap: 22px; }
+  .ax-side-stack .ax-card { flex: 1; justify-content: center; }
+  .ax-side-stack .ax-card-figure { font-size: 56px; }
+  .ax-card { background: var(--paper-deep); border-top: 6px solid var(--guardian-blue); padding: 24px 28px; display: flex; flex-direction: column; gap: 8px; }
+  .ax-card:nth-child(2) { border-top-color: var(--news-red); }
+  .ax-card:nth-child(3) { border-top-color: var(--eco-green); }
+  .ax-card-figure { font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 0.95; letter-spacing: -0.02em; color: var(--guardian-blue); margin: 0; }
+  .ax-card:nth-child(2) .ax-card-figure { color: var(--news-red); }
+  .ax-card:nth-child(3) .ax-card-figure { color: var(--eco-green); }
+  .ax-card-body { font-family: var(--body); font-size: 20px; line-height: 1.4; color: var(--ink-soft); margin: 0; }
+  .ax-card-eyebrow { font-family: var(--ui); font-weight: 700; font-size: 16px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 4px; }
+  .ax-quote { background: var(--paper-deep); border-left: 6px solid var(--news-red); padding: 32px 44px 26px; display: flex; flex-direction: column; gap: 12px; }
+  .ax-quote-body { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 36px; line-height: 1.2; color: var(--ink); margin: 0; }
+  .ax-quote-body em { color: var(--news-red); font-style: italic; }
+  .ax-keyfinding { padding: 28px 44px 26px; gap: 12px; }
+  .ax-keyfinding-eyebrow { font-family: var(--ui); font-weight: 700; font-size: 18px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--news-red); margin: 0; }
+  .ax-keyfinding .ax-quote-body { font-size: 34px; line-height: 1.22; }
+  .ax-quote-attr { font-family: var(--body); font-size: 18px; color: var(--ink-mute); margin: 0; }
+  .ax-quote-attr strong { color: var(--ink); font-weight: 700; }
+  .ax-source { font-family: var(--ui); font-size: 14px; letter-spacing: 0.04em; color: var(--ink-mute); font-style: italic; margin: 8px 0 0; }
+  .ax-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .ax-frictions-head { font-family: var(--display); font-weight: 500; font-size: 28px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); margin: 6px 0 0; }
+  .ax-frictions-head em { color: var(--news-red); font-style: italic; }
+  .ax-frictions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .ax-frictions li { display: grid; grid-template-columns: 14px 1fr; gap: 18px; padding: 10px 0; border-top: 1px solid var(--paper-rule); align-items: baseline; }
+  .ax-frictions li:first-child { border-top: 2px solid var(--ink); padding-top: 12px; }
+  .ax-pair .ax-card { padding: 18px 28px; }
+  .ax-pair .ax-card-figure { font-size: 52px; }
+  .ax-frictions li::before { content: ''; width: 12px; height: 12px; background: var(--news-red); align-self: start; margin-top: 10px; }
+  .ax-frictions strong { font-family: var(--display); font-weight: 500; font-size: 22px; color: var(--ink); display: block; margin-bottom: 2px; }
+  .ax-frictions span { font-family: var(--body); font-size: 19px; line-height: 1.4; color: var(--ink-soft); }
+
+  /* The enterprise gap — staged reveal: the two stats in, then the
+     heading, then the frictions list builds one item at a time. */
+  .ax-pair .ax-card, .ax-frictions-head, .ax-frictions li { opacity: 0; transform: translateY(14px); }
+  [data-deck-active] .ax-pair .ax-card,
+  [data-deck-active] .ax-frictions-head,
+  [data-deck-active] .ax-frictions li { animation: cardIn 420ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .ax-pair .ax-card:nth-child(1) { animation-delay: 120ms; }
+  [data-deck-active] .ax-pair .ax-card:nth-child(2) { animation-delay: 220ms; }
+  [data-deck-active] .ax-frictions-head { animation-delay: 340ms; }
+  [data-deck-active] .ax-frictions li:nth-child(1) { animation-delay: 460ms; }
+  [data-deck-active] .ax-frictions li:nth-child(2) { animation-delay: 560ms; }
+  [data-deck-active] .ax-frictions li:nth-child(3) { animation-delay: 660ms; }
+  [data-deck-active] .ax-frictions li:nth-child(4) { animation-delay: 760ms; }
+  [data-deck-active] .ax-frictions li:nth-child(5) { animation-delay: 860ms; }
+
+  /* Adoption-speed line chart (AI speed) */
+  .ax-chart-legend { display: flex; gap: 24px; }
+  .ax-chart-legend-item { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ui); font-weight: 700; font-size: 14px; color: var(--ink); }
+  .ax-chart-legend-item::before { content: ''; width: 22px; height: 3px; background: var(--ink-mute); }
+  .ax-chart-legend-item.is-internet::before { background: var(--guardian-blue-soft); }
+  .ax-chart-legend-item.is-phone::before { background: var(--ink-mute); }
+  .ax-chart-legend-item.is-ai::before { background: var(--news-red); }
+  .ax-axis { font-family: var(--mono); font-size: 13px; fill: var(--ink-mute); }
+  .ax-axis-y { text-anchor: end; }
+  .ax-grid { stroke: var(--paper-rule); stroke-width: 1; }
+  .ax-axis-base { stroke: var(--ink-mute); stroke-width: 1.5; }
+  .ax-line { fill: none; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+  .ax-line--internet { stroke: var(--guardian-blue-soft); }
+  .ax-line--phone { stroke: var(--ink-mute); }
+  .ax-line--ai { stroke: var(--news-red); stroke-width: 4; }
+  .ax-endpoint { font-family: var(--ui); font-weight: 700; font-size: 13px; fill: var(--ink); opacity: 0; }
+  [data-deck-active] .ax-endpoint { animation: cardIn 360ms ease 2400ms both; }
+  .slide--ax-speed .slide-title { font-size: 54px; margin-bottom: 12px; }
+  .slide--ax-speed .slide-subtitle { font-size: 24px; margin-bottom: 18px; max-width: 70ch; color: var(--ink-mute); }
+  .ax-chart-big { flex: 1; display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+  .ax-chart-big .ax-chart-legend { display: flex; gap: 32px; justify-content: flex-start; }
+  .ax-chart-big .ax-chart-legend-item { font-size: 17px; gap: 10px; }
+  .ax-chart-big .ax-chart-legend-item::before { width: 28px; height: 4px; }
+  .ax-chart-big svg { display: block; width: 100%; height: 100%; min-height: 0; flex: 1; }
+  .ax-dot { opacity: 0; }
+  .ax-dot--internet { fill: var(--guardian-blue-soft); }
+  .ax-dot--phone { fill: var(--ink-mute); }
+  .ax-dot--ai { fill: var(--news-red); }
+  [data-deck-active] .ax-dot--internet { animation: cardIn 280ms ease both; }
+  [data-deck-active] .ax-dot--phone { animation: cardIn 280ms ease both; }
+  [data-deck-active] .ax-dot--ai { animation: cardIn 320ms ease both; }
+  [data-deck-active] .ax-track--internet .ax-dot:nth-of-type(1) { animation-delay: 200ms; }
+  [data-deck-active] .ax-track--internet .ax-dot:nth-of-type(2) { animation-delay: 1133ms; }
+  [data-deck-active] .ax-track--internet .ax-dot:nth-of-type(3) { animation-delay: 2066ms; }
+  [data-deck-active] .ax-track--internet .ax-dot:nth-of-type(4) { animation-delay: 3000ms; }
+  [data-deck-active] .ax-track--phone .ax-dot:nth-of-type(1) { animation-delay: 200ms; }
+  [data-deck-active] .ax-track--phone .ax-dot:nth-of-type(2) { animation-delay: 1066ms; }
+  [data-deck-active] .ax-track--phone .ax-dot:nth-of-type(3) { animation-delay: 1933ms; }
+  [data-deck-active] .ax-track--phone .ax-dot:nth-of-type(4) { animation-delay: 2800ms; }
+  [data-deck-active] .ax-track--ai .ax-dot:nth-of-type(1) { animation-delay: 3400ms; }
+  [data-deck-active] .ax-track--ai .ax-dot:nth-of-type(2) { animation-delay: 4066ms; }
+  [data-deck-active] .ax-track--ai .ax-dot:nth-of-type(3) { animation-delay: 4733ms; }
+  [data-deck-active] .ax-track--ai .ax-dot:nth-of-type(4) { animation-delay: 5400ms; }
+  .ax-endpoint--big { font-size: 40px !important; fill: var(--news-red); font-weight: 700; }
+  [data-deck-active] .ax-endpoint--big { animation: cardIn 420ms ease 5600ms both; }
+
+  /* ============================================================
+     Four-rule quad grid — 2×2 cards with mono "rule" labels and
+     blue / red / green / ink top borders. (Recreated to match a
+     "Four key rules · non-negotiables" slide from another deck.)
+     ============================================================ */
+  .slide--rules .slide-title { margin-bottom: 32px; }
+  .quad-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 26px 40px;
+    min-height: 0;
+  }
+  .quad-card {
+    background: var(--paper-deep);
+    border-top: 4px solid var(--guardian-blue);
+    padding: 22px 36px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .quad-card:nth-child(2) { border-top-color: var(--news-red); }
+  .quad-card:nth-child(3) { border-top-color: var(--eco-green); }
+  .quad-card:nth-child(4) { border-top-color: var(--ink); }
+  [data-deck-active] .quad-card { animation: cardIn 420ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .quad-card:nth-child(1) { animation-delay: 120ms; }
+  [data-deck-active] .quad-card:nth-child(2) { animation-delay: 200ms; }
+  [data-deck-active] .quad-card:nth-child(3) { animation-delay: 280ms; }
+  [data-deck-active] .quad-card:nth-child(4) { animation-delay: 360ms; }
+  .quad-label {
+    font-family: var(--mono);
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .quad-card h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 33px;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 2px 0;
+  }
+  .quad-card p {
+    font-family: var(--body);
+    font-size: 22px;
+    line-height: 1.42;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* "Why this is already out of date" — square image left, text right */
+  .slide--fable .slide-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .fable-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+  .fable-text .kicker { margin-bottom: 18px; }
+  .fable-text .slide-title { font-size: 60px; margin-bottom: 28px; max-width: none; }
+  .fable-body {
+    font-family: var(--body);
+    font-size: 27px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  /* gentle reveal: the image settles in, the text rises after */
+  .fable-img { opacity: 0; }
+  [data-deck-active] .fable-img { animation: fadeScale 720ms cubic-bezier(.2,.8,.2,1) 120ms both; }
+  .fable-text { opacity: 0; transform: translateY(14px); }
+  [data-deck-active] .fable-text { animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) 360ms both; }
+  @keyframes fadeScale { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+
+  /* ============================================================
+     Agenda / structure slide — 2×2 grid, each cell with a top rule,
+     a mono blue number, a serif heading and a body line.
+     ============================================================ */
+  .slide--agenda .slide-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 36px 80px;
+  }
+  .agenda-item { border-top: 2px solid var(--ink); padding-top: 22px; min-height: 0; }
+  .agenda-num {
+    display: block;
+    font-family: var(--mono);
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--guardian-blue);
+    margin: 0 0 14px;
+  }
+  .agenda-item h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .agenda-item p {
+    font-family: var(--body);
+    font-size: 23px;
+    line-height: 1.42;
+    color: var(--ink-soft);
+    max-width: 44ch;
+    margin: 0;
+  }
+  /* agenda items fade up in reading order */
+  .agenda-item { opacity: 0; transform: translateY(14px); }
+  [data-deck-active] .agenda-item { animation: cardIn 420ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .agenda-item:nth-child(1) { animation-delay: 140ms; }
+  [data-deck-active] .agenda-item:nth-child(2) { animation-delay: 240ms; }
+  [data-deck-active] .agenda-item:nth-child(3) { animation-delay: 340ms; }
+  [data-deck-active] .agenda-item:nth-child(4) { animation-delay: 440ms; }
+
+  /* ============================================================
+     Four-up prompt-framework cards (Irreplaceable expertise) — each
+     card carries an example prompt in a message bubble at its foot.
+     ============================================================ */
+  .slide--quad .slide-title { font-size: 52px; margin-bottom: 26px; }
+  .aims.quad { grid-template-columns: repeat(4, 1fr); gap: 26px; }
+  .aims.quad .aim { min-height: 0; padding: 32px 30px 30px; gap: 16px; }
+  .aims.quad .aim h3 { font-size: 32px; line-height: 1.06; }
+  .aims.quad .aim > p { font-size: 22px; line-height: 1.4; }
+  .aims.quad .aim-num { font-size: 21px; }
+  .example-bubble {
+    margin-top: auto;
+    position: relative;
+    background: #faf6ee;
+    border-radius: 14px;
+    padding: 14px 18px 15px;
+    box-shadow: 0 5px 16px rgba(18,18,18,0.06);
+    opacity: 0;
+  }
+  /* each bubble fades in after its card has appeared */
+  [data-deck-active] .example-bubble { animation: bubbleIn 480ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .aims.quad .aim:nth-child(1) .example-bubble { animation-delay: 660ms; }
+  [data-deck-active] .aims.quad .aim:nth-child(2) .example-bubble { animation-delay: 760ms; }
+  [data-deck-active] .aims.quad .aim:nth-child(3) .example-bubble { animation-delay: 860ms; }
+  [data-deck-active] .aims.quad .aim:nth-child(4) .example-bubble { animation-delay: 960ms; }
+  @keyframes bubbleIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .example-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 24px;
+    width: 0; height: 0;
+    border-left: 7px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 10px solid #faf6ee;
+  }
+  .example-bubble p {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.36;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ============================================================
+     Quantum Leap — image on the left, the two concept cards reduced
+     and stacked on the right.
+     ============================================================ */
+  .slide--ql .slide-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .ql-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 16px 40px rgba(18,18,18,0.12);
+  }
+  .ql-cards { display: flex; flex-direction: column; gap: 28px; }
+  .ql-cards .aim { min-height: 0; padding: 28px 32px; gap: 12px; }
+  .ql-cards .aim h3 { font-size: 34px; }
+  .ql-cards .aim p { font-size: 23px; line-height: 1.42; }
+
+  /* ============================================================
+     Deep-research prompt — oversized pull-quote on ink, opening the
+     practical-examples section (modelled on a reference slide).
+     ============================================================ */
+  .slide--research { justify-content: center; }
+  .research-eyebrow {
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,0.5);
+    margin: 0 0 52px;
+  }
+  .research-quote {
+    position: relative;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 100px;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin: 0;
+    max-width: 24ch;
+  }
+  .research-quote em { color: var(--news-red); font-style: italic; font-weight: 500; }
+  .research-mark { font-size: 1.25em; line-height: 0; color: rgba(244,239,230,0.32); margin-right: 0.04em; vertical-align: -0.12em; }
+  .research-sub {
+    font-family: var(--ui);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,0.5);
+    margin: 58px 0 0;
+    max-width: 64ch;
+  }
+
+  /* ============================================================
+     Getting started — "Pick a first project": three ways in, set as a
+     typographic numbered list (big numeral · heading + why · the
+     "I asked Claude to…" as an italic quote). A calmer, editorial close
+     — deliberately unlike the card grids earlier in the deck.
+     ============================================================ */
+  .slide--ways .slide-title { font-size: 52px; margin-bottom: 14px; }
+  .slide--ways .slide-subtitle { font-family: var(--body); font-size: 24px; line-height: 1.4; color: var(--ink-mute); margin: 0 0 22px; max-width: 90ch; }
+  .slide--ways .slide-body { justify-content: center; }
+  .ways-list { list-style: none; margin: 0; padding: 0; }
+  .way {
+    display: grid;
+    grid-template-columns: 108px 1fr 1.3fr;
+    column-gap: 46px;
+    align-items: baseline;
+    padding: 32px 0;
+    border-top: 1px solid var(--paper-rule);
+  }
+  .way:last-child { border-bottom: 1px solid var(--paper-rule); }
+  .way-num {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 58px;
+    line-height: 0.85;
+    color: var(--guardian-blue);
+    letter-spacing: -0.01em;
+  }
+  .way:nth-child(2) .way-num { color: var(--news-red); }
+  .way:nth-child(3) .way-num { color: var(--eco-green); }
+  .way-main h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.08;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .way-why {
+    font-family: var(--body);
+    font-size: 20px;
+    line-height: 1.42;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .way-ask {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.46;
+    color: var(--ink);
+    margin: 0;
+    padding-left: 24px;
+    border-left: 3px solid var(--guardian-blue);
+  }
+  .way:nth-child(2) .way-ask { border-left-color: var(--news-red); }
+  .way:nth-child(3) .way-ask { border-left-color: var(--eco-green); }
+  /* reveal: rows rise in turn */
+  .way { opacity: 0; transform: translateY(16px); }
+  [data-deck-active].slide--ways .way { animation: cardIn 480ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active].slide--ways .way:nth-child(1) { animation-delay: 160ms; }
+  [data-deck-active].slide--ways .way:nth-child(2) { animation-delay: 300ms; }
+  [data-deck-active].slide--ways .way:nth-child(3) { animation-delay: 440ms; }
+
+  /* ============================================================
+     Chat stream — staggered "user message" bubbles, each a link to
+     the real project that prompt produced (lifted from the Awayday
+     deck). They arrive one at a time, ~1.2s apart, like a live chat.
+     ============================================================ */
+  .chat-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-end;
+    max-width: 1280px;
+    margin: 40px 0 0 auto;
+  }
+  .chat-bubble {
+    background: var(--paper-deep);
+    border-radius: 28px;
+    padding: 28px 40px;
+    font-family: var(--body);
+    font-size: 36px;
+    line-height: 1.32;
+    color: var(--ink);
+    max-width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    text-decoration: none;
+    display: block;
+    transition: background 200ms ease, color 200ms ease;
+  }
+  a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
+  [data-deck-active] .chat-bubble { animation: chatIn 600ms cubic-bezier(.2,.8,.2,1) both; }
+  [data-deck-active] .chat-bubble:nth-child(1) { animation-delay: 250ms; }
+  [data-deck-active] .chat-bubble:nth-child(2) { animation-delay: 1450ms; }
+  [data-deck-active] .chat-bubble:nth-child(3) { animation-delay: 2650ms; }
+  [data-deck-active] .chat-bubble:nth-child(4) { animation-delay: 3850ms; }
+  @keyframes chatIn { to { opacity: 1; transform: translateY(0); } }
+
+  /* Print: force animated-in elements visible so Cmd-P PDF export
+     (where only the active slide carries [data-deck-active]) doesn't
+     drop content stuck at opacity:0. Covers this deck's own animated
+     elements as well as the lifted ones. */
+  @media print {
+    .aim, .flow-label, .flow-node, .section-opener h1 em,
+    .ai-meta, .choice-card, .ax-dot, .ax-endpoint, .quad-card,
+    .ax-pair .ax-card, .ax-frictions-head, .ax-frictions li, .example-bubble,
+    .agenda-item, .fable-img, .fable-text, .feed-table tbody tr, .exchange,
+    .compare-table tbody tr, .chat-bubble, .way {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+    .flow-curve .line { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; animation: none !important; }
+    .caret { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============================================================
+       SLIDE 1 — Cover
+       ============================================================ -->
+  <section class="slide cover" data-label="Cover">
+    <div class="rule-band"></div>
+
+    <div>
+      <p class="kicker"><span class="group-tag">Training</span>Board and Trust · A strategic framework · 2026</p>
+      <h1 class="wordmark">Advanced AI<br><em>training<span class="q-mark">.</span></em></h1>
+    </div>
+
+    <div class="cover-meta-row">
+      <p class="cover-framing">How to think about and instruct LLMs. Prompt engineering has become complex and technical — but the real gains come from a handful of mental models, not from technical syntax. This is the framework.</p>
+      <div class="cover-stat-block">
+        <p class="stat-line">Session<strong>Board and Trust</strong></p>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">01 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Agenda — the structure of the session (2×2, emulating a
+       reference slide Chris supplied)
+       ============================================================ -->
+  <section class="slide slide--agenda" data-label="What we'll cover">
+    <div class="rule-band"></div>
+
+    <p class="kicker">The session</p>
+    <h2 class="slide-title">What we'll <em>cover</em>.</h2>
+
+    <div class="slide-body">
+      <div class="agenda-item">
+        <span class="agenda-num">01</span>
+        <h3>The current landscape</h3>
+        <p>LLMs have radically changed and improved over the last three years. What are the substantive changes, and where are we today?</p>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-num">02</span>
+        <h3>How to think about LLMs</h3>
+        <p>Too much training focuses on tactics and tricks. It's more important to have mental models that can be applied to a range of applications.</p>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-num">03</span>
+        <h3>Practical examples</h3>
+        <p>Identifying possible use cases is a constant challenge for a general-purpose tool with jagged intelligence. We'll cover three concrete examples.</p>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-num">04</span>
+        <h3>Getting started</h3>
+        <p>LLMs can't be taught. How do you make space in your work to get practical experience, and what kind of project could you start with?</p>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">02 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       01 — The current landscape (black/yellow interstitial,
+       opening the state-of-AI run)
+       ============================================================ -->
+  <section class="slide ink section-opener" data-label="The current landscape">
+    <div class="rule-band"></div>
+
+    <div class="chapter-num">The state of AI</div>
+    <h1>The current <em>landscape.</em></h1>
+    <p class="section-dek">LLMs have radically changed and improved over the last three years. What are the substantive changes, and where are we today?</p>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">04 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STATE OF AI — four slides lifted from the Awayday deck
+       ============================================================ -->
+
+  <!-- Beyond chat: the new AI stack (Awayday slide 13) -->
+  <section class="slide" data-label="Beyond chat">
+    <div class="rule-band"></div>
+
+    <p class="kicker">The state of AI · capability</p>
+    <h2 class="slide-title">Beyond chat: the <em>new</em> AI stack.</h2>
+
+    <div class="slide-body">
+      <div class="aims">
+        <div class="aim">
+          <span class="aim-num">01</span>
+          <h3>The reasoning brain</h3>
+          <p>Modern models have moved beyond word prediction. They plan approaches before generating a response. Recent models have blown through existing evaluations.</p>
+          <div class="aim-image"><img src="images/reasoning.jpg" alt="Diagram of the reasoning brain."></div>
+        </div>
+        <div class="aim">
+          <span class="aim-num">02</span>
+          <h3>The harness</h3>
+          <p>The harness is the execution environment. By giving models access to tools (search, terminal, CMS, browser, apps), AI moves from talking about work to doing it.</p>
+          <div class="aim-image"><img src="images/harness.jpg" alt="Diagram of the harness — the model's execution environment."></div>
+        </div>
+        <div class="aim">
+          <span class="aim-num">03</span>
+          <h3>The agentic loop</h3>
+          <p>The synergy of <strong>brain + harness</strong> creates an "agent". It doesn't wait for your next prompt; it creates a plan, uses tools, and works in a loop until the goal is achieved.</p>
+          <div class="aim-image"><img src="images/agent.jpg" alt="Diagram of the agentic loop."></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">03 / NN</span>
+    </div>
+  </section>
+
+  <!-- Why this is already out of date — Fable (split image / text) -->
+  <section class="slide slide--fable" data-label="Why this is out of date">
+    <div class="rule-band"></div>
+
+    <div class="slide-body">
+      <img class="fable-img" src="images/fable.jpg" alt="Fable: an editorial collage of butterflies and moths arranged in a spiral, in the Guardian palette.">
+      <div class="fable-text">
+        <p class="kicker">The state of AI · pace</p>
+        <h2 class="slide-title">Why this is already <em>out of date</em>.</h2>
+        <p class="fable-body">Anthropic have released Fable today. This is the guardrailed version of Mythos. Two things distinguish it. It is more capable of completing highly complex end-to-end projects from a single prompt. And it represents a new level of safeguarding (specifically to stop the model from being used to identify digital vulnerabilities). Early signs suggest this is as big a leap as the one that occurred in November 2025 with Claude Opus 4.5.</p>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">04 / NN</span>
+    </div>
+  </section>
+
+  <!-- AI is not just something that happens to us (Awayday slide 14) -->
+  <section class="slide slide--choice" data-label="AI is something we choose about">
+    <div class="rule-band"></div>
+
+    <p class="kicker">The state of AI · agency</p>
+    <h2 class="slide-title">AI is not just something that <em>happens to us</em>.</h2>
+    <p class="slide-subtitle">We are professionals with clear codes and practices that govern behaviour. And we can make judicious decisions about how we use AI in that frame.</p>
+
+    <div class="slide-body">
+      <div class="ai-choice">
+        <article class="choice-card">
+          <span class="choice-num">01</span>
+          <h3>Should I use AI?</h3>
+          <p>This is entirely in your hands. But too often it's presented as the only element of control, and one that should be imposed on everyone.</p>
+        </article>
+        <article class="choice-card">
+          <span class="choice-num">02</span>
+          <h3>Where should I use AI?</h3>
+          <p>Your job is very likely an amalgam of a lot of jobs. Some of those are appropriate for AI and some absolutely depend on your personal control and expertise.</p>
+        </article>
+        <article class="choice-card">
+          <span class="choice-num">03</span>
+          <h3>How should I use AI?</h3>
+          <p>AI shouldn't — and doesn't have to — be used to execute a whole task. Instead of asking it to create something you can use it to give feedback and suggestions.</p>
+        </article>
+      </div>
+
+      <aside class="ai-meta">
+        <p class="ai-meta-eyebrow">In practice</p>
+        <p class="ai-meta-body"><em>Every slide in this presentation</em> was generated with AI, using Gemini to realise simple formats that worked, ChatGPT to create consistent images and Claude to realise the design. All of that integration made the process quicker and the output better. None of it removed or obscured the human expertise behind it.</p>
+      </aside>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">04 / NN</span>
+    </div>
+  </section>
+
+  <!-- AI adoption speed chart — "arrived, and quicker than anything" (Awayday slide 28) -->
+  <section class="slide slide--appendix slide--ax-speed" data-label="AI adoption speed">
+    <div class="rule-band"></div>
+
+    <p class="kicker">The state of AI · adoption</p>
+    <h2 class="slide-title">AI has already arrived… and <em>quicker</em> than anything else.</h2>
+    <p class="slide-subtitle">Adoption in the first three years after launch — same window for each technology.</p>
+
+    <div class="slide-body">
+      <div class="ax-chart-big">
+        <div class="ax-chart-legend">
+          <span class="ax-chart-legend-item is-internet">Internet at work (1995–98)</span>
+          <span class="ax-chart-legend-item is-phone">Smartphone adoption (2007–10)</span>
+          <span class="ax-chart-legend-item is-ai">Generative AI at work (2022–25)</span>
+        </div>
+
+        <svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Three-year adoption curves comparing internet at work, smartphone adoption, and generative AI at work.">
+          <line class="ax-grid" x1="100" y1="60"  x2="1500" y2="60"/>
+          <line class="ax-grid" x1="100" y1="180" x2="1500" y2="180"/>
+          <line class="ax-grid" x1="100" y1="300" x2="1500" y2="300"/>
+          <line class="ax-grid" x1="100" y1="420" x2="1500" y2="420"/>
+          <line class="ax-axis-base" x1="100" y1="540" x2="1500" y2="540"/>
+
+          <text class="ax-axis ax-axis-y" x="86" y="64">50%</text>
+          <text class="ax-axis ax-axis-y" x="86" y="184">40%</text>
+          <text class="ax-axis ax-axis-y" x="86" y="304">30%</text>
+          <text class="ax-axis ax-axis-y" x="86" y="424">20%</text>
+          <text class="ax-axis ax-axis-y" x="86" y="544">10%</text>
+
+          <text class="ax-axis" x="100"  y="572" text-anchor="middle">Launch</text>
+          <text class="ax-axis" x="566"  y="572" text-anchor="middle">+1 yr</text>
+          <text class="ax-axis" x="1033" y="572" text-anchor="middle">+2 yrs</text>
+          <text class="ax-axis" x="1500" y="572" text-anchor="middle">+3 yrs</text>
+
+          <g class="ax-track ax-track--internet">
+            <polyline class="ax-line ax-line--internet" points="100,540 566,480 1033,396 1500,300"/>
+            <circle class="ax-dot ax-dot--internet" cx="100"  cy="540" r="7"/>
+            <circle class="ax-dot ax-dot--internet" cx="566"  cy="480" r="7"/>
+            <circle class="ax-dot ax-dot--internet" cx="1033" cy="396" r="7"/>
+            <circle class="ax-dot ax-dot--internet" cx="1500" cy="300" r="7"/>
+          </g>
+
+          <g class="ax-track ax-track--phone">
+            <polyline class="ax-line ax-line--phone" points="100,540 566,480 1033,360 1500,240"/>
+            <circle class="ax-dot ax-dot--phone" cx="100"  cy="540" r="7"/>
+            <circle class="ax-dot ax-dot--phone" cx="566"  cy="480" r="7"/>
+            <circle class="ax-dot ax-dot--phone" cx="1033" cy="360" r="7"/>
+            <circle class="ax-dot ax-dot--phone" cx="1500" cy="240" r="7"/>
+          </g>
+
+          <g class="ax-track ax-track--ai">
+            <polyline class="ax-line ax-line--ai" points="100,540 566,276 1033,168 1500,48"/>
+            <circle class="ax-dot ax-dot--ai" cx="100"  cy="540" r="9"/>
+            <circle class="ax-dot ax-dot--ai" cx="566"  cy="276" r="9"/>
+            <circle class="ax-dot ax-dot--ai" cx="1033" cy="168" r="9"/>
+            <circle class="ax-dot ax-dot--ai" cx="1500" cy="48"  r="11"/>
+          </g>
+
+          <text class="ax-endpoint" x="1490" y="296" text-anchor="end" dy="-8">20%</text>
+          <text class="ax-endpoint" x="1490" y="236" text-anchor="end" dy="-8">25%</text>
+          <text class="ax-endpoint ax-endpoint--big" x="1490" y="44" text-anchor="end" dy="-10">41%</text>
+        </svg>
+      </div>
+
+      <p class="ax-source">Within the same three-year window from launch, generative AI is at <strong>41%</strong> workforce adoption — roughly double internet-at-work and smartphone adoption at the equivalent point. Sources: US Census / Pew (internet, 1995–98), Pew Research (smartphone, 2007–10), Federal Reserve (GenAI, 2022–25). Y-axis is % of relevant population (workforce / adults).</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">06 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Firm vs worker — AI adoption gap (lifted from Awayday slide 30)
+       ============================================================ -->
+  <section class="slide slide--appendix" data-label="Firm vs worker">
+    <div class="rule-band"></div>
+
+    <p class="kicker">The state of AI · adoption</p>
+    <h2 class="slide-title">The enterprise <em>gap</em>.</h2>
+
+    <div class="slide-body">
+      <div class="ax-pair">
+        <article class="ax-card">
+          <p class="ax-card-eyebrow">Firms that have formally adopted</p>
+          <p class="ax-card-figure">18%</p>
+          <p class="ax-card-body">Of US businesses report adopting AI in any business function (Fed BTOS, end 2025).</p>
+        </article>
+        <article class="ax-card">
+          <p class="ax-card-eyebrow">Workers using it anyway</p>
+          <p class="ax-card-figure">41%</p>
+          <p class="ax-card-body">Of US workers use generative AI at work — often via personal accounts, ahead of their employer (Fed RPS).</p>
+        </article>
+      </div>
+
+      <h3 class="ax-frictions-head">Why deploying large-scale projects is <em>hard</em>.</h3>
+
+      <ul class="ax-frictions">
+        <li>
+          <div>
+            <strong>Identifying use cases</strong>
+            <span>What's flexible for one person becomes hard to define for a thousand. Personal use bends to the user; organisational use has to nail the use case first.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Reproducibility and audit trail</strong>
+            <span>A sole trader can let AI draft an invoice. A 1,000-person firm needs an output that survives an audit.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Error consequences at scale</strong>
+            <span>A hallucinated paragraph is a shrug in a personal email; a correction in a 200,000-circulation paper.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Workforce concerns about displacement</strong>
+            <span>Real, live conversations inside most large organisations — including ours.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Negative customer reaction</strong>
+            <span>AI-produced news is seen as less trustworthy than human-produced news, even with human oversight.</span>
+          </div>
+        </li>
+      </ul>
+
+      <p class="ax-source">Sources: Federal Reserve, April 2026; RISJ Digital News Report 2025. The Fed also notes adoption among the smallest firms is "stronger than would be expected based on size alone".</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">07 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Thesis (section opener) — moved to sit after the state-of-AI
+       run, introducing the mental-models section
+       ============================================================ -->
+  <section class="slide ink section-opener" data-label="The thesis">
+    <div class="rule-band"></div>
+
+    <div class="chapter-num">The thesis</div>
+    <p class="section-kicker">Why most prompt advice misses</p>
+    <h1>How to <em>think</em> about LLMs.</h1>
+    <p class="section-dek">Prompt engineering has become complex and opaque. But the whole value of LLMs is that you can talk to them. Our training focuses less on tips and more on mental models that are better guides to good results.</p>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">07 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Four key rules — non-negotiables (recreated from a screengrab;
+       text transcribed verbatim, incl. "judgment" / "GenAI" as shown).
+       Moved to sit after the thesis.
+       ============================================================ -->
+  <section class="slide slide--rules" data-label="Four key rules">
+    <div class="rule-band"></div>
+
+    <p class="kicker">Before we begin · Non-negotiables</p>
+    <h2 class="slide-title">Four key <em>rules</em>.</h2>
+
+    <div class="slide-body">
+      <div class="quad-grid">
+        <div class="quad-card">
+          <span class="quad-label">Rule 01</span>
+          <h3>Check everything</h3>
+          <p>You are responsible for anything you produce, either for internal or external use. Any input or sources used to create text or multimedia content, whether generated by AI or taken from other sources, must be checked. This is enshrined in our editorial code but applies to all our staff.</p>
+        </div>
+        <div class="quad-card">
+          <span class="quad-label">Rule 02</span>
+          <h3>Use GenAI within your area of expertise</h3>
+          <p>Generative AI is particularly risky in situations where it is used outside your field of expertise. It is tempting to use it as a shortcut to avoid resource constraints in other departments or functions. But a lack of expertise means a lack of ability to accurately judge potentially unreliable output. If you do use the technology in this way you must check your work with someone qualified to evaluate it.</p>
+        </div>
+        <div class="quad-card">
+          <span class="quad-label">Rule 03</span>
+          <h3>Use GenAI as a co-pilot</h3>
+          <p>GenAI can be used to completely automate a piece of work. But this approach gives too much responsibility to an unreliable machine and makes it tricky to check the output accurately. Instead, work with these tools to help you complete tasks step-by-step. You should still use your own creativity, thought and judgment. Outputs from LLMs may be owned by the LLM provider or not protected by copyright if they are not the product of human effort.</p>
+        </div>
+        <div class="quad-card">
+          <span class="quad-label">Rule 04</span>
+          <h3>Don't ask GenAI to make decisions or form opinions about people</h3>
+          <p>GenAI is not a thinking tool and it does not replace your role as an accountable decision maker. Do not use it to make decisions about individuals. It can be used to review and summarise content but only you can make decisions about another person.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">03 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 3 — Quantum Leap Principle (two-up cards)
+       ============================================================ -->
+  <section class="slide slide--ql" data-label="Quantum Leap Principle">
+    <div class="rule-band"></div>
+
+    <p class="kicker">How the machine thinks</p>
+    <h2 class="slide-title">The quantum leap <em>principle</em>.</h2>
+
+    <div class="slide-body">
+      <img class="ql-img" src="images/quantumleap.jpg" alt="A collage portrait in the Guardian palette illustrating the Quantum Leap idea — a mind that arrives brilliant but unoriented.">
+      <div class="ql-cards">
+        <div class="aim">
+          <span class="aim-num">01</span>
+          <h3>The Swiss cheese brain</h3>
+          <p>The model pops into existence each time with no memory. It "leaps" in with massive intelligence but zero orientation. Your job is to fill the holes.</p>
+        </div>
+        <div class="aim">
+          <span class="aim-num">02</span>
+          <h3>The fundamental anchor</h3>
+          <p>If the model has amnesia by design, context is your most fundamental tool. Without it, the machine's brilliance is unanchored and prone to drift.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">03 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 4 — Irreplaceable Expertise (three cards)
+       ============================================================ -->
+  <section class="slide slide--quad" data-label="Irreplaceable Expertise">
+    <div class="rule-band"></div>
+
+    <p class="kicker">What you bring</p>
+    <h2 class="slide-title">Irreplaceable <em>expertise</em>.</h2>
+
+    <div class="slide-body">
+      <div class="aims quad">
+        <div class="aim">
+          <span class="aim-num">01</span>
+          <h3>The problem</h3>
+          <p>Articulating the specific issue you want to address with absolute clarity and precision.</p>
+          <div class="example-bubble"><p>"I need to build a slide deck to help train the board on advanced AI."</p></div>
+        </div>
+        <div class="aim">
+          <span class="aim-num">02</span>
+          <h3>Support context</h3>
+          <p>Any supporting data, internal logic, or unique expertise that anchors the solution.</p>
+          <div class="example-bubble"><p>"Here are five recent training decks I've used. Absorb the style of writing and also the content. I will want to adapt many of them. Also ingest this academic text on proven presentation techniques."</p></div>
+        </div>
+        <div class="aim">
+          <span class="aim-num">03</span>
+          <h3>Ideal output</h3>
+          <p>The context for format (e.g. slides), tone of voice, intended audience, and specific constraints.</p>
+          <div class="example-bubble"><p>"Please take the design language, fonts and styling from the attached presentation and create a prompt that will reliably style my slide requests consistently in this form."</p></div>
+        </div>
+        <div class="aim">
+          <span class="aim-num">04</span>
+          <h3>Governance</h3>
+          <p>The magic of LLMs is their ability to infer intent from language. This is also the biggest cause of errors. Don't expect a prompt to work in one shot. Sculpt your way to success through conversation.</p>
+          <div class="example-bubble"><p>"I like the slide showing the graph of adoption but to make it land it needs to animate the lines from left to right."</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">04 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 5 — The Magpie Habit (three cards)
+       ============================================================ -->
+  <section class="slide" data-label="The Magpie Habit">
+    <div class="rule-band"></div>
+
+    <p class="kicker">What you bring</p>
+    <h2 class="slide-title">The magpie <em>habit</em>.</h2>
+
+    <div class="slide-body">
+      <div class="aims media">
+        <div class="aim">
+          <span class="aim-num">01</span>
+          <h3>Collect everything</h3>
+          <p>Maintain a digital scrapbook: designs, tweets, essays, YouTube videos, screengrabs, audio notes, academic papers, UIs … and anything that strikes you as useful collateral information.</p>
+          <img class="aim-media" src="images/collect.jpg" alt="A blue line-drawn illustration of Regent Street, London — a collected visual style reference.">
+        </div>
+        <div class="aim">
+          <span class="aim-num">02</span>
+          <h3>Feed the machine</h3>
+          <p>Images, voice notes, scribbled thoughts, screen grabs, videos and inputs that reduce the amount of time you need to prompt through text and can influence a project's creative direction.</p>
+          <img class="aim-media" src="images/feed.jpg" alt="An engraving-style portrait montage — an example image fed into a project.">
+        </div>
+        <div class="aim">
+          <span class="aim-num">03</span>
+          <h3>Sculpt and capture</h3>
+          <p>Refine the inputs you've given the machine by nudging it towards a more personalised vision, enriched by your expertise. Then turn the output into a reproducible prompt.</p>
+          <img class="aim-media" src="images/sculpt.jpg" alt="The same montage reworked with colour and texture — a sculpted, adapted output.">
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">05 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 6 — The Mentor & The Manager (two-up cards)
+       ============================================================ -->
+  <section class="slide" data-label="The Mentor & The Manager">
+    <div class="rule-band"></div>
+
+    <p class="kicker">How to instruct</p>
+    <h2 class="slide-title">The mentor & the <em>manager</em>.</h2>
+
+    <div class="slide-body">
+      <div class="aims two">
+        <div class="aim">
+          <span class="aim-num">Prompt level</span>
+          <h3>Think like a teacher</h3>
+          <p>Teaching is a skillset, and it's exactly what the machine needs. Like a child, it's capable but forgetful — easily distracted, easily led astray. Clear, patient instruction and a steady process matter far more than clever syntax.</p>
+        </div>
+        <div class="aim">
+          <span class="aim-num">Project level</span>
+          <h3>Manage the team</h3>
+          <p>Lead a team on individual tasks that add up to a whole. Break big projects into small, achievable, and verifiable chunks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">06 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 7 — The Strategic Expedition (merged process slide)
+       Folds the old "Planning Expedition" and "Strategic Workflow"
+       into one: a four-step timeline on a descending line.
+       ============================================================ -->
+  <section class="slide" data-label="The Strategic Expedition">
+    <div class="rule-band"></div>
+
+    <p class="kicker">The workflow</p>
+    <h2 class="slide-title">The strategic <em>expedition</em>.</h2>
+    <p class="slide-subtitle">Start wide, then narrow down: four waypoints from aim to a verified result.</p>
+
+    <div class="slide-body">
+      <div class="flow">
+        <div class="flow-track">
+          <svg class="flow-curve" viewBox="0 0 1680 240" preserveAspectRatio="none" aria-hidden="true">
+            <path class="fill" d="M 0,42 C 120,45 160,47 210,50 C 360,57 500,77 630,90 C 770,103 920,124 1050,135 C 1190,146 1340,165 1470,170 C 1550,172 1620,175 1680,178 L 1680,240 L 0,240 Z"></path>
+            <path class="line" d="M 0,42 C 120,45 160,47 210,50 C 360,57 500,77 630,90 C 770,103 920,124 1050,135 C 1190,146 1340,165 1470,170 C 1550,172 1620,175 1680,178"></path>
+          </svg>
+          <div class="flow-node n1">01</div>
+          <div class="flow-node n2">02</div>
+          <div class="flow-node n3">03</div>
+          <div class="flow-node n4">04</div>
+        </div>
+        <div class="flow-labels">
+          <div class="flow-label">
+            <h3>Define aim</h3>
+            <p>Set the ultimate goal. Start wide — tell the machine you are planning a project.</p>
+          </div>
+          <div class="flow-label">
+            <h3>Map steps</h3>
+            <p>Deconstruct it into small, modular chunks.</p>
+          </div>
+          <div class="flow-label">
+            <h3>Specific context</h3>
+            <p>Feed the data and expertise each step needs.</p>
+          </div>
+          <div class="flow-label">
+            <h3>Loop &amp; refine</h3>
+            <p>Iterate and verify at every waypoint.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">07 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Practical examples — black/yellow interstitial before the
+       worked example(s)
+       ============================================================ -->
+  <section class="slide ink section-opener" data-label="Practical examples">
+    <div class="rule-band"></div>
+
+    <div class="chapter-num">In the newsroom</div>
+    <h1>Practical <em>examples.</em></h1>
+    <p class="section-dek">All this can sound hypothetical and vague. Here are three concrete examples of what we've been building with Claude Code in the newsroom, responding quickly and effectively to requests that would otherwise remain unrealised.</p>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">14 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Deep-research prompt — oversized pull-quote opening the
+       practical-examples section (modelled on a reference slide)
+       ============================================================ -->
+  <section class="slide ink slide--research" data-label="Deep research prompt">
+    <div class="rule-band"></div>
+
+    <p class="research-eyebrow">A beginner's deep research prompt</p>
+    <p class="research-quote"><span class="research-mark">“</span>How might the agentic web affect <em>the Guardian's journalism and revenue model</em> in the next five years?</p>
+    <p class="research-sub">Think about your own deep research question that might be more relevant.</p>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">17 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Building a fuel-price dashboard — second worked example,
+       reproducing the bespoke-newsfeed layout (framed screenshot +
+       live-typing prompt; no self-correction on this one)
+       ============================================================ -->
+  <section class="slide slide--prompt" data-label="Fuel tracker">
+    <div class="rule-band"></div>
+
+    <div class="slide-body">
+      <div class="isw-frame">
+        <img class="isw-img" src="images/fuel-tracker.png" alt="Screenshot of a UK fuel-price tracker dashboard: average prices, regional breakdowns and anomaly detection.">
+      </div>
+
+      <div class="prompt-col">
+        <p class="kicker">Fuel tracker · A worked example</p>
+        <h2 class="slide-title">Building a fuel-price <em>dashboard</em>.</h2>
+        <div class="prompt-box">
+          <p class="prompt-label">The opening prompt</p>
+          <p class="prompt-text"><span class="typed" data-typo="differences" data-fix="disparities">The head of Consumer wants an easy way to keep track of and monitor fuel prices across the UK. We have a set of reliable sources for the data below. Identify any other official sources we may have missed and then suggest a framework for a dashboard to allow the editor to apply their expertise to search the data in multiple ways and through different visualisations with the intent of uncovering significant disparities or trends in the context of the impact of the Iran war on UK consumers.</span><span class="caret"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">18 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Building a bespoke newsfeed — the opening prompt types in
+       live (with a self-correction, secondary → primary) beside
+       the framed ISW report screenshot it responds to.
+       ============================================================ -->
+  <section class="slide slide--prompt" data-label="Bespoke newsfeed">
+    <div class="rule-band"></div>
+
+    <div class="slide-body">
+      <div class="isw-frame">
+        <img class="isw-img" src="images/isw-report.png" alt="Screenshot of the Institute for the Study of War's daily Iran Update report.">
+      </div>
+
+      <div class="prompt-col">
+        <p class="kicker">Iran Watcher · A worked example</p>
+        <h2 class="slide-title">Building a <em>bespoke</em> newsfeed.</h2>
+        <div class="prompt-box">
+          <p class="prompt-label">The opening prompt</p>
+          <p class="prompt-text"><span class="typed" data-typo="secondary" data-fix="primary">I want to build a daily Iran briefing for the Guardian's defence and security editor. His most authoritative read right now is an American think tank's report — three thousand words a day, written by six named analysts. I don't want to clone it. I want something a UK newsroom can sustain: faster, weighted to primary sources we can actually get at, and honest about what won't be possible. Let's scope it properly first — what's realistic, what isn't, and where we'd add something they don't. I'll feed you sources and examples that the editor values as we go.</span><span class="caret"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">15 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 12 — Iran Watcher: feed it material (magpie / context)
+       ============================================================ -->
+  <section class="slide case" data-label="Feed it material">
+    <div class="rule-band"></div>
+
+    <p class="kicker">Iran Watcher · Context in</p>
+    <h2 class="slide-title">Feed it material. Keep feeding it <em>material</em>.</h2>
+
+    <div class="slide-body">
+      <p class="case-lede"><strong>The project was born from one thing, and stayed sharp because of one thing: material being fed into the conversation.</strong></p>
+
+      <table class="feed-table">
+        <thead>
+          <tr>
+            <th>What we fed in</th>
+            <th>What it triggered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The opening brief: what the editor needed, and the report to measure against</td>
+            <td>An honest plan for what we could realistically build</td>
+          </tr>
+          <tr>
+            <td>A screenshot of a UN approval email</td>
+            <td>A humanitarian-reports feed, added within the hour</td>
+          </tr>
+          <tr>
+            <td>A screenshot of the site looking broken on a phone</td>
+            <td>A full redesign for mobile</td>
+          </tr>
+          <tr>
+            <td>An off-hand remark that we'd used up our free social-media feeds</td>
+            <td>Two more papers found that we could already pull in for free</td>
+          </tr>
+          <tr>
+            <td>A screenshot of a shipping-incident post we couldn't reliably read</td>
+            <td>One line of inquiry dropped, a sharper one started</td>
+          </tr>
+          <tr>
+            <td>Five of the think-tank's reports, shared over six weeks</td>
+            <td>Five side-by-side comparisons, each exposing the next gap</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">12 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 13 — Iran Watcher: it proposes things (the payoff)
+       ============================================================ -->
+  <section class="slide case" data-label="It proposes things">
+    <div class="rule-band"></div>
+
+    <p class="kicker">Iran Watcher · Suggestions out</p>
+    <h2 class="slide-title">Once it has the context, it starts <em>proposing</em> things you didn't ask for.</h2>
+
+    <div class="slide-body">
+      <p class="case-lede">Three moments where the model suggested something Chris hadn't asked for:</p>
+
+      <div class="exchanges">
+        <div class="exchange">
+          <div class="ask">
+            <p class="speaker">Chris asked</p>
+            <p class="line">"We've used both our free social-media-feed slots on IDF and CENTCOM. The question is whether to pay for more, or write a custom Twitter adapter."</p>
+          </div>
+          <div class="suggest">
+            <p class="speaker">Claude suggested</p>
+            <p class="line">"Before either — let me check whether Times of Israel and Jerusalem Post are on Bluesky's free public API. They are. About twenty extra items a day, from a layer you didn't ask about."</p>
+          </div>
+        </div>
+        <div class="exchange">
+          <div class="ask">
+            <p class="speaker">Chris asked</p>
+            <p class="line">(after a benchmark) "We're missing the vessel-level maritime tracking the think tank cites — sources like Lloyd's List and Windward AI."</p>
+          </div>
+          <div class="suggest">
+            <p class="speaker">Claude suggested</p>
+            <p class="line">"Both paid, enterprise tier — out of reach. But the OSINT outfit the think tank actually cites in its footnotes — Tanker Trackers — is on Bluesky and posts publicly. One line to add."</p>
+          </div>
+        </div>
+        <div class="exchange">
+          <div class="ask">
+            <p class="speaker">Chris asked</p>
+            <p class="line">"Should the Twitter and Bluesky cards be treated the same way as the Iranian state Telegram ones?"</p>
+          </div>
+          <div class="suggest">
+            <p class="speaker">Claude suggested</p>
+            <p class="line">"Partly. The Israeli army's Twitter is a broadcast — same band as the regime channels. The Israeli newspapers on Bluesky are different — they're newspapers that happen to deliver via Bluesky. Suggesting we split on editorial unit type, not just provenance."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">13 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 14 — Iran Watcher: verify externally (loop & verify)
+       ============================================================ -->
+  <section class="slide case" data-label="Verify externally">
+    <div class="rule-band"></div>
+
+    <p class="kicker">Iran Watcher · Benchmark and repeat</p>
+    <h2 class="slide-title">Verify against something external. <em>Repeatedly</em>.</h2>
+
+    <div class="slide-body">
+      <p class="case-lede">Our benchmark was the original ISW report. Across six weeks, I asked Claude to compare our report to theirs. Each comparison was published as its own page — what they covered, what we covered, what each side missed.</p>
+      <p class="case-emph">Every comparison identified the next gap to close.</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Comparison date</th>
+            <th>What the comparison identified as missing</th>
+            <th>What got built next</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>21 April</td>
+            <td>First benchmark — multiple gaps</td>
+            <td>Editorial design overhaul; threading and filters</td>
+          </tr>
+          <tr>
+            <td>24 April</td>
+            <td>Better presentation of UK Parliament questions</td>
+            <td>Rich question-and-answer layout</td>
+          </tr>
+          <tr>
+            <td>30 April</td>
+            <td>Direct access to Iranian state messaging</td>
+            <td>Three Iranian regime channels added</td>
+          </tr>
+          <tr>
+            <td>1 May</td>
+            <td>Military operational broadcasts (Israeli army, US Central Command)</td>
+            <td>Both social-media feeds added</td>
+          </tr>
+          <tr>
+            <td>14 May</td>
+            <td>Vessel-level maritime tracking</td>
+            <td>Tanker Trackers added</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="case-lede" style="margin-top:18px">Without the comparisons, the project would have drifted on instinct. With them, every round of work had a measurable target.</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">14 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       What does that unlock? — lifted verbatim from Awayday slide 15:
+       a chat stream of real prompts, each a link to the project it
+       produced. (Kicker is still the Awayday "Part 02 ·…" — Chris to
+       tweak.)
+       ============================================================ -->
+  <section class="slide" data-label="What does that unlock">
+    <div class="rule-band"></div>
+
+    <p class="kicker">In the newsroom · And more</p>
+    <h2 class="slide-title">But that's not <em>all</em>…</h2>
+
+    <div class="slide-body">
+      <div class="chat-stream">
+        <a class="chat-bubble" href="https://guardian-angles.com/" target="_blank" rel="noopener noreferrer">Could you build me an equivalent of Google Trends for the Guardian?</a>
+        <a class="chat-bubble" href="https://peter-guillam123.github.io/House/" target="_blank" rel="noopener noreferrer">What are the data sources in Hansard, and what could I build with them for journalists?</a>
+        <a class="chat-bubble" href="https://peter-guillam123.github.io/house-us/" target="_blank" rel="noopener noreferrer">How might this work for Congress?</a>
+        <a class="chat-bubble" href="https://peter-guillam123.github.io/abandoned-churches/" target="_blank" rel="noopener noreferrer">Can you create an interactive map that builds on a Guardian article about derelict churches?</a>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">23 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       04 — Getting started (black/yellow interstitial, closing
+       call to action; part 4 of the agenda)
+       ============================================================ -->
+  <section class="slide ink section-opener" data-label="Getting started">
+    <div class="rule-band"></div>
+
+    <div class="chapter-num">Over to you</div>
+    <h1>Getting <em>started.</em></h1>
+    <p class="section-dek">LLMs can't be taught. How do you make space in your work to get practical experience, and what kind of project could you start with?</p>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">20 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Getting started A — "First, you have to use it": the argument
+       (left) and the genie on-ramp, a real first prompt typed in live
+       (right). Reuses the prompt-box / typing engine from the worked
+       examples — closing the loop on the deck's spine.
+       ============================================================ -->
+  <section class="slide slide--start" data-label="Commit the time">
+    <div class="rule-band"></div>
+
+    <p class="kicker">Getting started · No shortcuts</p>
+    <h2 class="slide-title">First, you have to <em>use</em> it.</h2>
+
+    <div class="slide-body">
+      <div class="start-arg">
+        <p class="start-lede">You can't get your hands around what LLMs can do — or grasp their potential at scale — without committing real time to using them. <strong>It's non-negotiable.</strong> Skip it, and you're the person who tried AI Overviews once, decided GenAI was broken, and walked away.</p>
+        <ul class="start-points">
+          <li><strong>Put time aside, and protect it.</strong> Be disciplined about actually turning up.</li>
+          <li><strong>Expect not to finish.</strong> The project may never land — but the hours still teach you how they do and don't work.</li>
+        </ul>
+      </div>
+
+      <div class="start-genie">
+        <p class="start-genie-intro">Don't know where to begin? You have a magic genie in front of you. <strong>Ask it.</strong> Here's how I started:</p>
+        <div class="prompt-box">
+          <p class="prompt-label">My very first prompt</p>
+          <p class="prompt-text"><span class="typed">Can you build me a simple app on my machine? I can't code. I will need you to explain everything to me in simple language. Don't assume knowledge on my part. Redirect me if I ask for something stupid or there's a better way.</span><span class="caret"></span></p>
+        </div>
+        <p class="start-buy"><span class="buy-arrow" aria-hidden="true">→</span><strong>Buy Claude</strong>, and use the desktop app.</p>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">24 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Getting started B — "Pick a first project": three ways in
+       (hobby / a child's homework / a week at work), each with an
+       "I asked Claude to…" example in a message bubble (slide-12
+       pattern), bubbles fading in after their card.
+       ============================================================ -->
+  <section class="slide slide--ways" data-label="Pick a first project">
+    <div class="rule-band"></div>
+
+    <p class="kicker">Getting started · Three ways in</p>
+    <h2 class="slide-title">Pick a first <em>project</em>.</h2>
+    <p class="slide-subtitle">The best first project is something you already know and care about. Three ways in:</p>
+
+    <div class="slide-body">
+      <ol class="ways-list">
+        <li class="way">
+          <span class="way-num">01</span>
+          <div class="way-main">
+            <h3>A hobby</h3>
+            <p class="way-why">Start where you're passionate. You know the territory, and you know where it's painful.</p>
+          </div>
+          <p class="way-ask">"I'm a keen photographer, so I asked Claude to build me a small Mac app that reads the forecast and tells me, the night before, whether tomorrow's golden hour is worth shooting."</p>
+        </li>
+        <li class="way">
+          <span class="way-num">02</span>
+          <div class="way-main">
+            <h3>A child's homework</h3>
+            <p class="way-why">Use it as assistant and tutor. You'll learn from your kids, learn to steer them past just getting the answer, and see what a teacher it can be.</p>
+          </div>
+          <p class="way-ask">"My daughter couldn't get expanding double brackets — honestly, neither could I. So I asked Claude to explain it in plain English, then build us interactive examples and quizzes."</p>
+        </li>
+        <li class="way">
+          <span class="way-num">03</span>
+          <div class="way-main">
+            <h3>A week at work</h3>
+            <p class="way-why">Take one real task and use AI at every step. You're finding where you want the machine — and where you don't. Not a long-term project; prep for one big thing.</p>
+          </div>
+          <p class="way-ask">"Before a meeting to settle a long-running project, I asked Claude to pull together three months of Chat, Mail, Docs and Slides — where we'd got to, what's still open, who owes what, and what I need to tie off myself."</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">25 / NN</span>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+
+<script>
+  /* Auto-number slide footers: writes "NN / TT" into each slide's .num. */
+  (() => {
+    const slides = document.querySelectorAll('deck-stage > section');
+    const total = String(slides.length).padStart(2, '0');
+    slides.forEach((slide, i) => {
+      const num = slide.querySelector('.slide-foot .num');
+      if (num) num.textContent = `${String(i + 1).padStart(2, '0')} / ${total}`;
+    });
+  })();
+
+  /* Live-typing prompt (slide: Building a bespoke newsfeed). Types the
+     opening prompt out with one self-correction (secondary → primary)
+     and a blinking caret, replaying on each visit. The full text also
+     lives in the markup, so print / no-JS still shows the whole prompt. */
+  let promptTypingGen = 0;
+  const promptFullText = new WeakMap();   // each prompt's full text, captured once
+  function runPromptTyping(slide, gen) {
+    const typed = slide.querySelector('.prompt-text .typed');
+    if (!typed) return;
+    // Capture the full prompt the first time only. A re-entrant call (e.g. the
+    // double slidechange that fires as slides slot in on reload) must NOT re-read
+    // textContent here — a prior run may have cleared and half-typed it, and we'd
+    // then "complete" that fragment and stick. Read from the cache instead.
+    if (!promptFullText.has(typed)) promptFullText.set(typed, typed.textContent);
+    const full = promptFullText.get(typed);
+    const typo = typed.dataset.typo;      // optional: a word typed wrong first…
+    const fix = typed.dataset.fix;        // …then corrected to this (must occur in `full`)
+    const cancelled = () => gen !== promptTypingGen;
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    typed.textContent = '';
+    (async () => {
+      const type = async (str, base) => {
+        for (const ch of str) {
+          if (cancelled()) return true;
+          typed.textContent += ch;
+          await sleep(base + Math.random() * 8);
+        }
+        return false;
+      };
+      const backspace = async (n, base) => {
+        for (let i = 0; i < n; i++) {
+          if (cancelled()) return true;
+          typed.textContent = typed.textContent.slice(0, -1);
+          await sleep(base);
+        }
+        return false;
+      };
+      if (typo && fix && full.includes(fix)) {
+        const i = full.indexOf(fix);
+        if (await type(full.slice(0, i), 11)) return;
+        if (await type(typo, 13)) return;                // a wrong word, typed out…
+        await sleep(520); if (cancelled()) return;
+        if (await backspace(typo.length, 26)) return;    // …then deleted…
+        await sleep(180); if (cancelled()) return;
+        if (await type(fix, 15)) return;                 // …and rewritten
+        if (await type(full.slice(i + fix.length), 11)) return;
+      } else {
+        if (await type(full, 11)) return;                // no correction — type it straight
+      }
+    })();
+  }
+
+  /* Restart keyframe animations on the active slide each time it
+     becomes active, so reveals replay on backward / forward nav. */
+  document.querySelector('deck-stage').addEventListener('slidechange', (e) => {
+    const slide = e.detail.slide;
+    if (!slide) return;
+    promptTypingGen++;  // cancel any in-flight prompt typing on slide change
+    const els = slide.querySelectorAll('.aim, .flow-node, .flow-label, .flow-curve .line, .section-opener h1 em, .ai-meta, .ax-dot, .ax-endpoint, .quad-card, .ax-pair .ax-card, .ax-frictions-head, .ax-frictions li, .example-bubble, .agenda-item, .fable-img, .fable-text, .feed-table tbody tr, .exchange, .compare-table tbody tr, .chat-bubble, .way');
+    els.forEach((el) => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+
+    /* Adoption-speed chart — internet and smartphone lines draw together
+       (left to right), then a beat, then the AI line draws in last on its
+       own. The pause before AI is the editorial moment. (Lifted from the
+       Awayday project, where the line-draw is JS-driven, not CSS.) */
+    if (slide.querySelector('.ax-line')) {
+      const setup = [
+        { sel: '.ax-line--internet', dur: 2800, delay: 200 },
+        { sel: '.ax-line--phone',    dur: 2600, delay: 200 },
+        { sel: '.ax-line--ai',       dur: 2000, delay: 3400 },
+      ];
+      requestAnimationFrame(() => {
+        setup.forEach(({ sel, dur, delay }) => {
+          const line = slide.querySelector(sel);
+          if (!line) return;
+          const len = line.getTotalLength();
+          line.style.transition = 'none';
+          line.style.strokeDasharray = len;
+          line.style.strokeDashoffset = len;
+          line.getBoundingClientRect();  // force reflow
+          line.style.transition = `stroke-dashoffset ${dur}ms cubic-bezier(.45,.05,.25,1) ${delay}ms`;
+          line.style.strokeDashoffset = '0';
+        });
+      });
+    }
+
+    /* Live-type the opening prompt when its slide becomes active */
+    if (slide.querySelector('.prompt-text .typed')) {
+      runPromptTyping(slide, promptTypingGen);
+    }
+  });
+</script>
+
+</body></html>

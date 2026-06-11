@@ -22,6 +22,11 @@ one-slide-per-page export at 1920×1080.
   fails to run, nothing hides.
 - `deck-stage.js` — the `<deck-stage>` web component (keyboard nav, auto-scale,
   tap zones, print rules). Untouched.
+- `first-edition/` — the deck exactly as it stood before the second-edition
+  rework, kept browsable at
+  [/first-edition/](https://peter-guillam123.github.io/board-and-trust-training/first-edition/)
+  as a record of what changed. Same words, earlier clothes. The cutover is
+  also tagged `first-edition` in git.
 - `.github/workflows/pages.yml` — deploys to GitHub Pages on push to `main`.
   Inert until the deck is pushed to a repo.
 - `example-rubric-prompt.md` — a portable prompt to paste into projects already
@@ -39,6 +44,16 @@ the template's typographic `01 / 02 / 03` numbering. Copy is verbatim from the
 source, Anglicised (Labour, distil, realise).
 
 ## Changelog
+
+### 11 June 2026 — Archived the first edition
+
+The pre-rework deck is preserved at
+[/first-edition/](https://peter-guillam123.github.io/board-and-trust-training/first-edition/),
+served from a `first-edition/` folder copied out of git history (commit
+`ac7d237`, also tagged `first-edition`). Partly a record, mainly a
+demonstration: open the two side by side and the differences — the real
+italics, the materials, the motion — make the case better than any
+changelog entry can.
 
 ### 11 June 2026 — Notes from the first read-through
 
