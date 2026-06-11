@@ -11,10 +11,15 @@ Twenty-six slides, one source of truth. Open `index.html` in a browser to presen
 arrow keys / space to navigate, `R` to reset, `Cmd-P → Save as PDF` for a
 one-slide-per-page export at 1920×1080.
 
-- `index.html` — the twenty-six slides plus the deck-specific component styles.
-- `styles.css` — the shared Guardian stylesheet (fonts, design tokens, base
-  components). Untouched from the template; the deck's own components live in
-  the `<style>` block of `index.html`.
+- `index.html` — the twenty-six slides. Markup only; every visual decision
+  lives in the stylesheet.
+- `styles.css` — the full design system: the real Guardian font cuts, design
+  tokens, paper materiality, slide chrome, every component, and the motion
+  keyframes.
+- `motion.js` — the choreography engine: folios and the progress seam, masked
+  word reveals, the staggered `data-fx` replays, count-up figures, the
+  live-typing prompts and the staged chart draw. Built so that if it ever
+  fails to run, nothing hides.
 - `deck-stage.js` — the `<deck-stage>` web component (keyboard nav, auto-scale,
   tap zones, print rules). Untouched.
 - `.github/workflows/pages.yml` — deploys to GitHub Pages on push to `main`.
@@ -34,6 +39,46 @@ the template's typographic `01 / 02 / 03` numbering. Copy is verbatim from the
 source, Anglicised (Labour, distil, realise).
 
 ## Changelog
+
+### 11 June 2026 — Notes from the first read-through
+
+Three changes after a first read-through of the second edition. The
+directional wipes on images — left-to-right, bottom-up — felt like too much;
+images now arrive as a photographic dissolve, fading in while they settle from
+a barely-there over-zoom, like a print developing. The run of slides 10–14
+leaned on the same boxed-card layout five times in a row; they now take five
+different shapes in one voice — a rulebook ledger for the non-negotiables,
+open text blocks beside the Quantum Leap collage, a conversation rail for
+Irreplaceable expertise (each component of a good prompt answered by the
+example you'd actually type), a picture-led triptych for the magpie habit, and
+a clean diptych for the mentor and the manager. And a copy-edit pass: ten
+small changes — repeated words ("technical" twice on the cover, "realise"
+twice in one sentence), one consultancy word ("synergy") shown the door, the
+ISW acronym nobody had been introduced to, "LLMs can't be taught" sharpened to
+"can't be taught, only learned", the Fable slide rewritten now Fable has
+actually been used in anger, and one "Board and Trust" too many on the cover.
+
+### 11 June 2026 — Milestone: the second edition
+
+The whole presentation layer, rebuilt. Same twenty-six slides, same running
+order, and — a script diffed every visible word against the old deck to prove
+it — the same words. What changed is everything around them. The deck now
+loads the Guardian's real italic and Black cuts from the Guardian CDN; the
+first edition was slanting the upright fonts and hoping, which is the sort of
+thing you can't unsee once you've seen it. Titles arrive word by word through
+masks, the cover's red full stop lands on a spring (a CSS `linear()` spring —
+no JavaScript), and each section opener gets a giant outlined ghost numeral
+and a yellow stroke drawn under its italic word. Every slide sits on a faint
+paper-fibre grain with a press vignette at the edges; cards became plates with
+hairline borders and layered shadows; the prompts type inside console cards;
+and a red seam along the bottom edge quietly fills as the deck advances. All
+the motion moved into one new file, `motion.js` — with three safety nets: if
+JavaScript fails nothing hides, `prefers-reduced-motion` gets a fully static
+deck, and Cmd-P still prints final states. We looked at Pretext (chenglou's
+text-measurement library, suggested as possibly useful) and set it aside — it
+solves text layout on canvas and WebGL, a problem an HTML deck doesn't have.
+The genuinely useful new things were older ones done properly: real font
+cuts, `text-wrap: balance`, and restraint.
 
 ### 10 June 2026 — Reworked the closing two slides for beauty
 
