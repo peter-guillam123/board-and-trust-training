@@ -50,6 +50,15 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — New square Quantum Leap image
+
+Swapped the landscape Quantum Leap collage for a new square one, which uses the
+slide better: it stands as a 680px square block (sized to the body height, with
+a little air) and the two principles read in a wider column beside it. Kept a
+generous 80px gap rather than snapping to the grid gutter — an image-beside-text
+split wants the breathing room. Saved under a fresh filename
+(`quantumleap-square.jpg`) so no browser serves the old cached picture.
+
 ### 11 June 2026 — A Müller-Brockmann grid, as an instrument
 
 Tested a Swiss-grid design skill against the deck. The useful finding: we were

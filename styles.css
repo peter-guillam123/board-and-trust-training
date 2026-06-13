@@ -1068,12 +1068,12 @@ deck-stage { background: #000; }
    ============================================================ */
 .slide--ql .slide-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 680px 1fr;   /* square image block + wider text column */
+  gap: 80px;
   align-items: center;
 }
-.ql-frame { box-shadow: var(--shadow-frame); }
-.ql-img { display: block; width: 100%; height: auto; }
+.ql-frame { box-shadow: var(--shadow-frame); aspect-ratio: 1 / 1; }
+.ql-img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .ql-points { display: flex; flex-direction: column; gap: 44px; }
 .ql-point { border-top: 2px solid var(--ink); padding-top: 18px; }
 .ql-point:nth-child(2) .point-num { color: var(--news-red); }
