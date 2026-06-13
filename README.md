@@ -22,6 +22,11 @@ one-slide-per-page export at 1920×1080.
   fails to run, nothing hides.
 - `deck-stage.js` — the `<deck-stage>` web component (keyboard nav, auto-scale,
   tap zones, print rules). Untouched.
+- `grid-overlay.js` — a Müller-Brockmann grid instrument. Press **G** to toggle
+  the 12-column + baseline grid the deck is built against (off by default, and
+  it changes nothing — it only lets you check alignment). It reads the same
+  `--grid-*` tokens in `styles.css` that the chrome and card gutters use, so
+  content and grid can't drift.
 - `first-edition/` — the deck exactly as it stood before the second-edition
   rework, kept browsable at
   [/first-edition/](https://peter-guillam123.github.io/board-and-trust-training/first-edition/)
@@ -44,6 +49,22 @@ the template's typographic `01 / 02 / 03` numbering. Copy is verbatim from the
 source, Anglicised (Labour, distil, realise).
 
 ## Changelog
+
+### 11 June 2026 — A Müller-Brockmann grid, as an instrument
+
+Tested a Swiss-grid design skill against the deck. The useful finding: we were
+already ~95% on a 12-column grid by instinct — every margin and most column
+work lined up. So this is a light touch, not a retrofit. Added a `--grid-*`
+source of truth to `styles.css` (12 columns, 120px margins, 12px baseline, 24px
+gutter) and a toggle-able overlay (`grid-overlay.js`, press **G**) that draws
+the grid from those same tokens. Snapped the two three-up slides — "Beyond
+chat" and "The magpie habit" — to an exact 4 + 4 + 4 column rhythm; on the
+former it even pulled "The reasoning brain" back onto one line. Deliberately
+left the hand-tuned spacing alone where it was doing real work (the agenda's
+generous central gap, the choice cards' arrow gutters). Kept the Guardian
+palette and serif type throughout — the skill's "white paper, sans-serif"
+house rules were the one thing *not* taken, since they target exactly the look
+we want.
 
 ### 11 June 2026 — Archived the first edition
 

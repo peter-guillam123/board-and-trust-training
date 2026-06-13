@@ -76,6 +76,18 @@
   --ui: 'GuardianTextSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --mono: 'Menlo', 'SF Mono', 'Courier New', monospace;
 
+  /* Müller-Brockmann grid — one source of truth for the 1920×1080
+     canvas. The chrome margins, the card gutters and the grid-overlay
+     instrument all read these, so content and grid can never drift.
+     12 columns inside 120px margins on a 12px baseline; a 24px gutter
+     lands a 3-up row exactly on 4 + 4 + 4 columns. */
+  --grid-margin: 120px;
+  --grid-top: 100px;
+  --grid-bottom: 80px;
+  --grid-cols: 12;
+  --grid-gutter: 24px;
+  --grid-baseline: 12px;
+
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);          /* expo-out: lands softly */
   --ease-in-out: cubic-bezier(0.77, 0, 0.18, 1);      /* bars and draws */
@@ -125,7 +137,7 @@ deck-stage { background: #000; }
   background: var(--paper);
   color: var(--ink);
   font-family: var(--body);
-  padding: 100px 120px 80px;
+  padding: var(--grid-top) var(--grid-margin) var(--grid-bottom);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -176,7 +188,7 @@ deck-stage { background: #000; }
    ============================================================ */
 .rule-band {
   position: absolute;
-  top: 0; left: 120px; right: 120px;
+  top: 0; left: var(--grid-margin); right: var(--grid-margin);
   display: grid;
   grid-template-columns: 2fr 1fr;
   height: 8px;
@@ -199,7 +211,7 @@ deck-stage { background: #000; }
 
 .slide-foot {
   position: absolute;
-  bottom: 36px; left: 120px; right: 120px;
+  bottom: 36px; left: var(--grid-margin); right: var(--grid-margin);
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -501,7 +513,7 @@ deck-stage { background: #000; }
 .aims {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: var(--grid-gutter);   /* 3 cards land exactly on 4 + 4 + 4 columns */
 }
 .aim {
   padding: 40px 36px;
@@ -668,7 +680,7 @@ deck-stage { background: #000; }
 .magpie {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 56px;
+  gap: var(--grid-gutter);   /* same 4 + 4 + 4 column rhythm as .aims */
 }
 .magpie-photo { box-shadow: var(--shadow-frame); }
 .magpie-photo img {
