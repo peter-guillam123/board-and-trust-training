@@ -50,6 +50,15 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Genericised for wider audiences
+
+The deck's being used beyond the Board now, so the audience-specific framing is
+gone: the cover drops "Session — Board and Trust" (the year 2026 takes that spot,
+bottom right) and loses the year from the top line. The closing recommendation is
+broader too — from a flat "Buy Claude" to "Experiment with Canvas in Gemini, and
+move up to something like Claude Code in their desktop app" — an on-ramp rather
+than a single pick.
+
 ### 13 June 2026 — New slide: "The field"
 
 A new slide after Fable, pitched at a general audience: three tiers of models —
