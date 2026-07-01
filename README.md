@@ -50,6 +50,18 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — New slide: "The field"
+
+A new slide after Fable, pitched at a general audience: three tiers of models —
+frontier, open, and the small ones that run on your own device — as three rows
+of names. Within each row the names jostle for position (frontier hardest), the
+current leader lifted and capped in the tier's colour, under 1st / 2nd / 3rd
+headers. After the jostling a line lands — "The order rarely changes, but the
+time it takes to catch up keeps shrinking" — and the rows draw together: the
+gaps close, the order holds. Static and legible for reduced-motion and print.
+The names are wordmarks for now (real logos may follow) and the copy is a first
+pass. `motion.js` gains the jostle engine.
+
 ### 13 June 2026 — New square Quantum Leap image
 
 Swapped the landscape Quantum Leap collage for a new square one, which uses the

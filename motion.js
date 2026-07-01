@@ -190,6 +190,66 @@
     });
   };
 
+  /* ── Tier jostle (the field) ─────────────────────────────────── */
+  let tiersGen = 0;
+  const SLOT_PX = 430;
+  const placeChips = (state) => {
+    state.chips.forEach((c, i) => {
+      const slot = state.order[i];
+      const lead = slot === 0;                 // position 1 = the current leader
+      c.style.transform = `translateX(${slot * SLOT_PX}px)` + (lead ? ' translateY(-12px)' : '');
+      c.classList.toggle('lead', lead);
+    });
+  };
+  const swapSlots = (state, a) => {
+    const b = a + 1;                       // swap the chips occupying adjacent slots a and a+1
+    const ia = state.order.indexOf(a);
+    const ib = state.order.indexOf(b);
+    if (ia < 0 || ib < 0) return;
+    [state.order[ia], state.order[ib]] = [state.order[ib], state.order[ia]];
+    placeChips(state);
+  };
+  const runTiers = (slide, gen) => {
+    const stack = slide.querySelector('.tier-stack');
+    if (!stack) return;
+    const cue = slide.querySelector('.tier-cue');
+    stack.classList.remove('settled');
+    if (cue) cue.classList.remove('show');
+    const states = Array.from(slide.querySelectorAll('.tier-row')).map((row) => {
+      const chips = Array.from(row.querySelectorAll('.logo-chip'));
+      const state = { chips, order: chips.map((_, i) => i), shuffles: parseInt(row.dataset.shuffles || '2', 10) };
+      // snap to the starting order without a transition, then re-enable it
+      chips.forEach((c) => { c.style.transition = 'none'; });
+      placeChips(state);
+      return state;
+    });
+    requestAnimationFrame(() => {
+      if (gen !== tiersGen) return;
+      states.forEach((s) => s.chips.forEach((c) => { c.style.transition = ''; }));
+    });
+    const cancelled = () => gen !== tiersGen;
+    const START = 1000, STEP = 1150;
+    let maxT = START;
+    states.forEach((state, r) => {
+      for (let s = 0; s < state.shuffles; s++) {
+        const slot = s % 2;                // alternate swapping slots (0,1) then (1,2)
+        const t = START + s * STEP + r * 220;
+        maxT = Math.max(maxT, t);
+        setTimeout(() => { if (!cancelled()) swapSlots(state, slot); }, t);
+      }
+    });
+    // jostle finishes, the cue lands, then the rows draw together
+    setTimeout(() => { if (!cancelled() && cue) cue.classList.add('show'); }, maxT + 1200);
+    setTimeout(() => { if (!cancelled()) stack.classList.add('settled'); }, maxT + 2300);
+    // deterministic controls, for previewing the states without waiting
+    window.__tiers = {
+      reset() { tiersGen++; states.forEach((s) => { s.order = s.chips.map((_, i) => i); placeChips(s); }); stack.classList.remove('settled'); if (cue) cue.classList.remove('show'); },
+      step(slot) { states.forEach((s) => swapSlots(s, slot || 0)); },
+      cue() { if (cue) cue.classList.add('show'); },
+      settle() { stack.classList.add('settled'); },
+    };
+  };
+
   /* ── Replay choreography on every slide change ───────────────── */
   let lastIndex = -1;
   const play = (slide, index) => {
@@ -199,11 +259,13 @@
     lastIndex = index;
     typingGen++;
     countGen++;
+    tiersGen++;
     slide.classList.remove('fx-play');
     void slide.offsetWidth;   // reflow so re-adding restarts the animations
     slide.classList.add('fx-play');
     if (slide.querySelector('.ax-line')) drawChart(slide);
     if (slide.querySelector('.prompt-text .typed')) runPromptTyping(slide, typingGen);
+    if (slide.querySelector('.tier-stack')) runTiers(slide, tiersGen);
     runCounts(slide, countGen);
   };
 

@@ -1557,6 +1557,123 @@ deck-stage { background: #000; }
 a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 
 /* ============================================================
+   24 · The field — three tiers whose names jostle within each row
+   (motion.js drives it), then the rows settle a little closer.
+   Deck-specific. Chips are laid out by nth-child so they read
+   correctly with no JS; motion.js overrides their transform.
+   ============================================================ */
+.slide--tiers .slide-title { font-size: 60px; margin-bottom: 12px; max-width: none; }
+.slide--tiers .slide-subtitle { font-size: 25px; line-height: 1.4; margin-bottom: 28px; max-width: 96ch; }
+.slide--tiers .slide-body { justify-content: center; }
+
+.tier-stack { display: flex; flex-direction: column; gap: 34px; }
+
+/* Rank header — 1st / 2nd / 3rd, centred over the three columns */
+.tier-head { display: grid; grid-template-columns: 300px 1fr; gap: 40px; padding-left: 36px; }
+.tier-ranks { position: relative; height: 26px; }
+.tier-ranks .rank {
+  position: absolute;
+  transform: translateX(-50%);
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.tier-ranks .rank-1 { left: 200px; color: var(--news-red); }
+.tier-ranks .rank-2 { left: 630px; }
+.tier-ranks .rank-3 { left: 1060px; }
+
+.tier-rows { display: flex; flex-direction: column; gap: 44px; }
+.tier-row {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  align-items: center;
+  gap: 40px;
+  padding-left: 30px;
+  border-left: 6px solid var(--tier-accent);
+  transition: transform 900ms var(--ease-in-out);
+}
+.tier-row.frontier { --tier-accent: var(--news-red); }
+.tier-row.open     { --tier-accent: var(--guardian-blue); }
+.tier-row.local    { --tier-accent: var(--eco-green); }
+/* the close — frontier holds; open and local draw up toward it, a
+   clear gap always remaining */
+.tier-stack.settled .tier-rows .tier-row:nth-child(2) { transform: translateY(-28px); }
+.tier-stack.settled .tier-rows .tier-row:nth-child(3) { transform: translateY(-56px); }
+
+.tier-label h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.tier-label p {
+  font-family: var(--body);
+  font-size: 20px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 26ch;
+}
+
+.tier-track { position: relative; height: 146px; }
+.logo-chip {
+  position: absolute;
+  top: 0; left: 0;
+  width: 400px;
+  height: 146px;
+  background: var(--paper-bright);
+  border: 1px solid var(--hairline);
+  border-top: 5px solid transparent;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 720ms var(--spring), box-shadow 500ms ease, border-top-color 500ms ease;
+  will-change: transform;
+}
+/* No-JS / pre-JS layout — chips sit in their three columns */
+.tier-track .logo-chip:nth-child(1) { transform: translateX(0); }
+.tier-track .logo-chip:nth-child(2) { transform: translateX(430px); }
+.tier-track .logo-chip:nth-child(3) { transform: translateX(860px); }
+/* The leader (position 1) — coloured cap, lift and a deeper shadow.
+   motion.js toggles .lead and adds the lift to the transform. */
+.logo-chip.lead {
+  border-top-color: var(--tier-accent);
+  box-shadow: 0 28px 52px -22px rgba(18,18,18,0.5);
+  z-index: 2;
+}
+.chip-mark {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 38px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* The cue — lands after the jostle, then the rows draw together */
+.tier-cue {
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 27px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 28px 0 0;
+  padding-left: 24px;
+  border-left: 3px solid var(--news-red);
+  max-width: 74ch;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 700ms ease, transform 700ms var(--ease-out);
+}
+.tier-cue.show { opacity: 1; transform: none; }
+
+/* ============================================================
    23 · Accessibility + print
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -1569,6 +1686,10 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
   .fx-armed .flow-curve .fill, .fx-armed .ax-dot,
   .fx-armed .choice-card:not(:last-child)::after { opacity: 1; }
   .section-opener h1 em::after { transform: none; }
+  .tier-row, .logo-chip { transition: none !important; }
+  .tier-stack.settled .tier-rows .tier-row { transform: none !important; }
+  .tier-track .logo-chip:nth-child(1) { border-top-color: var(--tier-accent); }
+  .tier-cue { opacity: 1 !important; transform: none !important; }
   .deck-progress i { transition: none; }
   .caret { display: none; }
 }
@@ -1584,6 +1705,10 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
   .fx-armed .choice-card:not(:last-child)::after { opacity: 1 !important; animation: none !important; }
   .section-opener h1 em::after { transform: none !important; animation: none !important; }
   .ax-line { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+  .tier-row, .logo-chip { transition: none !important; }
+  .tier-stack.settled .tier-rows .tier-row { transform: none !important; }
+  .tier-track .logo-chip:nth-child(1) { border-top-color: var(--tier-accent); }
+  .tier-cue { opacity: 1 !important; transform: none !important; }
   .deck-progress { display: none; }
   .caret { display: none !important; }
   .slide::after { display: none; }  /* grain muddies print */
