@@ -409,13 +409,13 @@ deck-stage { background: #000; }
 }
 .cover-stat-block .stat-line strong {
   display: block;
-  font-family: var(--body);
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 1.05;
-  letter-spacing: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -0.01em;
   text-transform: none;
-  color: var(--ink-soft);
+  color: var(--news-red);
   margin-top: 4px;
 }
 .cover .slide-foot { border-top: none; padding-top: 0; }

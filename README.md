@@ -50,6 +50,15 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Review tweaks
+
+Cover: the year is now set in bold Guardian red, a deliberate date stamp rather
+than an afterthought. "The field": swapped Mistral for GLM in the open row, and
+sharpened the copy — the standfirst spells out the three tiers ("Frontier models
+lead the way, open models follow, local ones trail far behind but run on your own
+device") and the closing line is firmer: "The hierarchy doesn't (and won't)
+change — but the time it takes to catch up keeps shrinking."
+
 ### 13 June 2026 — Genericised for wider audiences
 
 The deck's being used beyond the Board now, so the audience-specific framing is
