@@ -1854,6 +1854,92 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 .slide--activity .act-note.show { opacity: 1; transform: none; }
 
 /* ============================================================
+   26 · Genie — "ask it for help": intro on the left, a ladder of
+   four escalating prompts (a conversation) on the right.
+   ============================================================ */
+.slide--genie .slide-body {
+  display: grid;
+  grid-template-columns: 0.82fr 1fr;
+  gap: 76px;
+  align-items: center;
+}
+.genie-intro .kicker { margin-bottom: 18px; }
+.genie-intro .slide-title { font-size: 52px; margin-bottom: 30px; max-width: none; }
+.genie-body {
+  font-family: var(--body);
+  font-size: 25px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+}
+.genie-body:last-child { margin-bottom: 0; }
+
+.genie-ladder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+/* the thread the numbered nodes ride */
+.genie-ladder::before {
+  content: '';
+  position: absolute;
+  left: 25px; top: 22px; bottom: 22px;
+  width: 2px;
+  background: var(--paper-rule);
+}
+.genie-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.genie-n {
+  position: relative;
+  z-index: 1;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--guardian-blue);
+  color: var(--guardian-blue);
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.genie-step:nth-child(2) .genie-n { border-color: var(--news-red); color: var(--news-red); }
+.genie-step:nth-child(3) .genie-n { border-color: var(--eco-green); color: var(--eco-green); }
+.genie-step:nth-child(4) .genie-n { border-color: var(--ink); color: var(--ink); }
+.genie-msg {
+  background: var(--paper-bright);
+  border: 1px solid var(--hairline);
+  border-radius: 4px 16px 16px 16px;
+  box-shadow: 0 8px 20px -12px rgba(18,18,18,0.18);
+  padding: 14px 24px 16px;
+}
+.genie-stage {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--guardian-blue);
+  margin: 0 0 6px;
+}
+.genie-step:nth-child(2) .genie-stage { color: var(--news-red); }
+.genie-step:nth-child(3) .genie-stage { color: var(--eco-green); }
+.genie-step:nth-child(4) .genie-stage { color: var(--ink); }
+.genie-prompt {
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.38;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ============================================================
    23 · Accessibility + print
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {

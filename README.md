@@ -50,6 +50,15 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — New slide: "You have a genie. Ask it for help"
+
+Added after the quantum-leap slide. The argument (getting started is often about
+nerve, not knowledge; spend your first conversation asking the LLM for help) sits
+on the left; a ladder of four escalating prompts — a real conversation that goes
+explore → focus → test → build — runs down the right on a numbered thread. Prompts
+verbatim (a readability tool for Guardian articles); the stage labels are
+editorial signposts.
+
 ### 13 June 2026 — Restructured the practical-examples section
 
 Dropped the deep-research prompt slide. The section now runs its two worked
