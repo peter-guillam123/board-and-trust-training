@@ -50,6 +50,16 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — New slide: "Your turn" (build in Gemini Canvas)
+
+A hands-on activity slide after the deep-research prompt (slide 18, kept for now).
+Setup steps across the top — open Gemini, use + to open Canvas — then two starter
+activities side by side: a meeting cost calculator (the hook) and a live-data
+weather app via the free, keyless Open-Meteo API (marked "if time allows"). Each
+gives a very base starter prompt and a three-step flow: add your own context,
+build it, change it by prompting. Drawn from the Gemini Canvas workshop lesson
+plan; copy is a first pass.
+
 ### 13 June 2026 — Review tweaks
 
 Cover: the year is now set in bold Guardian red, a deliberate date stamp rather
