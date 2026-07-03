@@ -50,6 +50,15 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Restructured the practical-examples section
+
+Dropped the deep-research prompt slide. The section now runs its two worked
+examples (the fuel-price dashboard and Iran Watcher) and the "But that's not
+all" stream, then closes with the "Your turn" Canvas task as the capstone —
+examples first, then over to you, then straight into Getting started. Updated
+the section opener to match: "two concrete examples… and a practical task for
+you."
+
 ### 13 June 2026 — New slide: "Your turn" (build in Gemini Canvas)
 
 A hands-on activity slide after the deep-research prompt (slide 18, kept for now).
