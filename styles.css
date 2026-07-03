@@ -1674,6 +1674,146 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 .tier-cue.show { opacity: 1; transform: none; }
 
 /* ============================================================
+   25 · Activity — a two-panel build brief: setup steps across the
+   top, then two starter activities side by side.
+   ============================================================ */
+.slide--activity .slide-title { font-size: 56px; margin-bottom: 22px; max-width: none; }
+.slide--activity .slide-body { justify-content: center; gap: 32px; }
+
+.act-setup {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  padding: 20px 36px;
+  background: var(--paper-deep);
+  border: 1px solid var(--hairline);
+  border-left: 6px solid var(--guardian-blue);
+}
+.act-setup-lead {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--news-red);
+  white-space: nowrap;
+}
+.act-steps {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  list-style: none;
+  margin: 0; padding: 0;
+  flex: 1;
+}
+.act-steps li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--body);
+  font-size: 24px;
+  color: var(--ink);
+}
+.act-step-n {
+  flex: none;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--guardian-blue);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.act-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.act-panel {
+  background: var(--paper-deep);
+  border: 1px solid var(--hairline);
+  border-top: 6px solid var(--guardian-blue);
+  box-shadow: var(--shadow-card);
+  padding: 30px 38px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.act-panel.a2 { border-top-color: var(--eco-green); }
+.act-eyebrow {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--guardian-blue);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.act-panel.a2 .act-eyebrow { color: var(--eco-green); }
+.act-optional {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  background: var(--paper);
+  border: 1px solid var(--paper-rule);
+  padding: 3px 10px;
+}
+.act-panel h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+.act-panel .prompt-box { box-shadow: 0 10px 24px -14px rgba(18,18,18,0.22); }
+.act-panel .prompt-body { padding: 22px 28px 24px; }
+.act-panel .prompt-text { font-size: 25px; line-height: 1.4; }
+.act-flow {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  counter-reset: act;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.act-flow li {
+  counter-increment: act;
+  position: relative;
+  padding-left: 46px;
+  font-family: var(--body);
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.act-flow li::before {
+  content: counter(act);
+  position: absolute;
+  left: 0; top: 1px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--guardian-blue);
+  color: var(--guardian-blue);
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.act-panel.a2 .act-flow li::before { border-color: var(--eco-green); color: var(--eco-green); }
+.act-flow strong { color: var(--ink); font-weight: 700; }
+.act-flow em { font-style: italic; color: var(--ink); }
+
+/* ============================================================
    23 · Accessibility + print
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
