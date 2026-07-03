@@ -1701,7 +1701,8 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 .act-steps {
   display: flex;
   align-items: center;
-  gap: 44px;
+  justify-content: space-between;
+  gap: 32px;
   list-style: none;
   margin: 0; padding: 0;
   flex: 1;
@@ -1799,7 +1800,8 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 .act-do-steps {
   display: flex;
   align-items: center;
-  gap: 44px;
+  justify-content: space-between;
+  gap: 32px;
   list-style: none;
   margin: 0; padding: 0;
   flex: 1;
@@ -1836,6 +1838,21 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 }
 .act-note strong { font-weight: 700; }
 
+/* Staged reveal — motion.js shows Activity 1, types its prompt, then
+   Activity 2, then the "Then" row and the note. Hidden only when the
+   engine is armed; no-JS shows everything. */
+.slide--activity .act-panel,
+.slide--activity .act-do,
+.slide--activity .act-note {
+  transition: opacity 560ms var(--ease-out), transform 560ms var(--ease-out);
+}
+.fx-armed .slide--activity .act-panel,
+.fx-armed .slide--activity .act-do,
+.fx-armed .slide--activity .act-note { opacity: 0; transform: translateY(18px); }
+.slide--activity .act-panel.show,
+.slide--activity .act-do.show,
+.slide--activity .act-note.show { opacity: 1; transform: none; }
+
 /* ============================================================
    23 · Accessibility + print
    ============================================================ */
@@ -1853,6 +1870,7 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
   .tier-stack.settled .tier-rows .tier-row { transform: none !important; }
   .tier-track .logo-chip:nth-child(1) { border-top-color: var(--tier-accent); }
   .tier-cue { opacity: 1 !important; transform: none !important; }
+  .slide--activity .act-panel, .slide--activity .act-do, .slide--activity .act-note { opacity: 1 !important; transform: none !important; transition: none !important; }
   .deck-progress i { transition: none; }
   .caret { display: none; }
 }
@@ -1872,6 +1890,7 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
   .tier-stack.settled .tier-rows .tier-row { transform: none !important; }
   .tier-track .logo-chip:nth-child(1) { border-top-color: var(--tier-accent); }
   .tier-cue { opacity: 1 !important; transform: none !important; }
+  .slide--activity .act-panel, .slide--activity .act-do, .slide--activity .act-note { opacity: 1 !important; transform: none !important; }
   .deck-progress { display: none; }
   .caret { display: none !important; }
   .slide::after { display: none; }  /* grain muddies print */

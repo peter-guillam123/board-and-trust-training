@@ -61,6 +61,9 @@ a shared "Then" row underneath — add your own context, build it, improve it by
 prompting — applies to either. A closing note nudges people to hand data to the
 Gemini API for fun (a poem about the weather; a picture of something that costs
 as much as the meeting). Drawn from the Gemini Canvas workshop lesson plan.
+It plays in as a staged reveal: Activity 1 appears and its starter prompt types
+itself in (the deck's prompt-typing engine), then Activity 2 the same, then the
+"Then" row and the note. Static for reduced-motion, no-JS and print.
 
 ### 13 June 2026 — Review tweaks
 

@@ -121,9 +121,11 @@
   /* ── Live-typing prompts ─────────────────────────────────────── */
   let typingGen = 0;
   const promptFullText = new WeakMap();   // each prompt's full text, captured once
-  const runPromptTyping = (slide, gen) => {
-    const typed = slide.querySelector('.prompt-text .typed');
-    if (!typed) return;
+  // Type a single `.typed` span; returns a promise that resolves when the
+  // typing finishes (or is cancelled). Reused for the single-prompt slides
+  // and, in sequence, for the two prompts on the activity slide.
+  const typeInto = (typed, cancelled) => {
+    if (!typed) return Promise.resolve();
     // Capture the full prompt the first time only. A re-entrant call must
     // NOT re-read textContent — a prior run may have cleared and half-typed
     // it, and we'd then "complete" that fragment and stick.
@@ -132,10 +134,9 @@
     const typo = typed.dataset.typo;      // optional: a word typed wrong first…
     const fix = typed.dataset.fix;        // …then corrected to this (must occur in `full`)
     const lead = parseFloat(typed.dataset.typeDelay || '650');
-    const cancelled = () => gen !== typingGen;
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     typed.textContent = '';
-    (async () => {
+    return (async () => {
       await sleep(lead); if (cancelled()) return;
       const type = async (str, base) => {
         for (const ch of str) {
@@ -165,6 +166,45 @@
       } else {
         if (await type(full, 11)) return;                // no correction — type it straight
       }
+    })();
+  };
+  const runPromptTyping = (slide, gen) => {
+    typeInto(slide.querySelector('.prompt-text .typed'), () => gen !== typingGen);
+  };
+
+  /* ── Activity slide — Activity 1 appears and its prompt types in,
+     then Activity 2 the same, then the "Then" row and the note. ─── */
+  let activityGen = 0;
+  const runActivity = (slide, gen) => {
+    const cancelled = () => gen !== activityGen;
+    const a1 = slide.querySelector('.act-panel.a1');
+    const a2 = slide.querySelector('.act-panel.a2');
+    const doRow = slide.querySelector('.act-do');
+    const note = slide.querySelector('.act-note');
+    const t1 = a1 && a1.querySelector('.prompt-text .typed');
+    const t2 = a2 && a2.querySelector('.prompt-text .typed');
+    // reset the staged pieces, and clear both prompts up front so no full
+    // text flashes in before it is typed
+    [a1, a2, doRow, note].forEach((el) => el && el.classList.remove('show'));
+    [t1, t2].forEach((t) => {
+      if (!t) return;
+      if (!promptFullText.has(t)) promptFullText.set(t, t.textContent);
+      t.textContent = '';
+    });
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    (async () => {
+      await sleep(300); if (cancelled()) return;
+      if (a1) a1.classList.add('show');
+      await sleep(560); if (cancelled()) return;
+      await typeInto(t1, cancelled); if (cancelled()) return;
+      await sleep(380); if (cancelled()) return;
+      if (a2) a2.classList.add('show');
+      await sleep(560); if (cancelled()) return;
+      await typeInto(t2, cancelled); if (cancelled()) return;
+      await sleep(380); if (cancelled()) return;
+      if (doRow) doRow.classList.add('show');
+      await sleep(220); if (cancelled()) return;
+      if (note) note.classList.add('show');
     })();
   };
 
@@ -260,11 +300,13 @@
     typingGen++;
     countGen++;
     tiersGen++;
+    activityGen++;
     slide.classList.remove('fx-play');
     void slide.offsetWidth;   // reflow so re-adding restarts the animations
     slide.classList.add('fx-play');
     if (slide.querySelector('.ax-line')) drawChart(slide);
-    if (slide.querySelector('.prompt-text .typed')) runPromptTyping(slide, typingGen);
+    if (slide.classList.contains('slide--activity')) runActivity(slide, activityGen);
+    else if (slide.querySelector('.prompt-text .typed')) runPromptTyping(slide, typingGen);
     if (slide.querySelector('.tier-stack')) runTiers(slide, tiersGen);
     runCounts(slide, countGen);
   };
