@@ -53,12 +53,14 @@ source, Anglicised (Labour, distil, realise).
 ### 13 June 2026 — New slide: "Your turn" (build in Gemini Canvas)
 
 A hands-on activity slide after the deep-research prompt (slide 18, kept for now).
-Setup steps across the top — open Gemini, use + to open Canvas — then two starter
-activities side by side: a meeting cost calculator (the hook) and a live-data
-weather app via the free, keyless Open-Meteo API (marked "if time allows"). Each
-gives a very base starter prompt and a three-step flow: add your own context,
-build it, change it by prompting. Drawn from the Gemini Canvas workshop lesson
-plan; copy is a first pass.
+Setup steps across the top — open Gemini, use + to open Canvas, use the provided
+prompt — then two starter activities side by side: a standalone app (a meeting
+cost calculator) and one using realtime data (a weather app via the free, keyless
+Open-Meteo API, marked "if time allows"). Each gives a very base starter prompt;
+a shared "Then" row underneath — add your own context, build it, improve it by
+prompting — applies to either. A closing note nudges people to hand data to the
+Gemini API for fun (a poem about the weather; a picture of something that costs
+as much as the meeting). Drawn from the Gemini Canvas workshop lesson plan.
 
 ### 13 June 2026 — Review tweaks
 
