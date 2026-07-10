@@ -4,8 +4,64 @@
 <title>Advanced AI training — Board and Trust</title>
 <link rel="preconnect" href="https://assets.guim.co.uk" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<style id="deck-gate-style">
+  #deck-gate {
+    position: fixed; inset: 0; z-index: 2147483647;
+    background: #F4EFE6;
+    background-image: radial-gradient(rgba(18,18,18,0.03) 1px, transparent 1px);
+    background-size: 4px 4px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  #deck-gate .dg-card { width: min(520px, 88vw); }
+  #deck-gate .dg-rule { height: 8px; display: grid; grid-template-columns: 2fr 1fr; margin-bottom: 44px; }
+  #deck-gate .dg-rule::before { content: ''; background: #052962; }
+  #deck-gate .dg-rule::after { content: ''; background: #FFE500; }
+  #deck-gate .dg-kicker {
+    font-family: 'GuardianTextSans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700; font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #C70000; margin: 0 0 14px;
+  }
+  #deck-gate h1 {
+    font-family: 'GH Guardian Headline', Georgia, 'Times New Roman', serif;
+    font-weight: 500; font-size: 50px; line-height: 1; letter-spacing: -0.02em;
+    color: #121212; margin: 0 0 30px;
+  }
+  #deck-gate h1 em { color: #C70000; font-style: italic; }
+  #deck-gate input {
+    width: 100%; box-sizing: border-box;
+    font-family: 'GuardianTextEgyptian', Georgia, 'Times New Roman', serif; font-size: 22px;
+    padding: 14px 18px; color: #121212;
+    background: #FBF8F1; border: 1px solid #D0C4AE; border-radius: 8px;
+    margin-bottom: 16px; outline: none;
+  }
+  #deck-gate input:focus { border-color: #052962; box-shadow: 0 0 0 3px rgba(5,41,98,0.12); }
+  #deck-gate button {
+    font-family: 'GuardianTextSans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: #F4EFE6; background: #052962; border: none; border-radius: 8px;
+    padding: 14px 30px; cursor: pointer; transition: background 140ms ease;
+  }
+  #deck-gate button:hover { background: #0a3a86; }
+  #deck-gate .dg-error {
+    font-family: 'GuardianTextSans', 'Helvetica Neue', Arial, sans-serif; font-size: 15px;
+    color: #C70000; margin: 14px 0 0;
+  }
+</style>
 </head>
 <body>
+
+<div id="deck-gate" role="dialog" aria-modal="true" aria-label="Password required">
+  <form class="dg-card" id="deck-gate-form">
+    <div class="dg-rule" aria-hidden="true"></div>
+    <p class="dg-kicker">Advanced AI training</p>
+    <h1>Enter the <em>password</em>.</h1>
+    <input id="deck-gate-input" type="password" autocomplete="off" autofocus aria-label="Password" placeholder="Password">
+    <button type="submit">Enter</button>
+    <p class="dg-error" id="deck-gate-error" hidden>That's not it — try again.</p>
+  </form>
+</div>
+<script src="gate.js"></script>
 
 <deck-stage width="1920" height="1080">
 

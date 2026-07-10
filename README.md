@@ -50,6 +50,16 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Light password gate
+
+Added a Guardian-styled password prompt in front of the deck (`gate.js` + an
+inline overlay). It's a **deterrent, not real security**: the slides are a static
+site, so their text still reaches the browser and anyone who views source can
+read it. The password is stored as a SHA-256 hash rather than plaintext, and
+unlock is remembered for the browser-tab session (so it only prompts once). For
+genuine protection the deck would need proper auth (e.g. Cloudflare Access) on a
+custom domain.
+
 ### 13 June 2026 — New slide: "You have a genie. Ask it for help"
 
 Added after the quantum-leap slide. The argument (getting started is often about
