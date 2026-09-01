@@ -50,6 +50,17 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Personal-picture slide: figures restored, rebalanced
+
+Chris missed two figures from the draft. Checked both: the exact "42% multiple
+times daily" and "78.2% find it indispensable" don't verify, but the sense of
+each does - so restored them with defensible numbers: a daily-habit point (close
+to a third use AI several times a day, Pew, up from a fifth) and youth utility
+(70% of Gen Z find it useful; ~9 in 10 students use it for coursework, HEPI).
+Also rebalanced: the model column is trimmed to concise one-line notes so it's
+no longer the heaviest, the type is larger and the spacing roomier so the content
+fills the slide instead of floating, and the source line is pinned to the bottom.
+
 ### 13 June 2026 — New slide: the personal picture
 
 A consumer-side slide after firm-vs-worker - who uses AI, how they feel, and
