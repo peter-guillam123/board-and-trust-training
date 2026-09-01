@@ -50,6 +50,17 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Slide 5 reworked: five milestones, not one
+
+"Why this is out of date" used to be a single slide about Fable. It's now
+"Why this deck is already out of date" - five recent milestones, each one
+dating the deck a little more, escalating to the Hugging Face breach on a red
+alarm card (card 5). Fable is one of the five now, not the whole slide. The old
+split image/text Fable layout and its CSS are gone; the cards reuse the house
+card system from "Beyond chat". Two slides on the breach itself come next. (The
+detailed Fable paragraph - Mythos, the safeguarding line, the token burn - was
+dropped in the compression; `images/fable.jpg` is now unused.)
+
 ### 13 June 2026 — Renamed to just "Advanced AI training"
 
 The deck is used well beyond the Board now, so it drops "Board and Trust".

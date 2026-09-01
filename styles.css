@@ -1038,29 +1038,77 @@ deck-stage { background: #000; }
 .fx-play .ax-track--ai .ax-dot:nth-of-type(4) { animation-delay: 4800ms; }
 
 /* ============================================================
-   14 · Fable — split image / text
+   14 · Pace — five recent milestones, escalating to the breach
    ============================================================ */
-.slide--fable .slide-body {
+.slide--pace .slide-subtitle {
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--ink-mute);
+  margin-bottom: 32px;
+  max-width: 96ch;
+}
+.pace-cards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
-  align-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  align-items: stretch;
 }
-.fable-frame { box-shadow: var(--shadow-frame); }
-.fable-img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+.pace-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px 26px;
+  background: var(--paper-deep);
+  border: 1px solid var(--hairline);
+  border-top: 5px solid var(--guardian-blue);
+  box-shadow: var(--shadow-card);
+  min-height: 520px;
 }
-.fable-text .kicker { margin-bottom: 18px; }
-.fable-text .slide-title { font-size: 60px; margin-bottom: 28px; max-width: none; }
-.fable-body {
+.pace-label {
+  font-family: var(--mono);
+  font-size: 16px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.pace-card h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+.pace-card p {
   font-family: var(--body);
-  font-size: 27px;
-  line-height: 1.5;
+  font-size: 19px;
+  line-height: 1.45;
   color: var(--ink-soft);
   margin: 0;
+}
+.pace-tag {
+  margin-top: auto;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  padding: 12px 14px;
+  background: var(--paper-bright);
+  border-left: 3px solid var(--guardian-blue);
+}
+/* Card 5 — the alarm */
+.pace-card--alarm {
+  border-top-color: var(--news-red);
+  border-color: rgba(199,0,0,0.28);
+  background: #F1E2DE;
+}
+.pace-card--alarm .pace-label { color: var(--news-red); }
+.pace-card--alarm .pace-tag {
+  border-left-color: var(--news-red);
+  color: var(--news-red);
+  background: #F7ECEA;
 }
 
 /* ============================================================
