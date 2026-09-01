@@ -50,6 +50,12 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — House style: em dashes to spaced hyphens
+
+Swept the deck's visible copy to Chris's no-em-dash rule: every em dash in the
+slide text is now a spaced hyphen ( - ). Left the en-dash ranges (1995-98) and
+the HTML code comments alone, so the diff is copy only.
+
 ### 13 June 2026 — Reframed "Beyond chat" (slide 4)
 
 Fixed the examples. Claude Code and Codex are harnesses, not agents, so the
