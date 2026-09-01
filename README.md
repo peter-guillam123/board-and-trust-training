@@ -54,8 +54,9 @@ source, Anglicised (Labour, distil, realise).
 
 Fixed the examples. Claude Code and Codex are harnesses, not agents, so the
 coding-harness collage moves onto the harness card, and the agentic-loop card is
-now a drawn loop (plan, act, check, repeat) rather than product logos - because
-an "agent" is a behaviour, not a separate product tier. Rewrote the three cards
+now a plan-act-check-repeat loop (a collage in the deck's style, made by Chris)
+rather than product logos - because an "agent" is a behaviour, not a separate
+product tier. Rewrote the three cards
 in plainer language for a general audience, keeping the model then harness then
 agentic-loop spine, and added that one agent can summon a swarm of them (which
 sets up a later addition). Dropped the MCP detail as too much to explain in the
