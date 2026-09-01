@@ -1,9 +1,9 @@
-# Advanced AI training — Board and Trust
+# Advanced AI training
 
 An HTML slide deck in the Guardian editorial style, built from the
 [guardian-deck-template](https://github.com/peter-guillam123). It renders the
 "Prompt Inflection" framework — how to think about and instruct LLMs — as a
-strategic training session for Board and Trust.
+strategic training session on advanced AI for staff across the newsroom.
 
 ## What this is
 
@@ -49,6 +49,14 @@ the template's typographic `01 / 02 / 03` numbering. Copy is verbatim from the
 source, Anglicised (Labour, distil, realise).
 
 ## Changelog
+
+### 13 June 2026 — Renamed to just "Advanced AI training"
+
+The deck is used well beyond the Board now, so it drops "Board and Trust".
+Updated the browser-tab title, the stylesheet header and this README's name and
+intro. The repo is still `board-and-trust-training` - renaming it would change
+the live URL and break the shared link and the password session, so that stays
+parked for now.
 
 ### 13 June 2026 — House style: em dashes to spaced hyphens
 
