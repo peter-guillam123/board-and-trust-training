@@ -50,6 +50,29 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — New slide: the personal picture
+
+A consumer-side slide after firm-vs-worker - who uses AI, how they feel, and
+which model they reach for - adapted from a draft of Chris's into house style.
+Every figure was grounded against real 2025-26 data before building:
+
+- **Demographics** (33% of EU adults, 53.6pp age gap, 4.2pp gender gap, 63.8% of
+  16-24s, employed 41% vs retired 12.5%) are Eurostat/OECD. The 33% all-adult
+  figure sitting below the 41-52% worker figures from earlier slides is now an
+  explicit, reconciling point, not a contradiction.
+- **Model share** (ChatGPT 53.9 / Gemini 27.9 / Claude 9.2 / everyone else 9.0,
+  summing to 100) is Similarweb, May 2026. The draft's "Meta AI 9.0%" was wrong -
+  Meta barely registers on web-visit share - so that bar became "everyone else"
+  (Grok, Copilot, Perplexity et al), which is what actually sums to ~9%.
+- **Sentiment** was rewritten. The draft's "young optimistic / old skeptical" is
+  contradicted by the real Pew/Gallup/Numerator data: the under-30s are the
+  heaviest users *and* among the most wary (about half expect net harm), while
+  the over-65s are more unsure than hostile. The honest version is the more
+  interesting one.
+
+First use of the `data-fx="bar"` primitive (the share bars draw in); the two big
+stats count up. styles.css bumped to ?v=3.
+
 ### 13 June 2026 — Fixed the adoption chart's mislabelled y-axis
 
 Pre-existing bug (not the ECB change): the three lines were plotted on a 0-40%

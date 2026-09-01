@@ -1049,6 +1049,76 @@ deck-stage { background: #000; }
 .fx-play .ax-track--ai .ax-dot:nth-of-type(4) { animation-delay: 4800ms; }
 
 /* ============================================================
+   13b · The personal picture — individual adoption, sentiment, share
+   ============================================================ */
+.slide--adopt .slide-subtitle {
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--ink-mute);
+  margin-bottom: 26px;
+  max-width: 104ch;
+}
+.adopt-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px;
+  align-items: start;
+}
+.adopt-col { display: flex; flex-direction: column; gap: 16px; }
+.adopt-clabel {
+  font-family: var(--mono);
+  font-size: 16px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--paper-rule);
+  margin: 0;
+}
+.adopt-stat { display: flex; flex-direction: column; gap: 2px; }
+.adopt-fig {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 66px;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--guardian-blue);
+  font-variant-numeric: tabular-nums;
+}
+.adopt-col--sentiment .adopt-fig { color: var(--news-red); }
+.adopt-fig-note {
+  font-family: var(--ui);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--ink-mute);
+}
+.adopt-list { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-direction: column; gap: 15px; }
+.adopt-list li { font-family: var(--body); font-size: 18px; line-height: 1.4; color: var(--ink-soft); margin: 0; }
+.adopt-list strong { color: var(--ink); font-weight: 700; }
+/* model-share bars */
+.share-bars { display: flex; flex-direction: column; gap: 15px; }
+.share-row { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 6px 12px; }
+.share-name { font-family: var(--ui); font-weight: 700; font-size: 17px; color: var(--ink); }
+.share-name em { font-style: normal; font-weight: 400; color: var(--ink-mute); font-size: 14px; }
+.share-val { font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.share-track { grid-column: 1 / -1; height: 12px; background: var(--paper-deep); border: 1px solid var(--hairline); overflow: hidden; }
+.share-fill { height: 100%; transform-origin: left center; }
+.share-fill.is-1 { background: var(--eco-green); }
+.share-fill.is-2 { background: var(--guardian-blue); }
+.share-fill.is-3 { background: var(--news-red); }
+.share-fill.is-4 { background: var(--ink-mute); }
+.share-notes {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--paper-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.share-notes p { font-family: var(--body); font-size: 16px; line-height: 1.38; color: var(--ink-soft); margin: 0; }
+.share-notes strong { color: var(--ink); font-weight: 700; }
+
+/* ============================================================
    14 · Pace — five recent milestones, escalating to the breach
    ============================================================ */
 .slide--pace .slide-subtitle {
