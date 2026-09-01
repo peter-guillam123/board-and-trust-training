@@ -50,6 +50,15 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Fixed the adoption chart's mislabelled y-axis
+
+Pre-existing bug (not the ECB change): the three lines were plotted on a 0-40%
+scale - launch sits at 0% on the baseline, 120px per 10 points - but the axis
+was labelled 10-50%. So every point read ten points high, and the 41% line
+appeared to finish above the "50%" mark. Relabelled the axis 0-40% to match how
+the data was actually drawn; the 41% endpoint now sits just above the 40% line,
+and internet (20%) / smartphone (25%) land correctly too. No data points moved.
+
 ### 13 June 2026 — Adoption chart: added the ECB "still climbing" point
 
 An ECB blog (26 Aug 2026) showed adoption rising again. Double-checked the
