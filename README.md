@@ -50,6 +50,17 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Reframed "Beyond chat" (slide 4)
+
+Fixed the examples. Claude Code and Codex are harnesses, not agents, so the
+coding-harness collage moves onto the harness card, and the agentic-loop card is
+now a drawn loop (plan, act, check, repeat) rather than product logos - because
+an "agent" is a behaviour, not a separate product tier. Rewrote the three cards
+in plainer language for a general audience, keeping the model then harness then
+agentic-loop spine, and added that one agent can summon a swarm of them (which
+sets up a later addition). Dropped the MCP detail as too much to explain in the
+room. The now-unused harness.jpg is left in place.
+
 ### 13 June 2026 — Light password gate
 
 Added a Guardian-styled password prompt in front of the deck (`gate.js` + an

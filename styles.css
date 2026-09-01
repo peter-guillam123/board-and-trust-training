@@ -557,6 +557,10 @@ deck-stage { background: #000; }
 /* In-card image — sits at the bottom of an .aim (Beyond chat) */
 .aim-image { margin-top: auto; display: block; }
 .aim-image img { display: block; width: 100%; height: auto; object-fit: contain; }
+/* The agentic-loop diagram (drawn, not a photo) on the "Beyond chat" slide */
+.loop-svg { display: block; width: 100%; height: auto; }
+.loop-label { font-family: var(--mono); font-size: 18px; font-weight: 700; fill: #22874d; }
+.loop-caption { font-family: var(--ui); font-size: 15px; font-weight: 700; letter-spacing: 0.06em; fill: var(--ink-mute); }
 
 /* Numbered point — shared by the open text blocks on the quantum
    leap and magpie slides: top rule, mono index, serif heading */

@@ -158,20 +158,38 @@
         <div class="aim" data-fx="rise" style="--d:260ms">
           <span class="aim-num">01</span>
           <h3>The reasoning brain</h3>
-          <p>Modern models have moved beyond word prediction. They plan approaches before generating a response. Recent models have blown through existing evaluations.</p>
-          <div class="aim-image" data-fx="photo" style="--d:560ms"><img src="images/reasoning.jpg" alt="Diagram of the reasoning brain."></div>
+          <p>The model is the part that thinks. The best ones no longer just predict the next word - they plan an approach before answering, and they keep beating the hardest tests we can set.</p>
+          <div class="aim-image" data-fx="photo" style="--d:560ms"><img src="images/reasoning.jpg" alt="Logos of the leading models: OpenAI, Gemini and Claude."></div>
         </div>
         <div class="aim" data-fx="rise" style="--d:380ms">
           <span class="aim-num">02</span>
           <h3>The harness</h3>
-          <p>The harness is the execution environment. By giving models access to tools (search, terminal, CMS, browser, apps), AI moves from talking about work to doing it.</p>
-          <div class="aim-image" data-fx="photo" style="--d:680ms"><img src="images/harness.jpg" alt="Diagram of the harness — the model's execution environment."></div>
+          <p>On its own, a model can only talk. A harness gives it hands - search, files, a browser, your own apps - so it can do the work, not just describe it. Claude Code and Codex are harnesses.</p>
+          <div class="aim-image" data-fx="photo" style="--d:680ms"><img src="images/agent.jpg" alt="Logos of coding harnesses: Claude Code, Codex and similar tools that give a model tools to act."></div>
         </div>
         <div class="aim" data-fx="rise" style="--d:500ms">
           <span class="aim-num">03</span>
           <h3>The agentic loop</h3>
-          <p>The combination of <strong>brain + harness</strong> creates an "agent". It doesn't wait for your next prompt; it creates a plan, uses tools, and works in a loop until the goal is achieved.</p>
-          <div class="aim-image" data-fx="photo" style="--d:800ms"><img src="images/agent.jpg" alt="Diagram of the agentic loop."></div>
+          <p>Put a thinking model in a harness and let it run: it plans, acts, checks the result, and goes again - round and round to a goal, without waiting for you. One agent can even summon a whole swarm of them to work at once.</p>
+          <div class="aim-image" data-fx="photo" style="--d:800ms">
+            <svg class="loop-svg" viewBox="0 0 500 172" role="img" aria-label="A loop: plan, act, check, then repeat until the job is done.">
+              <defs>
+                <marker id="loopArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#22874d"></path>
+                </marker>
+              </defs>
+              <line x1="104" y1="54" x2="214" y2="54" stroke="#22874d" stroke-width="3" marker-end="url(#loopArrow)"></line>
+              <line x1="286" y1="54" x2="396" y2="54" stroke="#22874d" stroke-width="3" marker-end="url(#loopArrow)"></line>
+              <path d="M432,88 L432,120 Q432,128 424,128 L76,128 Q68,128 68,120 L68,88" fill="none" stroke="#22874d" stroke-width="3" marker-end="url(#loopArrow)"></path>
+              <circle cx="68" cy="54" r="32" fill="#FBF8F1" stroke="#22874d" stroke-width="3"></circle>
+              <circle cx="250" cy="54" r="32" fill="#FBF8F1" stroke="#22874d" stroke-width="3"></circle>
+              <circle cx="432" cy="54" r="32" fill="#FBF8F1" stroke="#22874d" stroke-width="3"></circle>
+              <text x="68" y="60" text-anchor="middle" class="loop-label">Plan</text>
+              <text x="250" y="60" text-anchor="middle" class="loop-label">Act</text>
+              <text x="432" y="60" text-anchor="middle" class="loop-label">Check</text>
+              <text x="250" y="156" text-anchor="middle" class="loop-caption">Repeat until it's done</text>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
