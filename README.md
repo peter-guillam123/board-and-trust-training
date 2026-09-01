@@ -50,6 +50,16 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Slide 6 tier labels: the open/local line was wrong
+
+The old labels treated Open and Local as two separate rungs. They aren't:
+"local" models are just the small end of "open". Every open-weight model is
+downloadable - local ones are simply small enough to run on your own laptop or
+phone, while the big open models (DeepSeek, etc.) are downloadable but need
+serious hardware. Rewrote the three labels so the real axis reads honestly -
+closed at the top, open in the middle, pocket-sized open models at the bottom -
+and dropped "closed" as a word a layperson won't parse.
+
 ### 13 June 2026 — Slide 6 tiers now move constantly
 
 The three tiers used to jostle once on entry, land the cue, settle, then
