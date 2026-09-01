@@ -50,6 +50,17 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Slide 6 tiers now move constantly
+
+The three tiers used to jostle once on entry, land the cue, settle, then
+freeze. Now the leaders keep trading places for as long as the slide is up -
+each row on its own cadence (frontier churns, open drifts, local barely moves,
+weighted by `data-shuffles`), cancelled cleanly when you leave the slide. The
+cue and the rows-drawing-together beat still land once; the swapping underneath
+just never stops. Reduced-motion users still get the static deck (motion.js
+bails early for them). `data-shuffles` now reads as "contestedness" rather than
+a one-off swap count. Bumped `motion.js?v=` so returning viewers get it.
+
 ### 13 June 2026 — Slide 5 reworked: five milestones, not one
 
 "Why this is out of date" used to be a single slide about Fable. It's now
