@@ -940,6 +940,17 @@ deck-stage { background: #000; }
   margin: 8px 0 0;
 }
 .ax-source strong { font-weight: 700; }
+.ax-update {
+  font-family: var(--ui);
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  margin: 6px 0 0;
+  padding-left: 16px;
+  border-left: 3px solid var(--news-red);
+}
+.ax-update strong { font-weight: 700; color: var(--news-red); }
+.ax-update-mark { color: var(--news-red); font-weight: 700; margin-right: 2px; }
 .ax-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .ax-pair .ax-card { padding: 18px 28px; }
 .ax-pair .ax-card-figure { font-size: 52px; }

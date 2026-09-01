@@ -50,6 +50,18 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Adoption chart: added the ECB "still climbing" point
+
+An ECB blog (26 Aug 2026) showed adoption rising again. Double-checked the
+source before touching anything: those figures (26% → 41% → 52%, 2024-26) come
+from the ECB's own euro-area Consumer Expectations Survey, *not* the US Federal
+Reserve data behind our 41% - they land on 41% by coincidence. So rather than
+overwrite the Fed-sourced 41% (which would mix US and euro-area populations,
+and on this chart the 52% is the four-year point, outside the three-year race),
+added the ECB figure as a demarcated callout under the chart: euro-area worker
+adoption reached 52% in 2026, clearly flagged as a separate survey a year past
+the window. Left slide 9 (firm vs worker) untouched.
+
 ### 13 June 2026 — Slide 6 tier labels: the open/local line was wrong
 
 The old labels treated Open and Local as two separate rungs. They aren't:
