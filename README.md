@@ -50,6 +50,16 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 13 June 2026 — Reordered: getting-started pair moved up, interstitial dropped
+
+Moved "Commit the time" and "Pick a first project" from the end of the deck to
+sit before the genie slide (now slides 14-15). It flows well: "Commit the time"
+ends on "you have a magic genie in front of you, ask it", which runs straight
+into the genie ladder. Dropped the now-empty "Getting started" section
+interstitial, so the deck ends on "Your turn: build in Canvas". 28 slides.
+(The moved pair still carry "Getting started ·" kickers - left as-is since the
+content is still getting-started advice.)
+
 ### 13 June 2026 — Personal-picture slide: figures restored, rebalanced
 
 Chris missed two figures from the draft. Checked both: the exact "42% multiple
