@@ -2074,6 +2074,62 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 /* ============================================================
    23 · Accessibility + print
    ============================================================ */
+/* ============================================================
+   Twenty-three minutes — the Steinem proof-of-capability closer
+   ============================================================ */
+.slide--proof .slide-subtitle {
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--ink-mute);
+  margin-bottom: 22px;
+  max-width: 112ch;
+}
+.proof-cols {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 52px;
+  align-items: start;
+}
+.proof-shot {
+  display: block;
+  text-decoration: none;
+  box-shadow: var(--shadow-frame);
+  background: var(--ink);
+}
+.proof-shot img {
+  display: block;
+  width: 100%;
+  height: auto;   /* 2086x1256 screenshot, shown whole rather than cropped */
+}
+.proof-shot-cap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 18px;
+  font-family: var(--ui);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  background: var(--ink);
+}
+.proof-open { color: var(--guardian-yellow); font-weight: 700; white-space: nowrap; }
+.proof-shot:hover .proof-open,
+.proof-shot:focus-visible .proof-open { text-decoration: underline; }
+.proof-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+.proof-points li { font-family: var(--body); font-size: 21px; line-height: 1.45; color: var(--ink-soft); margin: 0; }
+.proof-points strong { color: var(--ink); font-weight: 700; }
+.proof-kicker {
+  margin: 28px 0 0;
+  padding: 20px 0 0;
+  border-top: 3px solid var(--news-red);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 27px;
+  line-height: 1.32;
+  color: var(--ink);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .slide, .slide[data-deck-active] { transition: none; }
   .fx-armed [data-fx],

@@ -7,11 +7,11 @@ strategic training session on advanced AI for staff across the newsroom.
 
 ## What this is
 
-Twenty-six slides, one source of truth. Open `index.html` in a browser to present:
+Twenty-nine slides, one source of truth. Open `index.html` in a browser to present:
 arrow keys / space to navigate, `R` to reset, `Cmd-P → Save as PDF` for a
 one-slide-per-page export at 1920×1080.
 
-- `index.html` — the twenty-six slides. Markup only; every visual decision
+- `index.html` — the twenty-nine slides. Markup only; every visual decision
   lives in the stylesheet.
 - `styles.css` — the full design system: the real Guardian font cuts, design
   tokens, paper materiality, slide chrome, every component, and the motion
@@ -50,7 +50,19 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
-### 13 June 2026 — Reordered: getting-started pair moved up, interstitial dropped
+### 4 September 2026 — New closing slide: twenty-three minutes
+
+Chris set Fable 5.1 a single prompt for a scrolling, rigorously sourced
+interactive on Gloria Steinem's life, capped at two hours. It came back in 23
+minutes, most of that spent on agents researching, double-sourcing and
+verifying. The new final slide shows a shot of it, linked to the published
+artifact, and makes the point that matters: this isn't how we'll make
+journalism, but it is what any individual can now make with no expertise on a
+subject they simply find interesting - and that is the competition. Screenshot
+converted to a 1600px JPEG (205KB) in line with the deck's other images.
+styles.css bumped to ?v=7. 29 slides.
+
+### 4 September 2026 — Reordered: getting-started pair moved up, interstitial dropped
 
 Moved "Commit the time" and "Pick a first project" from the end of the deck to
 sit before the genie slide (now slides 14-15). It flows well: "Commit the time"
@@ -60,7 +72,7 @@ interstitial, so the deck ends on "Your turn: build in Canvas". 28 slides.
 (The moved pair still carry "Getting started ·" kickers - left as-is since the
 content is still getting-started advice.)
 
-### 13 June 2026 — Personal-picture slide: figures restored, rebalanced
+### 4 September 2026 — Personal-picture slide: figures restored, rebalanced
 
 Chris missed two figures from the draft. Checked both: the exact "42% multiple
 times daily" and "78.2% find it indispensable" don't verify, but the sense of
@@ -71,7 +83,7 @@ Also rebalanced: the model column is trimmed to concise one-line notes so it's
 no longer the heaviest, the type is larger and the spacing roomier so the content
 fills the slide instead of floating, and the source line is pinned to the bottom.
 
-### 13 June 2026 — New slide: the personal picture
+### 4 September 2026 — New slide: the personal picture
 
 A consumer-side slide after firm-vs-worker - who uses AI, how they feel, and
 which model they reach for - adapted from a draft of Chris's into house style.
@@ -94,7 +106,7 @@ Every figure was grounded against real 2025-26 data before building:
 First use of the `data-fx="bar"` primitive (the share bars draw in); the two big
 stats count up. styles.css bumped to ?v=3.
 
-### 13 June 2026 — Fixed the adoption chart's mislabelled y-axis
+### 4 September 2026 — Fixed the adoption chart's mislabelled y-axis
 
 Pre-existing bug (not the ECB change): the three lines were plotted on a 0-40%
 scale - launch sits at 0% on the baseline, 120px per 10 points - but the axis
@@ -103,7 +115,7 @@ appeared to finish above the "50%" mark. Relabelled the axis 0-40% to match how
 the data was actually drawn; the 41% endpoint now sits just above the 40% line,
 and internet (20%) / smartphone (25%) land correctly too. No data points moved.
 
-### 13 June 2026 — Adoption chart: added the ECB "still climbing" point
+### 4 September 2026 — Adoption chart: added the ECB "still climbing" point
 
 An ECB blog (26 Aug 2026) showed adoption rising again. Double-checked the
 source before touching anything: those figures (26% → 41% → 52%, 2024-26) come
@@ -115,7 +127,7 @@ added the ECB figure as a demarcated callout under the chart: euro-area worker
 adoption reached 52% in 2026, clearly flagged as a separate survey a year past
 the window. Left slide 9 (firm vs worker) untouched.
 
-### 13 June 2026 — Slide 6 tier labels: the open/local line was wrong
+### 4 September 2026 — Slide 6 tier labels: the open/local line was wrong
 
 The old labels treated Open and Local as two separate rungs. They aren't:
 "local" models are just the small end of "open". Every open-weight model is
@@ -125,7 +137,7 @@ serious hardware. Rewrote the three labels so the real axis reads honestly -
 closed at the top, open in the middle, pocket-sized open models at the bottom -
 and dropped "closed" as a word a layperson won't parse.
 
-### 13 June 2026 — Slide 6 tiers now move constantly
+### 4 September 2026 — Slide 6 tiers now move constantly
 
 The three tiers used to jostle once on entry, land the cue, settle, then
 freeze. Now the leaders keep trading places for as long as the slide is up -
@@ -136,7 +148,7 @@ just never stops. Reduced-motion users still get the static deck (motion.js
 bails early for them). `data-shuffles` now reads as "contestedness" rather than
 a one-off swap count. Bumped `motion.js?v=` so returning viewers get it.
 
-### 13 June 2026 — Slide 5 reworked: five milestones, not one
+### 4 September 2026 — Slide 5 reworked: five milestones, not one
 
 "Why this is out of date" used to be a single slide about Fable. It's now
 "Why this deck is already out of date" - five recent milestones, each one
@@ -147,7 +159,7 @@ card system from "Beyond chat". Two slides on the breach itself come next. (The
 detailed Fable paragraph - Mythos, the safeguarding line, the token burn - was
 dropped in the compression; `images/fable.jpg` is now unused.)
 
-### 13 June 2026 — Renamed to just "Advanced AI training"
+### 4 September 2026 — Renamed to just "Advanced AI training"
 
 The deck is used well beyond the Board now, so it drops "Board and Trust".
 Updated the browser-tab title, the stylesheet header and this README's name and
