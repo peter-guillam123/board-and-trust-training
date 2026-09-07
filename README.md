@@ -50,6 +50,16 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 7 September 2026 — Reordered: quantum leap moved down, Steinem into the examples run
+
+Two moves. "The quantum leap principle" now sits after "Commit the time" and
+"Pick a first project" (slide 15), so the practical get-going pair leads and the
+principle lands once you've been told to start. The Steinem closer moves out of
+last place into the examples run, straight after "Verify externally" (slide 27),
+where it reads as the most spectacular of the worked examples before "What does
+that unlock". The deck ends on "Your turn: build in Canvas" again. Pure reorder -
+verified no content changed, only sequence.
+
 ### 4 September 2026 — New closing slide: twenty-three minutes
 
 Chris set Fable 5.1 a single prompt for a scrolling, rigorously sourced
