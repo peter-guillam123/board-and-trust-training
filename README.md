@@ -7,11 +7,11 @@ strategic training session on advanced AI for staff across the newsroom.
 
 ## What this is
 
-Twenty-nine slides, one source of truth. Open `index.html` in a browser to present:
+Forty slides, one source of truth. Open `index.html` in a browser to present:
 arrow keys / space to navigate, `R` to reset, `Cmd-P → Save as PDF` for a
 one-slide-per-page export at 1920×1080.
 
-- `index.html` — the twenty-nine slides. Markup only; every visual decision
+- `index.html` — the forty slides. Markup only; every visual decision
   lives in the stylesheet.
 - `styles.css` — the full design system: the real Guardian font cuts, design
   tokens, paper materiality, slide chrome, every component, and the motion
@@ -49,6 +49,40 @@ the template's typographic `01 / 02 / 03` numbering. Copy is verbatim from the
 source, Anglicised (Labour, distil, realise).
 
 ## Changelog
+
+### 30 September 2026 — Swapped in "Where we are now" from the working group deck
+
+The landscape section here had been overtaken by the one built for the AI
+working group, so it has been replaced wholesale: thirteen slides covering
+scale, the four layers of an agent, how the models got better, the timeline,
+the risks, this summer's Hugging Face incident, and why nobody agrees how good
+any of it is. Two of them are interactive, so `predictor.js` and `stream.js`
+came across with them.
+
+The two decks already shared a design system - all twenty-nine design tokens
+are identical - so the new slides sit natively rather than looking bolted on.
+Three things needed care on the way in. The working group's cover rules were
+left behind, because this deck has its own cover and uses the same class. The
+`.way` component was renamed `.rway`, because both decks used `.way` for
+different things and this deck's "Pick a first project" would have been
+wrecked by the clash. And the `.slide--spread` layout, which four of the new
+slides rely on, lives in the working group's base rules rather than its
+component block, so it had to be carried over separately.
+
+Three slides were dropped as superseded: the old landscape opener, "Beyond
+chat" (the four layers do that job better) and "Why this deck is out of date"
+(the timeline and this-summer slides now cover it). Five were kept in a new
+appendix at the end, because the new section does not carry them: the three
+tiers of model, the choice framing, the adoption chart, the firm-against-worker
+gap and the personal picture, with its Eurostat, Similarweb and Pew figures.
+
+### 30 September 2026 — Fixed the body font, and the local copy
+
+This folder had drifted thirty-one commits behind the live deck, and held one
+commit that was never pushed. That commit was right: the CDN returns 403 for
+`GuardianTextEgyptian-Reg.woff2`, so body text across the whole deck had been
+falling back to Georgia. The file is `-Regular.woff2`. Checked the other eight
+font URLs at the same time; they are all fine.
 
 ### 7 September 2026 — Reordered: quantum leap moved down, Steinem into the examples run
 

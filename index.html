@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Advanced AI training</title>
 <link rel="preconnect" href="https://assets.guim.co.uk" crossorigin>
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 <style id="deck-gate-style">
   #deck-gate {
     position: fixed; inset: 0; z-index: 2147483647;
@@ -101,8 +101,8 @@
     <div class="slide-body">
       <div class="agenda-item" data-fx="rise" style="--d:300ms">
         <span class="agenda-num">01</span>
-        <h3>The current landscape</h3>
-        <p>LLMs have radically changed and improved over the last three years. What are the substantive changes, and where are we today?</p>
+        <h3>Where we are now</h3>
+        <p>Three years ago this was a chatbot. It now plans, uses tools and acts on your behalf. How it got here, in four layers, and what comes with it.</p>
       </div>
       <div class="agenda-item" data-fx="rise" style="--d:420ms">
         <span class="agenda-num">02</span>
@@ -127,54 +127,13 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       SLIDE 3 — Section opener: The current landscape
-       ============================================================ -->
-  <section class="slide ink section-opener" data-label="The current landscape">
+  <section class="slide ink section-opener" data-label="Where we are now">
     <div class="rule-band"></div>
     <span class="chapter-ghost" aria-hidden="true" data-fx="ghost" style="--d:150ms">01</span>
 
     <div class="chapter-num" data-fx="rise" style="--d:100ms">The state of AI</div>
-    <h1 data-split data-split-base="260" data-split-step="50">The current <em>landscape.</em></h1>
-    <p class="section-dek" data-fx="rise" style="--d:780ms">LLMs have radically changed and improved over the last three years. What are the substantive changes, and where are we today?</p>
-
-    <div class="slide-foot">
-      <span class="wm">Advanced AI training</span>
-      <span class="num">04 / NN</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SLIDE 4 — Beyond chat: the new AI stack
-       ============================================================ -->
-  <section class="slide" data-label="Beyond chat">
-    <div class="rule-band"></div>
-
-    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · capability</p>
-    <h2 class="slide-title" data-split>Beyond chat: the <em>new</em> AI stack.</h2>
-
-    <div class="slide-body">
-      <div class="aims">
-        <div class="aim" data-fx="rise" style="--d:260ms">
-          <span class="aim-num">01</span>
-          <h3>The reasoning brain</h3>
-          <p>The model is the part that thinks. The best ones no longer just predict the next word - they plan an approach before answering, and they keep beating the hardest tests we can set.</p>
-          <div class="aim-image" data-fx="photo" style="--d:560ms"><img src="images/reasoning.jpg" alt="Logos of the leading models: OpenAI, Gemini and Claude."></div>
-        </div>
-        <div class="aim" data-fx="rise" style="--d:380ms">
-          <span class="aim-num">02</span>
-          <h3>The harness</h3>
-          <p>On its own, a model can only talk. A harness gives it hands - search, files, a browser, your own apps - so it can do the work, not just describe it. Claude Code and Codex are harnesses.</p>
-          <div class="aim-image" data-fx="photo" style="--d:680ms"><img src="images/agent.jpg" alt="Logos of coding harnesses: Claude Code, Codex and similar tools that give a model tools to act."></div>
-        </div>
-        <div class="aim" data-fx="rise" style="--d:500ms">
-          <span class="aim-num">03</span>
-          <h3>The agentic loop</h3>
-          <p>Put a thinking model in a harness and let it run: it plans, acts, checks the result, and goes again - round and round to a goal, without waiting for you. One agent can even summon a whole swarm of them to work at once.</p>
-          <div class="aim-image" data-fx="photo" style="--d:800ms"><img src="images/agentic-loop.jpg" alt="A loop diagram: plan, act, check, then repeat until the job is done."></div>
-        </div>
-      </div>
-    </div>
+    <h1 data-split data-split-base="260" data-split-step="50">Where we are <em>now.</em></h1>
+    <p class="section-dek" data-fx="rise" style="--d:780ms">Three years ago it was a chatbot. Now it plans, uses tools and acts for you. How it got here, in four layers, and what comes with it.</p>
 
     <div class="slide-foot">
       <span class="wm">Advanced AI training</span>
@@ -182,403 +141,541 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       SLIDE 5 — Why this deck is already out of date
-       Five recent milestones, escalating to the Hugging Face
-       breach (card 5, red alarm). Sets up the two incident slides.
-       ============================================================ -->
-  <section class="slide slide--pace" data-label="Why this deck is out of date">
+  <!-- 04 — Scale. Company figures are self-reported and unaudited;
+       see SOURCES.md for how each was checked. -->
+  <section class="slide ink slide--scale" data-label="Scale">
     <div class="rule-band"></div>
 
-    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · pace</p>
-    <h2 class="slide-title" data-split>Why this deck is already <em>out of date</em>.</h2>
-    <p class="slide-subtitle" data-fx="rise" style="--d:220ms">Five things from the last few months. This slide will need updating before the training's even over.</p>
+    <p class="kicker" data-fx="rise" style="--d:60ms">Where we are</p>
+    <h2 class="slide-title" data-split>Already used at <em>scale</em>.</h2>
 
     <div class="slide-body">
-      <div class="pace-cards">
-
-        <article class="pace-card" data-fx="rise" style="--d:320ms">
-          <span class="pace-label">01 · Work loops</span>
-          <h3>Answers turned into work</h3>
-          <p>Models stopped replying in seconds and started working for hours - planning, testing and finishing a whole task with nobody steering.</p>
-          <span class="pace-tag">Two-second chat → hours of work</span>
-        </article>
-
-        <article class="pace-card" data-fx="rise" style="--d:410ms">
-          <span class="pace-label">02 · Discoveries</span>
-          <h3>They started finding things</h3>
-          <p>Frontier models cleared tests meant to last years - working through maths problems that had stood for a decade, and finding unknown security holes on their own.</p>
-          <span class="pace-tag">Benchmarks → real breakthroughs</span>
-        </article>
-
-        <article class="pace-card" data-fx="rise" style="--d:500ms">
-          <span class="pace-label">03 · Swarms</span>
-          <h3>One assistant became a team</h3>
-          <p>A single prompt no longer means a single model. A manager agent breaks a big job into pieces and hands them to specialist agents working at once.</p>
-          <span class="pace-tag">One model → a team of them</span>
-        </article>
-
-        <article class="pace-card" data-fx="rise" style="--d:590ms">
-          <span class="pace-label">04 · Autonomy</span>
-          <h3>The harness started to shrink</h3>
-          <p>Fable chased open-ended goals with far less of the human scaffolding - the harness - that earlier models leaned on. Enough that governments moved on safety within days.</p>
-          <span class="pace-tag">Less scaffolding, more initiative</span>
-        </article>
-
-        <article class="pace-card pace-card--alarm" data-fx="rise" style="--d:720ms">
-          <span class="pace-label">05 · Escalation</span>
-          <h3>The Hugging Face breach</h3>
-          <p>More than a thousand test agents gamed their own goal, opened private channels to one another and reached into live systems. The risk stopped being hypothetical.</p>
-          <span class="pace-tag">The first multi-agent breach</span>
-        </article>
-
+      <div class="scale-grid">
+        <div class="scale-cell" data-fx="rise" style="--d:300ms">
+          <p class="scale-fig">1bn<span class="unit">+</span></p>
+          <p class="scale-what"><strong>people a week</strong> use ChatGPT</p>
+          <p class="scale-src">OpenAI's own figure, 31 August 2026</p>
+        </div>
+        <div class="scale-cell" data-fx="rise" style="--d:440ms">
+          <p class="scale-fig">2.5bn</p>
+          <p class="scale-what"><strong>people a month</strong> see Google's AI Overviews. The Gemini app passed 1bn in August.</p>
+          <p class="scale-src">Google, May and August 2026</p>
+        </div>
+        <div class="scale-cell" data-fx="rise" style="--d:580ms">
+          <p class="scale-fig"><span data-count="54" data-count-delay="600">54</span><span class="unit">%</span></p>
+          <p class="scale-what"><strong>of UK adults</strong> use AI tools. Among 16–24s, 79%.</p>
+          <p class="scale-src">Ofcom, published April 2026, surveyed autumn 2025</p>
+        </div>
+        <div class="scale-cell" data-fx="rise" style="--d:720ms">
+          <p class="scale-fig"><span data-count="55" data-count-delay="740">55</span><span class="unit">%</span></p>
+          <p class="scale-what"><strong>of workers in Great Britain</strong> use AI for work or education</p>
+          <p class="scale-src">ONS, May–June 2026</p>
+        </div>
       </div>
     </div>
 
     <div class="slide-foot">
       <span class="wm">Advanced AI training</span>
-      <span class="num">05 / NN</span>
+      <span class="num">01 / NN</span>
     </div>
   </section>
 
-  <!-- ============================================================
-       The field — three tiers of models. Within each row the names
-       jostle for position (frontier hardest), then the rows settle a
-       little closer: the gaps close, but the order is baked in.
-       Copy is PROVISIONAL (Chris to rewrite). Chips are wordmarks
-       standing in for logos until the motion is signed off.
-       ============================================================ -->
-  <section class="slide slide--tiers" data-label="The field">
+  <!-- 05 — The map: four layers, one agent -->
+  <section class="slide slide--map" data-label="Four layers">
     <div class="rule-band"></div>
 
-    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · the field</p>
-    <h2 class="slide-title" data-split>Three tiers, always in <em>motion</em>.</h2>
-    <p class="slide-subtitle" data-fx="rise" style="--d:240ms">In each category the leaders trade places constantly. Frontier models lead the way, open models follow, local ones trail far behind but run on your own device.</p>
+    <p class="kicker" data-fx="rise" style="--d:60ms">How it got here</p>
+    <h2 class="slide-title" data-split>Four layers, one <em>agent</em>.</h2>
 
     <div class="slide-body">
-      <div class="tier-stack" data-fx="rise" style="--d:360ms">
-        <div class="tier-head">
-          <div class="tier-head-spacer"></div>
-          <div class="tier-ranks">
-            <span class="rank rank-1">1st</span>
-            <span class="rank rank-2">2nd</span>
-            <span class="rank rank-3">3rd</span>
-          </div>
-        </div>
-        <div class="tier-rows">
-          <div class="tier-row frontier" data-shuffles="4">
-            <div class="tier-label">
-              <h3>Frontier</h3>
-              <p>The most capable. Online only - you can't download them.</p>
-            </div>
-            <div class="tier-track">
-              <div class="logo-chip"><span class="chip-mark">Claude</span></div>
-              <div class="logo-chip"><span class="chip-mark">ChatGPT</span></div>
-              <div class="logo-chip"><span class="chip-mark">Gemini</span></div>
-            </div>
-          </div>
-          <div class="tier-row open" data-shuffles="2">
-            <div class="tier-label">
-              <h3>Open</h3>
-              <p>Weights published for anyone to download - the best are closing the gap fast.</p>
-            </div>
-            <div class="tier-track">
-              <div class="logo-chip"><span class="chip-mark">Llama</span></div>
-              <div class="logo-chip"><span class="chip-mark">GLM</span></div>
-              <div class="logo-chip"><span class="chip-mark">DeepSeek</span></div>
-            </div>
-          </div>
-          <div class="tier-row local" data-shuffles="1">
-            <div class="tier-label">
-              <h3>Local</h3>
-              <p>The small end of open - cut down to run on your own laptop or phone.</p>
-            </div>
-            <div class="tier-track">
-              <div class="logo-chip"><span class="chip-mark">Gemma</span></div>
-              <div class="logo-chip"><span class="chip-mark">Phi</span></div>
-              <div class="logo-chip"><span class="chip-mark">Qwen</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="tier-cue">The hierarchy doesn't (and won't) change - but the time it takes to catch up keeps shrinking.</p>
-    </div>
-
-    <div class="slide-foot">
-      <span class="wm">Advanced AI training</span>
-      <span class="num">06 / NN</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SLIDE 6 — AI is not just something that happens to us
-       ============================================================ -->
-  <section class="slide slide--choice" data-label="AI is something we choose about">
-    <div class="rule-band"></div>
-
-    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · agency</p>
-    <h2 class="slide-title" data-split>AI is not just something that <em>happens to us</em>.</h2>
-    <p class="slide-subtitle" data-fx="rise" style="--d:260ms">We are professionals with clear codes and practices that govern behaviour. And we can make judicious decisions about how we use AI in that frame.</p>
-
-    <div class="slide-body">
-      <div class="ai-choice">
-        <article class="choice-card" data-fx="rise" style="--d:320ms">
-          <span class="choice-num">01</span>
-          <h3>Should I use AI?</h3>
-          <p>This is entirely in your hands. But too often it's presented as the only element of control, and one that should be imposed on everyone.</p>
-        </article>
-        <article class="choice-card" data-fx="rise" style="--d:440ms">
-          <span class="choice-num">02</span>
-          <h3>Where should I use AI?</h3>
-          <p>Your job is very likely an amalgam of many jobs. Some of those are appropriate for AI and some absolutely depend on your personal control and expertise.</p>
-        </article>
-        <article class="choice-card" data-fx="rise" style="--d:560ms">
-          <span class="choice-num">03</span>
-          <h3>How should I use AI?</h3>
-          <p>AI shouldn't - and doesn't have to - be used to execute a whole task. Instead of asking it to create something you can use it to give feedback and suggestions.</p>
-        </article>
-      </div>
-
-      <aside class="ai-meta" data-fx="rise" style="--d:820ms">
-        <p class="ai-meta-eyebrow">In practice</p>
-        <p class="ai-meta-body"><em>Every slide in this presentation</em> was generated with AI, using Gemini to realise simple formats that worked, ChatGPT to create consistent images and Claude to build the design. All of that integration made the process quicker and the output better. None of it removed or obscured the human expertise behind it.</p>
-      </aside>
-    </div>
-
-    <div class="slide-foot">
-      <span class="wm">Advanced AI training</span>
-      <span class="num">04 / NN</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SLIDE 7 — AI adoption speed chart
-       ============================================================ -->
-  <section class="slide slide--appendix slide--ax-speed" data-label="AI adoption speed">
-    <div class="rule-band"></div>
-
-    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · adoption</p>
-    <h2 class="slide-title" data-split>AI has already arrived… and <em>quicker</em> than anything else.</h2>
-    <p class="slide-subtitle" data-fx="rise" style="--d:240ms">Adoption in the first three years after launch - same window for each technology.</p>
-
-    <div class="slide-body">
-      <div class="ax-chart-big">
-        <div class="ax-chart-legend">
-          <span class="ax-chart-legend-item is-internet" data-fx="rise" style="--d:260ms">Internet at work (1995–98)</span>
-          <span class="ax-chart-legend-item is-phone" data-fx="rise" style="--d:340ms">Smartphone adoption (2007–10)</span>
-          <span class="ax-chart-legend-item is-ai" data-fx="rise" style="--d:420ms">Generative AI at work (2022–25)</span>
-        </div>
-
-        <svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Three-year adoption curves comparing internet at work, smartphone adoption, and generative AI at work.">
-          <g class="ax-frame" data-fx="fade" style="--d:150ms">
-            <line class="ax-grid" x1="100" y1="60"  x2="1500" y2="60"/>
-            <line class="ax-grid" x1="100" y1="180" x2="1500" y2="180"/>
-            <line class="ax-grid" x1="100" y1="300" x2="1500" y2="300"/>
-            <line class="ax-grid" x1="100" y1="420" x2="1500" y2="420"/>
-            <line class="ax-axis-base" x1="100" y1="540" x2="1500" y2="540"/>
-
-            <text class="ax-axis ax-axis-y" x="86" y="64">40%</text>
-            <text class="ax-axis ax-axis-y" x="86" y="184">30%</text>
-            <text class="ax-axis ax-axis-y" x="86" y="304">20%</text>
-            <text class="ax-axis ax-axis-y" x="86" y="424">10%</text>
-            <text class="ax-axis ax-axis-y" x="86" y="544">0%</text>
-
-            <text class="ax-axis" x="100"  y="572" text-anchor="middle">Launch</text>
-            <text class="ax-axis" x="566"  y="572" text-anchor="middle">+1 yr</text>
-            <text class="ax-axis" x="1033" y="572" text-anchor="middle">+2 yrs</text>
-            <text class="ax-axis" x="1500" y="572" text-anchor="middle">+3 yrs</text>
+      <div data-fx="fade" style="--d:200ms">
+        <svg class="rings" viewBox="0 0 760 760" role="img" aria-label="Four concentric rings: the LLM at the centre, then reasoning, then the loop, then the harness on the outside">
+          <defs>
+            <path id="arc4" d="M 63 380 A 317 317 0 0 1 697 380"/><path id="arc3" d="M 153 380 A 227 227 0 0 1 607 380"/><path id="arc2" d="M 241 380 A 139 139 0 0 1 519 380"/>
+          </defs>
+          <circle class="disc d4" cx="380" cy="380" r="370" data-fx="pop" style="--d:900ms"/>
+          <circle class="disc d3" cx="380" cy="380" r="280" data-fx="pop" style="--d:700ms"/>
+          <circle class="disc d2" cx="380" cy="380" r="190" data-fx="pop" style="--d:500ms"/>
+          <circle class="disc d1" cx="380" cy="380" r="105" data-fx="pop" style="--d:300ms"/>
+          <g data-fx="fade" style="--d:1250ms">
+            <text class="ring-label d4-label"><textPath href="#arc4" startOffset="50%" text-anchor="middle">4 · The harness</textPath></text>
+            <text class="ring-label"><textPath href="#arc3" startOffset="50%" text-anchor="middle">3 · The loop</textPath></text>
+            <text class="ring-label"><textPath href="#arc2" startOffset="50%" text-anchor="middle">2 · Reasoning</textPath></text>
+            <text class="core-label" x="380" y="386" text-anchor="middle">The LLM</text>
           </g>
-
-          <g class="ax-track ax-track--internet">
-            <polyline class="ax-line ax-line--internet" points="100,540 566,480 1033,396 1500,300"/>
-            <circle class="ax-dot ax-dot--internet" cx="100"  cy="540" r="7"/>
-            <circle class="ax-dot ax-dot--internet" cx="566"  cy="480" r="7"/>
-            <circle class="ax-dot ax-dot--internet" cx="1033" cy="396" r="7"/>
-            <circle class="ax-dot ax-dot--internet" cx="1500" cy="300" r="7"/>
-          </g>
-
-          <g class="ax-track ax-track--phone">
-            <polyline class="ax-line ax-line--phone" points="100,540 566,480 1033,360 1500,240"/>
-            <circle class="ax-dot ax-dot--phone" cx="100"  cy="540" r="7"/>
-            <circle class="ax-dot ax-dot--phone" cx="566"  cy="480" r="7"/>
-            <circle class="ax-dot ax-dot--phone" cx="1033" cy="360" r="7"/>
-            <circle class="ax-dot ax-dot--phone" cx="1500" cy="240" r="7"/>
-          </g>
-
-          <g class="ax-track ax-track--ai">
-            <polyline class="ax-line ax-line--ai" points="100,540 566,276 1033,168 1500,48"/>
-            <circle class="ax-dot ax-dot--ai" cx="100"  cy="540" r="9"/>
-            <circle class="ax-dot ax-dot--ai" cx="566"  cy="276" r="9"/>
-            <circle class="ax-dot ax-dot--ai" cx="1033" cy="168" r="9"/>
-            <circle class="ax-dot ax-dot--ai" cx="1500" cy="48"  r="11"/>
-          </g>
-
-          <text class="ax-endpoint" x="1490" y="296" text-anchor="end" dy="-8" data-fx="fade" style="--d:2350ms" data-count="20" data-count-suffix="%" data-count-delay="2350" data-count-dur="700">20%</text>
-          <text class="ax-endpoint" x="1490" y="236" text-anchor="end" dy="-8" data-fx="fade" style="--d:2450ms" data-count="25" data-count-suffix="%" data-count-delay="2450" data-count-dur="700">25%</text>
-          <text class="ax-endpoint ax-endpoint--big" x="1490" y="44" text-anchor="end" dy="-10" data-fx="fade" style="--d:4300ms" data-count="41" data-count-suffix="%" data-count-delay="4300" data-count-dur="1000">41%</text>
         </svg>
       </div>
-
-      <p class="ax-update" data-fx="fade" style="--d:5400ms"><span class="ax-update-mark" aria-hidden="true">↗</span> And still climbing: in the euro area, worker adoption reached <strong>52%</strong> in 2026 (ECB Consumer Expectations Survey) - a separate measure, a year past the three-year mark.</p>
-
-      <p class="ax-source" data-fx="fade" style="--d:1100ms">Within the same three-year window from launch, generative AI is at <strong>41%</strong> workforce adoption - roughly double internet-at-work and smartphone adoption at the equivalent point. Sources: US Census / Pew (internet, 1995–98), Pew Research (smartphone, 2007–10), Federal Reserve (GenAI, 2022–25). Y-axis is % of relevant population (workforce / adults).</p>
+      <div>
+        <ol class="layer-list">
+          <li data-fx="rise" style="--d:360ms"><span class="ln">1</span><div><h3>The LLM <small>2022</small></h3><p>A large language model: it predicts the next word, having read a vast share of the internet.</p></div></li>
+          <li data-fx="rise" style="--d:560ms"><span class="ln">2</span><div><h3>Reasoning <small>2024</small></h3><p>The LLM writes out a plan and its working before it answers.</p></div></li>
+          <li data-fx="rise" style="--d:760ms"><span class="ln">3</span><div><h3>The loop <small>2025</small></h3><p>Plans, acts, checks, and goes again until the job is done.</p></div></li>
+          <li data-fx="rise" style="--d:960ms"><span class="ln">4</span><div><h3>The harness <small>2025</small></h3><p>The tools and access around it: browser, files, email, apps.</p></div></li>
+        </ol>
+        <p class="layer-sum" data-fx="rise" style="--d:1300ms">Together, an <b>agent</b>: not a better chatbot, but something that does the work.</p>
+      </div>
     </div>
 
     <div class="slide-foot">
       <span class="wm">Advanced AI training</span>
-      <span class="num">06 / NN</span>
+      <span class="num">01 / NN</span>
     </div>
   </section>
 
-  <!-- ============================================================
-       SLIDE 8 — The enterprise gap (firm vs worker)
-       ============================================================ -->
-  <section class="slide slide--appendix" data-label="Firm vs worker">
+  <!-- 06 — Layer 1: the LLM. The odds are illustrative. -->
+  <section class="slide slide--layer" data-layer="1" data-label="Layer 1: the LLM">
     <div class="rule-band"></div>
+    <div class="rings-badge" data-on="1" data-fx="fade" style="--d:200ms"><span class="badge-text">Layer 1<b>The LLM</b></span><svg class="rings" viewBox="0 0 760 760" aria-hidden="true"><circle class="disc d4" cx="380" cy="380" r="370"/><circle class="disc d3" cx="380" cy="380" r="280"/><circle class="disc d2" cx="380" cy="380" r="190"/><circle class="disc d1" cx="380" cy="380" r="105"/></svg></div>
 
-    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · adoption</p>
-    <h2 class="slide-title" data-split>The enterprise <em>gap</em>.</h2>
+    <p class="kicker" data-fx="rise" style="--d:60ms">Layer 1 · The LLM</p>
+    <h2 class="slide-title" data-split>It guesses the next <em>word</em>.</h2>
 
     <div class="slide-body">
-      <div class="ax-pair">
-        <article class="ax-card" data-fx="rise" style="--d:200ms">
-          <p class="ax-card-eyebrow">Firms that have formally adopted</p>
-          <p class="ax-card-figure" data-count="18" data-count-suffix="%" data-count-delay="500" data-count-dur="900">18%</p>
-          <p class="ax-card-body">Of US businesses report adopting AI in any business function (Fed BTOS, end 2025).</p>
-        </article>
-        <article class="ax-card" data-fx="rise" style="--d:320ms">
-          <p class="ax-card-eyebrow">Workers using it anyway</p>
-          <p class="ax-card-figure" data-count="41" data-count-suffix="%" data-count-delay="620" data-count-dur="900">41%</p>
-          <p class="ax-card-body">Of US workers use generative AI at work - often via personal accounts, ahead of their employer (Fed RPS).</p>
-        </article>
+      <div class="pred" id="pred" data-fx="rise" style="--d:300ms">
+        <div class="pred-left">
+          <p class="pred-sentence">The cat sat on the <span class="pred-caret" aria-hidden="true"></span></p>
+          <div class="pred-controls">
+            <button class="pred-pick" type="button">Let the model choose</button>
+            <button class="pred-reset" type="button">Start again</button>
+          </div>
+          <div class="pred-temp" role="group" aria-label="How much risk it takes">
+            <span class="pred-temp-label">How much risk it takes</span>
+            <button type="button" data-t="cautious" aria-pressed="false">Cautious</button>
+            <button type="button" data-t="normal" aria-pressed="true">Normal</button>
+            <button type="button" data-t="wild" aria-pressed="false">Wild</button>
+          </div>
+          <p class="pred-live vh" aria-live="polite"></p>
+        </div>
+        <div class="pred-right">
+          <p class="pred-q">What comes next? Its odds:</p>
+          <div class="pred-bars">
+            <p class="pred-static">mat 52% · sofa 21% · windowsill 13% · keyboard 9% · everything else 5%</p>
+          </div>
+          <p class="wg-source pred-note">The odds are made up, to show the idea. A real model picks from tens of thousands of word-pieces, every time.</p>
+        </div>
       </div>
 
-      <h3 class="ax-frictions-head" data-fx="rise" style="--d:480ms">Why deploying large-scale projects is <em>hard</em>.</h3>
-
-      <ul class="ax-frictions">
-        <li data-fx="rise" style="--d:600ms">
-          <div>
-            <strong>Identifying use cases</strong>
-            <span>What's flexible for one person becomes hard to define for a thousand. Personal use bends to the user; organisational use has to nail the use case first.</span>
-          </div>
-        </li>
-        <li data-fx="rise" style="--d:700ms">
-          <div>
-            <strong>Reproducibility and audit trail</strong>
-            <span>A sole trader can let AI draft an invoice. A 1,000-person firm needs an output that survives an audit.</span>
-          </div>
-        </li>
-        <li data-fx="rise" style="--d:800ms">
-          <div>
-            <strong>Error consequences at scale</strong>
-            <span>A hallucinated paragraph is a shrug in a personal email; a correction in a 200,000-circulation paper.</span>
-          </div>
-        </li>
-        <li data-fx="rise" style="--d:900ms">
-          <div>
-            <strong>Workforce concerns about displacement</strong>
-            <span>Real, live conversations inside most large organisations - including ours.</span>
-          </div>
-        </li>
-        <li data-fx="rise" style="--d:1000ms">
-          <div>
-            <strong>Negative customer reaction</strong>
-            <span>AI-produced news is seen as less trustworthy than human-produced news, even with human oversight.</span>
-          </div>
-        </li>
-      </ul>
-
-      <p class="ax-source" data-fx="fade" style="--d:1150ms">Sources: Federal Reserve, April 2026; RISJ Digital News Report 2025. The Fed also notes adoption among the smallest firms is "stronger than would be expected based on size alone".</p>
+      <div class="grown">
+        <p class="wg-label" data-fx="rise" style="--d:1100ms">Grown, not built: nobody wrote its rules. Three stages of training</p>
+        <ol class="grown-steps">
+          <li data-fx="rise" style="--d:1200ms"><h4>Read everything</h4><p>Predicting the next word across much of the internet. Knowledge, but no manners.</p></li>
+          <li data-fx="rise" style="--d:1320ms"><h4>Learn what people like</h4><p>People rate its answers, and it is nudged towards the ones they prefer.</p></li>
+          <li class="hot" data-fx="rise" style="--d:1440ms"><h4>Practise on tasks</h4><p>Rewarded for getting checkable tasks right. This is where reasoning came from.</p></li>
+        </ol>
+      </div>
     </div>
 
     <div class="slide-foot">
       <span class="wm">Advanced AI training</span>
-      <span class="num">07 / NN</span>
+      <span class="num">01 / NN</span>
     </div>
   </section>
 
-  <!-- ============================================================
-       SLIDE — The personal picture: individual adoption, sentiment,
-       model share. Figures grounded in real 2025-26 data:
-       Eurostat/OECD (individual use), Pew/Gallup/Numerator
-       (attitudes), Similarweb (model share, worldwide web visits).
-       ============================================================ -->
-  <section class="slide slide--adopt" data-label="The personal picture">
+  <!-- 07 — Layer 2: reasoning. The two answers are illustrative; the
+       sum is real (1.04 / 1.06 = 0.981). The bars are OpenAI's AIME 2024
+       figures: GPT-4o 12%, o1 74% (single attempt). -->
+  <section class="slide slide--layer" data-layer="2" data-label="Layer 2: reasoning">
     <div class="rule-band"></div>
+    <div class="rings-badge" data-on="2" data-fx="fade" style="--d:200ms"><span class="badge-text">Layer 2<b>Reasoning</b></span><svg class="rings" viewBox="0 0 760 760" aria-hidden="true"><circle class="disc d4" cx="380" cy="380" r="370"/><circle class="disc d3" cx="380" cy="380" r="280"/><circle class="disc d2" cx="380" cy="380" r="190"/><circle class="disc d1" cx="380" cy="380" r="105"/></svg></div>
 
-    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · adoption</p>
-    <h2 class="slide-title" data-split>AI in <em>private hands</em>.</h2>
-    <p class="slide-subtitle" data-fx="rise" style="--d:220ms">Away from the workplace: who actually uses it, what they make of it, and which models they reach for.</p>
+    <p class="kicker" data-fx="rise" style="--d:60ms">Layer 2 · Reasoning</p>
+    <h2 class="slide-title" data-split>It thinks before it <em>answers</em>.</h2>
 
     <div class="slide-body">
-      <div class="adopt-cols">
-
-        <div class="adopt-col">
-          <p class="adopt-clabel" data-fx="rise" style="--d:320ms">01 · Who uses it</p>
-          <div class="adopt-stat" data-fx="rise" style="--d:440ms">
-            <span class="adopt-fig" data-count="33" data-count-suffix="%" data-count-delay="560" data-count-dur="900">33%</span>
-            <span class="adopt-fig-note">of EU adults, in the last three months</span>
+      <div class="l2-grid">
+        <div>
+          <p class="same-q" data-fx="rise" style="--d:260ms"><b>The same question, two ways</b>A council says its budget went up 4%, but spending per resident fell. Can both be true?</p>
+          <div class="ways">
+            <div class="rway fast" data-fx="rise" style="--d:500ms" data-stream-seq data-start="900">
+              <p class="rway-head">Answers straight away</p>
+              <p class="rway-a" data-stream data-rate="55">No. If the budget went up, the money spent on each resident went up too.</p>
+              <p class="verdict" data-stream="show" data-pause="350">Wrong</p>
+            </div>
+            <div class="rway slow" data-fx="rise" style="--d:700ms" data-stream-seq data-start="1000">
+              <p class="rway-head"><span data-think-timer>Thinks first</span></p>
+              <ol class="rway-steps">
+                <li data-stream data-rate="130" data-pause="300">Per resident means dividing by the population.</li>
+                <li data-stream data-rate="130" data-pause="450">What if the population grew faster than 4%?</li>
+                <li data-stream data-rate="130" data-pause="450">4% more money, 6% more people: 1.04 ÷ 1.06 = 0.98.</li>
+              </ol>
+              <p class="rway-a" data-stream data-rate="60" data-pause="400" data-stop-timer>Yes, if the population grew faster. With 6% more residents, each gets about 2% less.</p>
+              <p class="verdict" data-stream="show" data-pause="350">Right</p>
+            </div>
           </div>
-          <ul class="adopt-list" data-fx="rise" style="--d:560ms">
-            <li><strong>The young run ahead.</strong> 64% of 16-24s use generative AI, against a small fraction of the over-65s - a 53.6-point age gap, the widest of any divide.</li>
-            <li><strong>Barely a gender gap.</strong> Men and women sit just 4.2 points apart. Age is the story; gender isn't.</li>
-            <li><strong>Then it becomes a habit.</strong> In the US, close to a third now use AI several times a day - up from a fifth two years ago.</li>
-            <li><strong>Work pulls it up.</strong> 41% of employed adults use it against 12.5% of the retired - which is why this all-adult third sits below the workers' four-in-ten-plus.</li>
-          </ul>
+          <p class="l2-how" data-fx="rise" style="--d:2000ms" data-after-stream>It is <strong>the same LLM</strong>, still guessing the next word. It has just been trained to write out a plan and its working first, check itself, and only then answer.</p>
+          <p class="wg-source" data-fx="rise" style="--d:2100ms" data-after-stream>The two answers are an illustration.</p>
         </div>
-
-        <div class="adopt-col adopt-col--sentiment">
-          <p class="adopt-clabel" data-fx="rise" style="--d:400ms">02 · How they feel</p>
-          <div class="adopt-stat" data-fx="rise" style="--d:520ms">
-            <span class="adopt-fig" data-count="70" data-count-suffix="%" data-count-delay="640" data-count-dur="900">70%</span>
-            <span class="adopt-fig-note">of Gen Z find AI useful day to day</span>
+        <div class="duel" data-fx="rise" style="--d:400ms" data-after-stream>
+          <p class="wg-label">Maths competition problems solved</p>
+          <div class="duel-bars">
+            <div class="col"><span class="v">12%</span><span class="bar" style="--h:16%;--d2:300ms"></span></div>
+            <div class="col hi"><span class="v">74%</span><span class="bar" style="--h:100%;--d2:500ms"></span></div>
           </div>
-          <ul class="adopt-list" data-fx="rise" style="--d:640ms">
-            <li><strong>Indispensable for study.</strong> Around 9 in 10 students now use it for coursework, and about half say it has improved their studies.</li>
-            <li><strong>But wary of where it leads.</strong> Even the heaviest users are uneasy - roughly half of under-30s expect AI to do society more harm than good.</li>
-            <li><strong>The old aren't hostile - just unsure.</strong> Over-65s use it least, and are likeliest to say they don't yet know what to make of it.</li>
-          </ul>
+          <div class="duel-names"><span><b>GPT-4o</b>answers at once</span><span><b>o1</b>thinks first</span></div>
+          <p class="wg-source">Same company, same month, same test: the 2024 American Invitational Mathematics Examination. OpenAI, September 2024.</p>
         </div>
-
-        <div class="adopt-col">
-          <p class="adopt-clabel" data-fx="rise" style="--d:480ms">03 · Which model</p>
-          <div class="share-bars">
-            <div class="share-row">
-              <span class="share-name" data-fx="fade" style="--d:640ms">ChatGPT <em>OpenAI</em></span>
-              <span class="share-val" data-fx="fade" style="--d:640ms">53.9%</span>
-              <div class="share-track"><div class="share-fill is-1" data-fx="bar" style="--d:640ms; width:53.9%"></div></div>
-            </div>
-            <div class="share-row">
-              <span class="share-name" data-fx="fade" style="--d:760ms">Google Gemini</span>
-              <span class="share-val" data-fx="fade" style="--d:760ms">27.9%</span>
-              <div class="share-track"><div class="share-fill is-2" data-fx="bar" style="--d:760ms; width:27.9%"></div></div>
-            </div>
-            <div class="share-row">
-              <span class="share-name" data-fx="fade" style="--d:880ms">Claude <em>Anthropic</em></span>
-              <span class="share-val" data-fx="fade" style="--d:880ms">9.2%</span>
-              <div class="share-track"><div class="share-fill is-3" data-fx="bar" style="--d:880ms; width:9.2%"></div></div>
-            </div>
-            <div class="share-row">
-              <span class="share-name" data-fx="fade" style="--d:1000ms">Everyone else <em>Grok, Copilot, Perplexity…</em></span>
-              <span class="share-val" data-fx="fade" style="--d:1000ms">9.0%</span>
-              <div class="share-track"><div class="share-fill is-4" data-fx="bar" style="--d:1000ms; width:9.0%"></div></div>
-            </div>
-          </div>
-          <div class="share-notes">
-            <p data-fx="fade" style="--d:1300ms"><strong>ChatGPT below half</strong> for the first time - even past a billion weekly users.</p>
-            <p data-fx="fade" style="--d:1420ms"><strong>Gemini roughly tripled</strong> its share in a year, on Google's reach.</p>
-            <p data-fx="fade" style="--d:1540ms"><strong>Claude grew fastest</strong> in the field, off a small base.</p>
-          </div>
-        </div>
-
       </div>
+    </div>
 
-      <p class="ax-source" data-fx="fade" style="--d:1800ms">Sources: Eurostat / OECD (individual use, 2025); Pew Research, HEPI, Numerator (frequency, students and attitudes, 2026); Similarweb (model share, worldwide web visits, May 2026).</p>
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">01 / NN</span>
+    </div>
+  </section>
+
+  <!-- 07b — The hard tests are falling. GPQA: Rein et al 2023 (GPT-4
+       ~39%, experts 65%), top models over 90% (developer-reported, which
+       Epoch finds accurate). SWE-bench: Stanford AI Index 2025 (4.4% in
+       2023, 71.7% a year later); over 90% on SWE-bench Verified in 2026,
+       with contamination concerns. HLE: under 10% at launch (Jan 2025),
+       61.4% top score 22 Sep 2026 (Artificial Analysis). Epoch ECI: 14
+       points a year since reasoning models v 6 before (1 Sep 2026). -->
+  <section class="slide slide--spread slide--better" data-label="Better models">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">Meanwhile, the models themselves</p>
+    <h2 class="slide-title" data-split>The hard tests are <em>falling</em>.</h2>
+
+    <div class="slide-body">
+      <div class="db">
+          <div class="db-row" data-fx="rise" style="--d:400ms">
+            <div class="db-name"><h3>PhD-level science</h3><p>GPQA · 2023 · questions written to defeat a Google search</p></div>
+            <div class="db-track">
+              <span class="db-grid" style="left:0%"></span><span class="db-grid" style="left:50%"></span><span class="db-grid" style="left:100%"></span>
+              <span class="db-exp" style="left:65%"><i></i><b>PhD experts 65%</b></span>
+              <span class="db-span" style="left:39%;width:53%;--d:650ms" data-fx="bar"></span>
+              <span class="db-dot then" style="left:39%"></span>
+              <span class="db-lab then" style="left:39%">39%<small>GPT-4, 2023</small></span>
+              <span class="db-dot now" style="left:92%;--d:1300ms" data-fx="pop"></span>
+              <span class="db-lab now" style="left:92%">90%+ now</span>
+            </div>
+          </div>
+          <div class="db-row" data-fx="rise" style="--d:620ms">
+            <div class="db-name"><h3>Real software bugs</h3><p>SWE-bench · 2023 · fix genuine faults in real code</p></div>
+            <div class="db-track">
+              <span class="db-grid" style="left:0%"></span><span class="db-grid" style="left:50%"></span><span class="db-grid" style="left:100%"></span>
+              
+              <span class="db-span" style="left:4.4%;width:87.6%;--d:870ms" data-fx="bar"></span>
+              <span class="db-dot then" style="left:4.4%"></span>
+              <span class="db-lab then edge" style="left:4.4%">4.4%<small>2023</small></span>
+              <span class="db-dot now" style="left:92%;--d:1520ms" data-fx="pop"></span>
+              <span class="db-lab now" style="left:92%">90%+ now</span>
+            </div>
+          </div>
+          <div class="db-row" data-fx="rise" style="--d:840ms">
+            <div class="db-name"><h3>Humanity's Last Exam</h3><p>2025 · the hardest questions experts could write</p></div>
+            <div class="db-track">
+              <span class="db-grid" style="left:0%"></span><span class="db-grid" style="left:50%"></span><span class="db-grid" style="left:100%"></span>
+              
+              <span class="db-span" style="left:8%;width:53%;--d:1090ms" data-fx="bar"></span>
+              <span class="db-dot then" style="left:8%"></span>
+              <span class="db-lab then edge" style="left:8%">Under 10%<small>at launch, January 2025</small></span>
+              <span class="db-dot now" style="left:61%;--d:1740ms" data-fx="pop"></span>
+              <span class="db-lab now" style="left:61%">61% now</span>
+            </div>
+          </div>
+        <div class="db-axis"><span style="left:0%">0%</span><span style="left:50%">50%</span><span style="left:100%">100%</span></div>
+      </div>
+      <div class="better-foot">
+        <div class="pace" data-fx="rise" style="--d:1400ms"><span class="pace-n">2×</span><p>The pace since reasoning models arrived. Epoch's index of overall capability has climbed 14 points a year since late 2024, against 6 before.</p></div>
+        <div class="finds" data-fx="rise" style="--d:1550ms">
+          <p class="wg-label">And now, real discoveries</p>
+          <ul>
+            <li><span class="f-when">May 2025</span>Google DeepMind's AlphaEvolve, built on Gemini, found a faster way to multiply 4×4 matrices, the first improvement on a method from 1969.</li>
+            <li><span class="f-when">May 2026</span>An OpenAI model disproved a 1946 conjecture by the mathematician Paul Erdős, Quanta reported.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="wg-source better-note" data-fx="rise" style="--d:1700ms">Stanford AI Index 2025; Epoch AI; Artificial Analysis. Top software scores may be flattered: the test is so widely used its answers may have leaked into training. And yes, it can count the r's in strawberry now.</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">01 / NN</span>
+    </div>
+  </section>
+
+  <section class="slide slide--layer" data-layer="3" data-label="Layer 3: the loop">
+    <div class="rule-band"></div>
+    <div class="rings-badge" data-on="3" data-fx="fade" style="--d:200ms"><span class="badge-text">Layer 3<b>The loop</b></span><svg class="rings" viewBox="0 0 760 760" aria-hidden="true"><circle class="disc d4" cx="380" cy="380" r="370"/><circle class="disc d3" cx="380" cy="380" r="280"/><circle class="disc d2" cx="380" cy="380" r="190"/><circle class="disc d1" cx="380" cy="380" r="105"/></svg></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">Layer 3 · The loop</p>
+    <h2 class="slide-title" data-split>It keeps <em>going</em>.</h2>
+
+    <div class="slide-body">
+      <div class="layer-cols layer-cols--loop">
+        <div class="loop-wrap">
+          <svg class="loop-svg" viewBox="0 0 600 600" aria-hidden="true">
+            <circle class="orbit" cx="300" cy="300" r="220" data-fx="fade" style="--d:300ms"/>
+            <g data-fx="fade" style="--d:900ms">
+              <polygon class="arrow" points="-13,-11 13,0 -13,11" transform="translate(490.5 190.0) rotate(60)"/>
+              <polygon class="arrow" points="-13,-11 13,0 -13,11" transform="translate(300.0 520.0) rotate(180)"/>
+              <polygon class="arrow" points="-13,-11 13,0 -13,11" transform="translate(109.5 190.0) rotate(300)"/>
+            </g>
+          </svg>
+          <div class="loop-node" style="left:300px;top:80px;--d:400ms" data-fx="pop">Think<small>plans the next step</small></div>
+          <div class="loop-node" style="left:491px;top:410px;--d:560ms" data-fx="pop">Act<small>uses a tool</small></div>
+          <div class="loop-node" style="left:109px;top:410px;--d:720ms" data-fx="pop">Look<small>checks what happened</small></div>
+          <div class="loop-goal" data-fx="fade" style="--d:1000ms"><b>The goal</b>set by a person, then round and round until it's met</div>
+        </div>
+        <div>
+          <p class="run-goal" data-fx="rise" style="--d:300ms">Find me the cheapest train from London to Leeds on Friday morning.</p>
+          <ol class="run">
+            <li data-fx="rise" style="--d:500ms"><span class="k">Thinks</span><span>I need times and prices. I'll search a booking site.</span></li>
+            <li data-fx="rise" style="--d:640ms"><span class="k">Acts</span><span>Opens a browser. Searches London to Leeds, Friday, before noon.</span></li>
+            <li data-fx="rise" style="--d:780ms"><span class="k">Looks</span><span>14 trains, from £31 to £118.</span></li>
+            <li data-fx="rise" style="--d:920ms"><span class="k">Thinks</span><span>The 06:33 is cheapest. Check for booking fees first.</span></li>
+            <li data-fx="rise" style="--d:1060ms"><span class="k">Acts</span><span>Clicks through to the checkout for the 06:33.</span></li>
+            <li data-fx="rise" style="--d:1200ms"><span class="k">Looks</span><span>£32.50 with the fee.</span></li>
+            <li class="done" data-fx="rise" style="--d:1340ms"><span class="k">Done</span><span>Reports back, and asks before paying.</span></li>
+          </ol>
+          <div class="stamina" data-fx="rise" style="--d:1500ms">
+            <p class="wg-label">How long the best agent can work on its own</p>
+            <ol class="stamina-rows">
+              <li><span class="yr">2023</span><span class="track"><span class="fill" style="--w:0.4%"></span></span><span class="val">3½ min</span></li>
+              <li><span class="yr">Early 2025</span><span class="track"><span class="fill" style="--w:6.3%"></span></span><span class="val">1 hour</span></li>
+              <li><span class="yr">Late 2025</span><span class="track"><span class="fill" style="--w:33%"></span></span><span class="val">5 hours</span></li>
+              <li><span class="yr">2026</span><span class="track"><span class="fill" style="--w:100%"></span></span><span class="val">16+ hours</span></li>
+            </ol>
+            <p class="wg-source">Measured in how long the same task takes a skilled person; the agent succeeds half the time. METR, 2023–2026.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">09 / NN</span>
+    </div>
+  </section>
+
+  <section class="slide slide--layer" data-layer="4" data-label="Layer 4: the harness">
+    <div class="rule-band"></div>
+    <div class="rings-badge" data-on="4" data-fx="fade" style="--d:200ms"><span class="badge-text">Layer 4<b>The harness</b></span><svg class="rings" viewBox="0 0 760 760" aria-hidden="true"><circle class="disc d4" cx="380" cy="380" r="370"/><circle class="disc d3" cx="380" cy="380" r="280"/><circle class="disc d2" cx="380" cy="380" r="190"/><circle class="disc d1" cx="380" cy="380" r="105"/></svg></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">Layer 4 · The harness</p>
+    <h2 class="slide-title" data-split>It gets <em>tools</em>.</h2>
+
+    <div class="slide-body">
+      <div class="layer-cols layer-cols--hub">
+        <div class="hub">
+          <svg class="hub-svg" viewBox="0 0 700 700" aria-hidden="true">
+            <circle class="rim" cx="350" cy="350" r="285" data-fx="fade" style="--d:300ms"/>
+            <g data-fx="fade" style="--d:500ms">
+              <line x1="350" y1="350" x2="350" y2="65"/><line x1="350" y1="350" x2="552" y2="148"/>
+              <line x1="350" y1="350" x2="635" y2="350"/><line x1="350" y1="350" x2="552" y2="552"/>
+              <line x1="350" y1="350" x2="350" y2="635"/><line x1="350" y1="350" x2="148" y2="552"/>
+              <line x1="350" y1="350" x2="65" y2="350"/><line x1="350" y1="350" x2="148" y2="148"/>
+            </g>
+          </svg>
+          <div class="hub-core" data-fx="fade" style="--d:200ms"><span>LLM</span></div>
+          <span class="tool" style="left:350px;top:65px;--d:600ms" data-fx="pop"><i></i>Search</span>
+          <span class="tool" style="left:552px;top:148px;--d:680ms" data-fx="pop"><i></i>Browser</span>
+          <span class="tool" style="left:635px;top:350px;--d:760ms" data-fx="pop"><i></i>Your files</span>
+          <span class="tool" style="left:552px;top:552px;--d:840ms" data-fx="pop"><i></i>Code</span>
+          <span class="tool risky" style="left:350px;top:635px;--d:920ms" data-fx="pop"><i></i>Payments</span>
+          <span class="tool risky" style="left:148px;top:552px;--d:1000ms" data-fx="pop"><i></i>Email</span>
+          <span class="tool" style="left:65px;top:350px;--d:1080ms" data-fx="pop"><i></i>Calendar</span>
+          <span class="tool" style="left:148px;top:148px;--d:1160ms" data-fx="pop"><i></i>Memory</span>
+        </div>
+        <div>
+          <p class="wg-body" data-fx="rise" style="--d:300ms">The harness is everything built around the model: <strong>which tools it can use, what it can see, what it remembers, and what it must ask you first.</strong> The same model in a different harness behaves very differently.</p>
+          <p class="wg-body" data-fx="rise" style="--d:440ms;margin-top:22px">Most now plug into apps through a shared standard, MCP, so any tool can connect to any model. The red ones are those that let it send and spend.</p>
+          <p class="wg-eyebrow" data-fx="rise" style="--d:600ms;margin-top:40px">Harnesses you'll hear about</p>
+          <ul class="harness-names" data-fx="rise" style="--d:700ms">
+            <li>Claude Code</li><li>Claude Cowork</li><li>Claude in Chrome</li><li>OpenAI Codex</li><li>ChatGPT Work</li><li>Gemini Spark</li><li>Perplexity Comet</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="slide-foot">
       <span class="wm">Advanced AI training</span>
       <span class="num">10 / NN</span>
+    </div>
+  </section>
+
+  <!-- 10 — Acting for you. Muse facts from Meta's launch and safety
+       posts; Voice facts from coverage quoting OpenAI's help centre,
+       which blocked direct reading. See SOURCES.md. -->
+  <section class="slide slide--spread slide--proxy" data-label="Acting for you">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">September 2026</p>
+    <h2 class="slide-title" data-split>Towards personal AI <em>agents</em>.</h2>
+    <p class="slide-subtitle" data-fx="rise" style="--d:220ms">All four layers, inside apps that hundreds of millions of people already use.</p>
+
+    <div class="slide-body top">
+      <div class="proxy">
+        <div class="proxy-card" data-fx="rise" style="--d:360ms">
+          <div class="proxy-main">
+            <p class="who">Meta · 8 September · US only for now</p>
+            <h3>Muse</h3>
+            <p class="what">A personal agent in its own app and inside WhatsApp. It keeps working after you close it.</p>
+            <ul class="does">
+              <li>Sends emails, fills in forms, books travel</li>
+              <li>Shops and pays for things</li>
+              <li>Top of the US App Store within ten days</li>
+            </ul>
+          </div>
+          <div class="proxy-guard"><b>The safeguard</b><p>You approve purchases. Even so, Meta's own safety notes say “Muse will sometimes make mistakes.”</p></div>
+        </div>
+        <div class="proxy-card" data-fx="rise" style="--d:500ms">
+          <div class="proxy-main">
+            <p class="who">OpenAI · 23 September · worldwide</p>
+            <h3>ChatGPT Voice</h3>
+            <p class="what">Talk to it, and it now uses your connected apps in the middle of the conversation.</p>
+            <ul class="does">
+              <li>Reads your Gmail, finds a slot in your diary, posts to Slack</li>
+              <li>Builds documents, decks and spreadsheets while you talk</li>
+              <li>Included for free users</li>
+            </ul>
+          </div>
+          <div class="proxy-guard"><b>The safeguard</b><p>Saying “yes, send it” isn't enough. You have to tap to approve on screen.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">01 / NN</span>
+    </div>
+  </section>
+
+  <!-- 11 — Timeline. Evenly spaced, not to scale: the subtitle tells
+       the gaps. Colours follow the four layers. -->
+  <section class="slide slide--spread slide--timeline" data-label="Timeline">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">How fast it moved</p>
+    <h2 class="slide-title" data-split>Ten moments in four <em>years</em>.</h2>
+    <p class="slide-subtitle" data-fx="rise" style="--d:220ms">Nearly two years between the first two. Since then, something big every few months.</p>
+
+    <div class="slide-body">
+      <div class="tl">
+          <div class="tl-axis" data-fx="bar" style="--d:250ms"></div>
+          <div class="tl-ev up l1" style="left:130px;--d:400ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Nov 2022</p><p class="t">ChatGPT</p><p class="s">The LLM goes public</p></div>
+          <div class="tl-ev down l2" style="left:288px;--d:520ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Sep 2024</p><p class="t">OpenAI o1</p><p class="s">Thinks before it answers</p></div>
+          <div class="tl-ev up l4" style="left:446px;--d:640ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Nov 2024</p><p class="t">MCP</p><p class="s">One plug for every tool</p></div>
+          <div class="tl-ev down l2" style="left:603px;--d:760ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Jan 2025</p><p class="t">DeepSeek R1</p><p class="s">Reasoning, cheap and open</p></div>
+          <div class="tl-ev up l4" style="left:761px;--d:880ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Feb 2025</p><p class="t">Claude Code</p><p class="s">An agent at work on your computer</p></div>
+          <div class="tl-ev down l2" style="left:919px;--d:1000ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Jul 2025</p><p class="t">Maths Olympiad</p><p class="s">Gold-medal standard</p></div>
+          <div class="tl-ev up l3" style="left:1077px;--d:1120ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Nov 2025</p><p class="t">Claude Opus 4.5</p><p class="s">Agents work for five hours</p></div>
+          <div class="tl-ev down tl-risk" style="left:1234px;--d:1240ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Apr 2026</p><p class="t">Claude Mythos</p><p class="s">Held back as too risky; the US then barred foreign use</p></div>
+          <div class="tl-ev up tl-risk" style="left:1392px;--d:1360ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Jul 2026</p><p class="t">Hugging Face</p><p class="s">Test agents break out</p></div>
+          <div class="tl-ev down l4 now" style="left:1550px;--d:1480ms" data-fx="rise"><span class="stem"></span><span class="dot"></span><p class="d">Sep 2026</p><p class="t">Muse and Voice</p><p class="s">Agents go mainstream</p></div>
+      </div>
+      <p class="tl-key" data-fx="rise" style="--d:1700ms"><span><i style="--c:var(--l1)"></i>The LLM</span><span><i style="--c:var(--l2)"></i>Reasoning</span><span><i style="--c:var(--l3)"></i>The loop</span><span><i style="--c:var(--l4)"></i>The harness</span><span><i class="fill" style="--c:var(--news-red)"></i>Risk, and now</span></p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">01 / NN</span>
+    </div>
+  </section>
+
+  <!-- 12 — What can go wrong. A hero contrast on the left, the four
+       risks as a ledger on the right, each with a real case. -->
+  <section class="slide slide--risks" data-label="Risks">
+    <div class="rule-band"></div>
+
+    <div class="risks-lead">
+      <p class="kicker" data-fx="rise" style="--d:60ms">The catch</p>
+      <h2 class="slide-title" data-split>What can go <em>wrong</em>.</h2>
+      <div class="contrast">
+        <p class="a" data-fx="rise" style="--d:400ms">When a chatbot gets it wrong, you get a bad answer.</p>
+        <p class="b" data-fx="rise" style="--d:700ms">When an agent gets it wrong, it <em>does</em> a bad thing.</p>
+      </div>
+    </div>
+
+    <ol class="risk-rows">
+      <li data-fx="rise" style="--d:900ms"><span class="rn">01</span><div><h3>It can be tricked</h3><p>Words hidden in a web page, email or document can give it orders. Nobody has solved this.</p><p class="case"><b>2025</b>Researchers showed one crafted email could make Microsoft 365 Copilot leak company data, with no click needed.</p></div></li>
+      <li data-fx="rise" style="--d:1030ms"><span class="rn">02</span><div><h3>Mistakes become actions</h3><p>A wrong answer you can ignore. A wrong email sent, or a wrong purchase, has already happened.</p><p class="case"><b>2025</b>Asked to find cheap eggs, OpenAI's Operator agent bought $31 worth, with priority delivery, without checking first.</p></div></li>
+      <li data-fx="rise" style="--d:1160ms"><span class="rn">03</span><div><h3>It sees what you let it see</h3><p>To act for you it needs your inbox, files and logins. Whatever it can read, it can leak.</p><p class="case"><b>Named</b>Private data, content from strangers and a way to send things out: the “lethal trifecta”. Meta cites it for Muse.</p></div></li>
+      <li data-fx="rise" style="--d:1290ms"><span class="rn">04</span><div><h3>It chases the goal, not what you meant</h3><p>It does whatever gets rewarded, by whatever route works.</p><p class="case"><b>2016</b>A game-playing AI rewarded for points circled one lagoon for ever instead of finishing the race.</p></div></li>
+    </ol>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">01 / NN</span>
+    </div>
+  </section>
+
+  <section class="slide ink slide--incident" data-label="This summer">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">This summer, and last week</p>
+
+    <div class="slide-body">
+      <p class="incident-line" data-split data-split-base="160" data-split-step="34">In July, AI agents under test at OpenAI broke out and hacked another company. <em>Nobody</em> told them to.</p>
+      <div class="incident-figs">
+        <div class="f" data-fx="rise" style="--d:1200ms"><div class="n">~<span data-count="700" data-count-delay="1300">700</span></div><p class="l">agents went into Hugging Face, which hosts AI models and data</p></div>
+        <div class="f" data-fx="rise" style="--d:1350ms"><div class="n">&lt;<span data-count="13" data-count-delay="1450">13</span> hrs</div><p class="l">from one machine to administrator control across its systems</p></div>
+        <div class="f" data-fx="rise" style="--d:1500ms"><div class="n">17,600</div><p class="l">separate actions, with no person directing any of them</p></div>
+      </div>
+      <p class="incident-after" data-fx="rise" style="--d:1800ms">They were trying to cheat on a test, and the answers were stored at Hugging Face. Since then <strong>Anthropic, Meta and Google</strong> have admitted their models broke into outside systems during tests too. On 25 September <strong>OpenAI said an agent had slipped out again</strong>, and paused all work that lets its most capable models use tools.</p>
+      <p class="wg-source" data-fx="rise" style="--d:2000ms">Sources: OpenAI technical report, 26 August 2026; Hugging Face technical timeline, 27 July 2026; METR and Redwood Research review, 26 August 2026; OpenAI misalignment report, 25 September 2026. The whole story, with every source: AI risk field guide, peter-guillam123.github.io/ai-risk-field-guide</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">14 / NN</span>
+    </div>
+  </section>
+
+  <!-- 14 — Why nobody agrees. Jagged ability (illustrative chart,
+       real study) plus many different tools, so experiences differ
+       wildly. Doesn't describe the practical; sets it up. -->
+  <section class="slide slide--spread slide--jagged" data-label="Why nobody agrees">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">So where does that leave us</p>
+    <h2 class="slide-title" data-split>Why nobody agrees how good it <em>is</em>.</h2>
+
+    <div class="slide-body top">
+      <div class="jag">
+        <div>
+          <p class="wg-label" data-fx="rise" style="--d:200ms">Its ability is jagged · an illustration</p>
+          <svg class="jag-chart" viewBox="0 -24 1000 432" role="img" aria-label="Illustration: AI ability rises far above a capable person on some tasks, such as competition maths, writing code and summarising, and falls far below on others, such as admitting it doesn't know and today's news without searching">
+            <path class="area" d="M0,400 L0,210 L130,30 L290,300 L450,55 L620,320 L790,70 L1000,100 L1000,400 Z" data-fx="fade" style="--d:1400ms"/>
+            <line class="human" x1="0" y1="180" x2="1000" y2="180" data-fx="fade" style="--d:300ms"/>
+            <text class="human-label" x="1000" y="212" text-anchor="end" data-fx="fade" style="--d:300ms">A capable person</text>
+            <polyline class="edge" points="0,210 130,30 290,300 450,55 620,320 790,70 1000,100"/>
+            <g data-fx="fade" style="--d:1500ms">
+              <circle class="pt" cx="130" cy="30" r="9"/>
+              <text class="tag" x="130" y="8" text-anchor="middle">Competition maths</text>
+              <circle class="pt" cx="290" cy="300" r="9"/>
+              <text class="tag lo" x="290" y="338" text-anchor="middle">Admitting it doesn’t know</text>
+              <circle class="pt" cx="450" cy="55" r="9"/>
+              <text class="tag" x="450" y="33" text-anchor="middle">Writing code</text>
+              <circle class="pt" cx="620" cy="320" r="9"/>
+              <text class="tag lo" x="620" y="358" text-anchor="middle"><tspan x="620">Today’s news,</tspan><tspan x="620" dy="26">without searching</tspan></text>
+              <circle class="pt" cx="790" cy="70" r="9"/>
+              <text class="tag" x="790" y="48" text-anchor="middle">Summarising a long report</text>
+            </g>
+            <line class="axis" x1="0" y1="400" x2="1000" y2="400"/>
+          </svg>
+          <div class="jag-study" data-fx="rise" style="--d:1800ms">
+            <span class="big">−19</span>
+            <p>On a task the AI was bad at, consultants using it were 19 points less likely to get the answer right. On tasks it was good at, their work was over 40% better.<small>Harvard Business School and BCG study of 758 consultants, 2023</small></p>
+          </div>
+        </div>
+        <div data-fx="rise" style="--d:500ms">
+          <p class="wg-label">And every tool sets the four layers differently</p>
+          <ol class="dials">
+            <li style="--c:var(--l1)"><h4>Which LLM is underneath</h4><p>The newest, largest models are usually better, and often barely slower. A tool answering billions of searches has to be quick and cheap.</p></li>
+            <li style="--c:var(--l2)"><h4>How hard it thinks</h4><p>More isn't always better. Anthropic warns its top setting can overthink, and its newest Opus thinks less by default.</p></li>
+            <li style="--c:var(--l3)"><h4>Whether it keeps going</h4><p>One answer, or plan, act and check for hours.</p></li>
+            <li style="--c:var(--l4)"><h4>What it can reach</h4><p>Search, your files, your apps, or nothing at all.</p></li>
+          </ol>
+          <p class="jag-close" data-fx="rise" style="--d:2100ms">So one person's “AI” is a summary at the top of Google, and another's is GPT-6 Astra thinking for minutes. One finds it useless, the other astonishing. <mark>Often they're both right.</mark></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">01 / NN</span>
     </div>
   </section>
 
@@ -1376,10 +1473,372 @@
     </div>
   </section>
 
+  <!-- ============================================================
+       Appendix opener. The landscape slides the working group
+       section replaced, kept here because they still hold data
+       the new run does not carry.
+       ============================================================ -->
+  <section class="slide ink section-opener" data-label="Appendix">
+    <div class="rule-band"></div>
+    <span class="chapter-ghost" aria-hidden="true" data-fx="ghost" style="--d:150ms">04</span>
+
+    <div class="chapter-num" data-fx="rise" style="--d:100ms">Reference</div>
+    <h1 data-split data-split-base="260" data-split-step="50">Appendix<em>.</em></h1>
+    <p class="section-dek" data-fx="rise" style="--d:780ms">Not part of the run-through, but here if they are useful: the three tiers of model, how fast people took this up, the gap between what firms have adopted and what their staff already use, and what people do with AI in private.</p>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">35 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       The field — three tiers of models. Within each row the names
+       jostle for position (frontier hardest), then the rows settle a
+       little closer: the gaps close, but the order is baked in.
+       Copy is PROVISIONAL (Chris to rewrite). Chips are wordmarks
+       standing in for logos until the motion is signed off.
+       ============================================================ -->
+  <section class="slide slide--tiers" data-label="The field">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · the field</p>
+    <h2 class="slide-title" data-split>Three tiers, always in <em>motion</em>.</h2>
+    <p class="slide-subtitle" data-fx="rise" style="--d:240ms">In each category the leaders trade places constantly. Frontier models lead the way, open models follow, local ones trail far behind but run on your own device.</p>
+
+    <div class="slide-body">
+      <div class="tier-stack" data-fx="rise" style="--d:360ms">
+        <div class="tier-head">
+          <div class="tier-head-spacer"></div>
+          <div class="tier-ranks">
+            <span class="rank rank-1">1st</span>
+            <span class="rank rank-2">2nd</span>
+            <span class="rank rank-3">3rd</span>
+          </div>
+        </div>
+        <div class="tier-rows">
+          <div class="tier-row frontier" data-shuffles="4">
+            <div class="tier-label">
+              <h3>Frontier</h3>
+              <p>The most capable. Online only - you can't download them.</p>
+            </div>
+            <div class="tier-track">
+              <div class="logo-chip"><span class="chip-mark">Claude</span></div>
+              <div class="logo-chip"><span class="chip-mark">ChatGPT</span></div>
+              <div class="logo-chip"><span class="chip-mark">Gemini</span></div>
+            </div>
+          </div>
+          <div class="tier-row open" data-shuffles="2">
+            <div class="tier-label">
+              <h3>Open</h3>
+              <p>Weights published for anyone to download - the best are closing the gap fast.</p>
+            </div>
+            <div class="tier-track">
+              <div class="logo-chip"><span class="chip-mark">Llama</span></div>
+              <div class="logo-chip"><span class="chip-mark">GLM</span></div>
+              <div class="logo-chip"><span class="chip-mark">DeepSeek</span></div>
+            </div>
+          </div>
+          <div class="tier-row local" data-shuffles="1">
+            <div class="tier-label">
+              <h3>Local</h3>
+              <p>The small end of open - cut down to run on your own laptop or phone.</p>
+            </div>
+            <div class="tier-track">
+              <div class="logo-chip"><span class="chip-mark">Gemma</span></div>
+              <div class="logo-chip"><span class="chip-mark">Phi</span></div>
+              <div class="logo-chip"><span class="chip-mark">Qwen</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="tier-cue">The hierarchy doesn't (and won't) change - but the time it takes to catch up keeps shrinking.</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">06 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 6 — AI is not just something that happens to us
+       ============================================================ -->
+  <section class="slide slide--choice" data-label="AI is something we choose about">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · agency</p>
+    <h2 class="slide-title" data-split>AI is not just something that <em>happens to us</em>.</h2>
+    <p class="slide-subtitle" data-fx="rise" style="--d:260ms">We are professionals with clear codes and practices that govern behaviour. And we can make judicious decisions about how we use AI in that frame.</p>
+
+    <div class="slide-body">
+      <div class="ai-choice">
+        <article class="choice-card" data-fx="rise" style="--d:320ms">
+          <span class="choice-num">01</span>
+          <h3>Should I use AI?</h3>
+          <p>This is entirely in your hands. But too often it's presented as the only element of control, and one that should be imposed on everyone.</p>
+        </article>
+        <article class="choice-card" data-fx="rise" style="--d:440ms">
+          <span class="choice-num">02</span>
+          <h3>Where should I use AI?</h3>
+          <p>Your job is very likely an amalgam of many jobs. Some of those are appropriate for AI and some absolutely depend on your personal control and expertise.</p>
+        </article>
+        <article class="choice-card" data-fx="rise" style="--d:560ms">
+          <span class="choice-num">03</span>
+          <h3>How should I use AI?</h3>
+          <p>AI shouldn't - and doesn't have to - be used to execute a whole task. Instead of asking it to create something you can use it to give feedback and suggestions.</p>
+        </article>
+      </div>
+
+      <aside class="ai-meta" data-fx="rise" style="--d:820ms">
+        <p class="ai-meta-eyebrow">In practice</p>
+        <p class="ai-meta-body"><em>Every slide in this presentation</em> was generated with AI, using Gemini to realise simple formats that worked, ChatGPT to create consistent images and Claude to build the design. All of that integration made the process quicker and the output better. None of it removed or obscured the human expertise behind it.</p>
+      </aside>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">04 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 7 — AI adoption speed chart
+       ============================================================ -->
+  <section class="slide slide--appendix slide--ax-speed" data-label="AI adoption speed">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · adoption</p>
+    <h2 class="slide-title" data-split>AI has already arrived… and <em>quicker</em> than anything else.</h2>
+    <p class="slide-subtitle" data-fx="rise" style="--d:240ms">Adoption in the first three years after launch - same window for each technology.</p>
+
+    <div class="slide-body">
+      <div class="ax-chart-big">
+        <div class="ax-chart-legend">
+          <span class="ax-chart-legend-item is-internet" data-fx="rise" style="--d:260ms">Internet at work (1995–98)</span>
+          <span class="ax-chart-legend-item is-phone" data-fx="rise" style="--d:340ms">Smartphone adoption (2007–10)</span>
+          <span class="ax-chart-legend-item is-ai" data-fx="rise" style="--d:420ms">Generative AI at work (2022–25)</span>
+        </div>
+
+        <svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Three-year adoption curves comparing internet at work, smartphone adoption, and generative AI at work.">
+          <g class="ax-frame" data-fx="fade" style="--d:150ms">
+            <line class="ax-grid" x1="100" y1="60"  x2="1500" y2="60"/>
+            <line class="ax-grid" x1="100" y1="180" x2="1500" y2="180"/>
+            <line class="ax-grid" x1="100" y1="300" x2="1500" y2="300"/>
+            <line class="ax-grid" x1="100" y1="420" x2="1500" y2="420"/>
+            <line class="ax-axis-base" x1="100" y1="540" x2="1500" y2="540"/>
+
+            <text class="ax-axis ax-axis-y" x="86" y="64">40%</text>
+            <text class="ax-axis ax-axis-y" x="86" y="184">30%</text>
+            <text class="ax-axis ax-axis-y" x="86" y="304">20%</text>
+            <text class="ax-axis ax-axis-y" x="86" y="424">10%</text>
+            <text class="ax-axis ax-axis-y" x="86" y="544">0%</text>
+
+            <text class="ax-axis" x="100"  y="572" text-anchor="middle">Launch</text>
+            <text class="ax-axis" x="566"  y="572" text-anchor="middle">+1 yr</text>
+            <text class="ax-axis" x="1033" y="572" text-anchor="middle">+2 yrs</text>
+            <text class="ax-axis" x="1500" y="572" text-anchor="middle">+3 yrs</text>
+          </g>
+
+          <g class="ax-track ax-track--internet">
+            <polyline class="ax-line ax-line--internet" points="100,540 566,480 1033,396 1500,300"/>
+            <circle class="ax-dot ax-dot--internet" cx="100"  cy="540" r="7"/>
+            <circle class="ax-dot ax-dot--internet" cx="566"  cy="480" r="7"/>
+            <circle class="ax-dot ax-dot--internet" cx="1033" cy="396" r="7"/>
+            <circle class="ax-dot ax-dot--internet" cx="1500" cy="300" r="7"/>
+          </g>
+
+          <g class="ax-track ax-track--phone">
+            <polyline class="ax-line ax-line--phone" points="100,540 566,480 1033,360 1500,240"/>
+            <circle class="ax-dot ax-dot--phone" cx="100"  cy="540" r="7"/>
+            <circle class="ax-dot ax-dot--phone" cx="566"  cy="480" r="7"/>
+            <circle class="ax-dot ax-dot--phone" cx="1033" cy="360" r="7"/>
+            <circle class="ax-dot ax-dot--phone" cx="1500" cy="240" r="7"/>
+          </g>
+
+          <g class="ax-track ax-track--ai">
+            <polyline class="ax-line ax-line--ai" points="100,540 566,276 1033,168 1500,48"/>
+            <circle class="ax-dot ax-dot--ai" cx="100"  cy="540" r="9"/>
+            <circle class="ax-dot ax-dot--ai" cx="566"  cy="276" r="9"/>
+            <circle class="ax-dot ax-dot--ai" cx="1033" cy="168" r="9"/>
+            <circle class="ax-dot ax-dot--ai" cx="1500" cy="48"  r="11"/>
+          </g>
+
+          <text class="ax-endpoint" x="1490" y="296" text-anchor="end" dy="-8" data-fx="fade" style="--d:2350ms" data-count="20" data-count-suffix="%" data-count-delay="2350" data-count-dur="700">20%</text>
+          <text class="ax-endpoint" x="1490" y="236" text-anchor="end" dy="-8" data-fx="fade" style="--d:2450ms" data-count="25" data-count-suffix="%" data-count-delay="2450" data-count-dur="700">25%</text>
+          <text class="ax-endpoint ax-endpoint--big" x="1490" y="44" text-anchor="end" dy="-10" data-fx="fade" style="--d:4300ms" data-count="41" data-count-suffix="%" data-count-delay="4300" data-count-dur="1000">41%</text>
+        </svg>
+      </div>
+
+      <p class="ax-update" data-fx="fade" style="--d:5400ms"><span class="ax-update-mark" aria-hidden="true">↗</span> And still climbing: in the euro area, worker adoption reached <strong>52%</strong> in 2026 (ECB Consumer Expectations Survey) - a separate measure, a year past the three-year mark.</p>
+
+      <p class="ax-source" data-fx="fade" style="--d:1100ms">Within the same three-year window from launch, generative AI is at <strong>41%</strong> workforce adoption - roughly double internet-at-work and smartphone adoption at the equivalent point. Sources: US Census / Pew (internet, 1995–98), Pew Research (smartphone, 2007–10), Federal Reserve (GenAI, 2022–25). Y-axis is % of relevant population (workforce / adults).</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">06 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 8 — The enterprise gap (firm vs worker)
+       ============================================================ -->
+  <section class="slide slide--appendix" data-label="Firm vs worker">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · adoption</p>
+    <h2 class="slide-title" data-split>The enterprise <em>gap</em>.</h2>
+
+    <div class="slide-body">
+      <div class="ax-pair">
+        <article class="ax-card" data-fx="rise" style="--d:200ms">
+          <p class="ax-card-eyebrow">Firms that have formally adopted</p>
+          <p class="ax-card-figure" data-count="18" data-count-suffix="%" data-count-delay="500" data-count-dur="900">18%</p>
+          <p class="ax-card-body">Of US businesses report adopting AI in any business function (Fed BTOS, end 2025).</p>
+        </article>
+        <article class="ax-card" data-fx="rise" style="--d:320ms">
+          <p class="ax-card-eyebrow">Workers using it anyway</p>
+          <p class="ax-card-figure" data-count="41" data-count-suffix="%" data-count-delay="620" data-count-dur="900">41%</p>
+          <p class="ax-card-body">Of US workers use generative AI at work - often via personal accounts, ahead of their employer (Fed RPS).</p>
+        </article>
+      </div>
+
+      <h3 class="ax-frictions-head" data-fx="rise" style="--d:480ms">Why deploying large-scale projects is <em>hard</em>.</h3>
+
+      <ul class="ax-frictions">
+        <li data-fx="rise" style="--d:600ms">
+          <div>
+            <strong>Identifying use cases</strong>
+            <span>What's flexible for one person becomes hard to define for a thousand. Personal use bends to the user; organisational use has to nail the use case first.</span>
+          </div>
+        </li>
+        <li data-fx="rise" style="--d:700ms">
+          <div>
+            <strong>Reproducibility and audit trail</strong>
+            <span>A sole trader can let AI draft an invoice. A 1,000-person firm needs an output that survives an audit.</span>
+          </div>
+        </li>
+        <li data-fx="rise" style="--d:800ms">
+          <div>
+            <strong>Error consequences at scale</strong>
+            <span>A hallucinated paragraph is a shrug in a personal email; a correction in a 200,000-circulation paper.</span>
+          </div>
+        </li>
+        <li data-fx="rise" style="--d:900ms">
+          <div>
+            <strong>Workforce concerns about displacement</strong>
+            <span>Real, live conversations inside most large organisations - including ours.</span>
+          </div>
+        </li>
+        <li data-fx="rise" style="--d:1000ms">
+          <div>
+            <strong>Negative customer reaction</strong>
+            <span>AI-produced news is seen as less trustworthy than human-produced news, even with human oversight.</span>
+          </div>
+        </li>
+      </ul>
+
+      <p class="ax-source" data-fx="fade" style="--d:1150ms">Sources: Federal Reserve, April 2026; RISJ Digital News Report 2025. The Fed also notes adoption among the smallest firms is "stronger than would be expected based on size alone".</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">07 / NN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE — The personal picture: individual adoption, sentiment,
+       model share. Figures grounded in real 2025-26 data:
+       Eurostat/OECD (individual use), Pew/Gallup/Numerator
+       (attitudes), Similarweb (model share, worldwide web visits).
+       ============================================================ -->
+  <section class="slide slide--adopt" data-label="The personal picture">
+    <div class="rule-band"></div>
+
+    <p class="kicker" data-fx="rise" style="--d:60ms">The state of AI · adoption</p>
+    <h2 class="slide-title" data-split>AI in <em>private hands</em>.</h2>
+    <p class="slide-subtitle" data-fx="rise" style="--d:220ms">Away from the workplace: who actually uses it, what they make of it, and which models they reach for.</p>
+
+    <div class="slide-body">
+      <div class="adopt-cols">
+
+        <div class="adopt-col">
+          <p class="adopt-clabel" data-fx="rise" style="--d:320ms">01 · Who uses it</p>
+          <div class="adopt-stat" data-fx="rise" style="--d:440ms">
+            <span class="adopt-fig" data-count="33" data-count-suffix="%" data-count-delay="560" data-count-dur="900">33%</span>
+            <span class="adopt-fig-note">of EU adults, in the last three months</span>
+          </div>
+          <ul class="adopt-list" data-fx="rise" style="--d:560ms">
+            <li><strong>The young run ahead.</strong> 64% of 16-24s use generative AI, against a small fraction of the over-65s - a 53.6-point age gap, the widest of any divide.</li>
+            <li><strong>Barely a gender gap.</strong> Men and women sit just 4.2 points apart. Age is the story; gender isn't.</li>
+            <li><strong>Then it becomes a habit.</strong> In the US, close to a third now use AI several times a day - up from a fifth two years ago.</li>
+            <li><strong>Work pulls it up.</strong> 41% of employed adults use it against 12.5% of the retired - which is why this all-adult third sits below the workers' four-in-ten-plus.</li>
+          </ul>
+        </div>
+
+        <div class="adopt-col adopt-col--sentiment">
+          <p class="adopt-clabel" data-fx="rise" style="--d:400ms">02 · How they feel</p>
+          <div class="adopt-stat" data-fx="rise" style="--d:520ms">
+            <span class="adopt-fig" data-count="70" data-count-suffix="%" data-count-delay="640" data-count-dur="900">70%</span>
+            <span class="adopt-fig-note">of Gen Z find AI useful day to day</span>
+          </div>
+          <ul class="adopt-list" data-fx="rise" style="--d:640ms">
+            <li><strong>Indispensable for study.</strong> Around 9 in 10 students now use it for coursework, and about half say it has improved their studies.</li>
+            <li><strong>But wary of where it leads.</strong> Even the heaviest users are uneasy - roughly half of under-30s expect AI to do society more harm than good.</li>
+            <li><strong>The old aren't hostile - just unsure.</strong> Over-65s use it least, and are likeliest to say they don't yet know what to make of it.</li>
+          </ul>
+        </div>
+
+        <div class="adopt-col">
+          <p class="adopt-clabel" data-fx="rise" style="--d:480ms">03 · Which model</p>
+          <div class="share-bars">
+            <div class="share-row">
+              <span class="share-name" data-fx="fade" style="--d:640ms">ChatGPT <em>OpenAI</em></span>
+              <span class="share-val" data-fx="fade" style="--d:640ms">53.9%</span>
+              <div class="share-track"><div class="share-fill is-1" data-fx="bar" style="--d:640ms; width:53.9%"></div></div>
+            </div>
+            <div class="share-row">
+              <span class="share-name" data-fx="fade" style="--d:760ms">Google Gemini</span>
+              <span class="share-val" data-fx="fade" style="--d:760ms">27.9%</span>
+              <div class="share-track"><div class="share-fill is-2" data-fx="bar" style="--d:760ms; width:27.9%"></div></div>
+            </div>
+            <div class="share-row">
+              <span class="share-name" data-fx="fade" style="--d:880ms">Claude <em>Anthropic</em></span>
+              <span class="share-val" data-fx="fade" style="--d:880ms">9.2%</span>
+              <div class="share-track"><div class="share-fill is-3" data-fx="bar" style="--d:880ms; width:9.2%"></div></div>
+            </div>
+            <div class="share-row">
+              <span class="share-name" data-fx="fade" style="--d:1000ms">Everyone else <em>Grok, Copilot, Perplexity…</em></span>
+              <span class="share-val" data-fx="fade" style="--d:1000ms">9.0%</span>
+              <div class="share-track"><div class="share-fill is-4" data-fx="bar" style="--d:1000ms; width:9.0%"></div></div>
+            </div>
+          </div>
+          <div class="share-notes">
+            <p data-fx="fade" style="--d:1300ms"><strong>ChatGPT below half</strong> for the first time - even past a billion weekly users.</p>
+            <p data-fx="fade" style="--d:1420ms"><strong>Gemini roughly tripled</strong> its share in a year, on Google's reach.</p>
+            <p data-fx="fade" style="--d:1540ms"><strong>Claude grew fastest</strong> in the field, off a small base.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="ax-source" data-fx="fade" style="--d:1800ms">Sources: Eurostat / OECD (individual use, 2025); Pew Research, HEPI, Numerator (frequency, students and attitudes, 2026); Similarweb (model share, worldwide web visits, May 2026).</p>
+    </div>
+
+    <div class="slide-foot">
+      <span class="wm">Advanced AI training</span>
+      <span class="num">10 / NN</span>
+    </div>
+  </section>
+
 </deck-stage>
 
 <script src="deck-stage.js"></script>
-<script src="motion.js?v=7"></script>
+<script src="predictor.js?v=8"></script>
+<script src="stream.js?v=8"></script>
+<script src="motion.js?v=8"></script>
 <script src="grid-overlay.js"></script>
 
 </body></html>
