@@ -3248,3 +3248,58 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 .rway-chip { font-family: var(--ui); font-weight: 700; font-size: 20px; padding: 9px 18px; border: 1.5px solid var(--ink); border-radius: 999px; color: var(--ink); background: var(--paper-bright); }
 .slide--ask .asks-foot { margin: 30px 0 0; font-family: var(--display); font-weight: 500; font-size: 34px; color: var(--ink); }
 .slide--topic .slide-title { margin-bottom: 12px; } .topic-dek { margin-bottom: 30px; }
+
+/* ================================================================
+   Copy a picture - click an image and it lands on the clipboard,
+   ready to paste into Gemini and ask for something in that style.
+   The chip is the only affordance; it stays quiet until you hover
+   or tab to the image.
+   ================================================================ */
+[data-copy-image] {
+  cursor: pointer;
+  outline-offset: 3px;
+}
+[data-copy-image]:hover { outline: 3px solid var(--guardian-blue); }
+[data-copy-image]:focus-visible { outline: 3px solid var(--guardian-blue); }
+
+.imgcopy-chip {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  pointer-events: none;
+  padding: 7px 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 200ms ease, transform 200ms var(--ease-out);
+}
+[data-copy-image]:hover ~ .imgcopy-chip,
+[data-copy-image]:focus-visible ~ .imgcopy-chip,
+.imgcopy-chip.is-shown { opacity: 1; transform: none; }
+.imgcopy-chip.is-ok { background: var(--eco-green); }
+
+/* The status line is for screen readers only. */
+.imgcopy-live {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imgcopy-chip { transition: none; transform: none; }
+}
+
+/* Nothing clickable in an export. */
+@media print {
+  .imgcopy-chip { display: none !important; }
+  [data-copy-image]:hover { outline: none !important; }
+}

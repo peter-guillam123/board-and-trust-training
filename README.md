@@ -50,6 +50,25 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 1 October 2026 — Click a picture to copy it
+
+All seven images in the deck now go to the clipboard when you click them, so
+the room can take one straight into Gemini and ask for something in that style.
+Hover over an image, or tab to it, and a small "copy image" chip appears in the
+corner. Click it, or press Enter, and it is copied.
+
+Browsers only accept PNG on the clipboard, so the JPEGs are redrawn through a
+canvas on the way out. They land between 0.3MB and 3MB, which pastes fine.
+
+Two things worth knowing. The clipboard needs a secure context, so this works on
+the published deck and on localhost, but not from a file:// copy. And deck-stage
+lays tap zones over the left and right thirds on touch devices, so the click is
+caught in the capture phase at window level, before those zones see it. That is
+what stops the slide advancing under your finger.
+
+Images keep their alt text as the button label, take keyboard focus, and
+announce the result to a screen reader. `deck-stage.js` was not touched.
+
 ### 30 September 2026 — Swapped in "Where we are now" from the working group deck
 
 The landscape section here had been overtaken by the one built for the AI
