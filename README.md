@@ -50,6 +50,14 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 1 October 2026 — "Irreplaceable expertise" moved up, after the quantum leap
+
+It now follows the quantum leap principle directly, rather than sitting after
+the genie. The two belong together: the quantum leap explains that the model
+starts cold every time, and irreplaceable expertise is what you bring to fill
+that gap. The genie slide follows them both. Pure reorder, verified no content
+changed.
+
 ### 1 October 2026 — Example prompts on "The mentor & the manager"
 
 Each side of the slide now carries an example of the instruction it is arguing
