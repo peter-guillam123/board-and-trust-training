@@ -50,6 +50,23 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 1 October 2026 — Example prompts on "The mentor & the manager"
+
+Each side of the slide now carries an example of the instruction it is arguing
+for, ruled in that side's colour. The teacher one shows what patient setup looks
+like: give it good and bad examples and make it tell you the difference before
+it writes anything. The manager one shows the same discipline at project level:
+no building until the work is broken into steps with a way of telling whether
+each one worked.
+
+The project side also carries a footnote, because agentic tools will now often
+break the work up themselves and show you a plan. That is a help, not a reason
+to skip reading it.
+
+The two columns are tied together with subgrid, so both "for example" labels sit
+on the same line however long the body copy above them runs. Where subgrid is
+unsupported it falls back to ordinary stacking.
+
 ### 1 October 2026 — The two reasoning panels now sit side by side
 
 On "It thinks before it answers", the straight-away answer and the thought-it-

@@ -3307,3 +3307,41 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
   .imgcopy-chip { display: none !important; }
   [data-copy-image]:hover { outline: none !important; }
 }
+
+/* Example prompts on "The mentor & the manager". Each one shows the
+   instruction the side is arguing for, ruled in that side's colour. */
+.duo-eg-label {
+  margin: 30px 0 10px;
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.duo-eg {
+  margin: 0;
+  padding-left: 22px;
+  border-left: 3px solid var(--guardian-blue);
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.duo-side:last-child .duo-eg { border-left-color: var(--news-red); }
+.duo-note {
+  margin: 20px 0 0;
+  font-family: var(--ui);
+  font-size: 19px;
+  line-height: 1.42;
+  color: var(--ink-mute);
+}
+/* Line the two columns up row by row, so both "for example" labels sit
+   on the same line however long the body copy above them runs. Falls
+   back to normal stacking where subgrid is unsupported. */
+.duo { grid-template-rows: auto auto auto 1fr; align-items: stretch; }
+.duo-side { display: grid; grid-row: 1 / -1; grid-template-rows: subgrid; align-content: start; }
+.duo-divider { grid-row: 1 / -1; }
+.duo-egs { margin: 0; }
+
