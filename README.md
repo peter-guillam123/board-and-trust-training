@@ -50,6 +50,20 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 1 October 2026 — Steinem slide: reworded, and two more pieces linked
+
+The standfirst now reads "On the morning of her death, I asked Fable 5.1...",
+which is both truer and sharper than "this morning". Bottom right of the slide
+there are now links to two more of Chris's pieces, How a data centre works and
+the AI risk field guide. Both checked live before linking.
+
+Fixed a regression that came with click-to-copy. That feature claimed every
+image in the deck, including the Steinem screenshot, which sits inside a link to
+the artifact. Clicking it copied the picture instead of opening the artifact,
+which is the one thing the slide asks you to do. Images inside a link are now
+left alone: the link wins, and a right-click still copies them the ordinary way.
+It was the only image in the deck affected; the other six still copy on a click.
+
 ### 1 October 2026 — "Irreplaceable expertise" moved up, after the quantum leap
 
 It now follows the quantum leap principle directly, rather than sitting after

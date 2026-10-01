@@ -68,6 +68,11 @@
   };
 
   document.querySelectorAll(SELECTOR).forEach((img) => {
+    // An image inside a link already has a job. The Steinem screenshot
+    // opens the artifact, and hijacking that click to copy would break
+    // the one thing the slide asks you to do. Leave those alone; a
+    // right-click still copies them the ordinary way.
+    if (img.closest('a')) return;
     img.dataset.copyImage = '';
     img.setAttribute('role', 'button');
     img.setAttribute('tabindex', '0');

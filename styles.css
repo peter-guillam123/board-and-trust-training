@@ -3345,3 +3345,26 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 .duo-divider { grid-row: 1 / -1; }
 .duo-egs { margin: 0; }
 
+/* Two more of Chris's pieces, bottom right of the Steinem slide. */
+.proof-more-label {
+  margin: 24px 0 10px;
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.proof-more { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.proof-more a {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--guardian-blue);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(5,41,98,0.25);
+  padding-bottom: 2px;
+}
+.proof-more a:hover,
+.proof-more a:focus-visible { border-bottom-color: var(--guardian-blue); }
+.proof-more-arrow { color: var(--news-red); }
