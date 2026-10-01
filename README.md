@@ -50,6 +50,24 @@ source, Anglicised (Labour, distil, realise).
 
 ## Changelog
 
+### 1 October 2026 — The two reasoning panels now sit side by side
+
+On "It thinks before it answers", the straight-away answer and the thought-it-
+through answer were stacked, which buried the comparison the slide exists to
+make. They now sit side by side.
+
+The cause was mine, from the section port. The working group's Part 2 had its
+own `.ways` component, a row of chips, and its rule came across with everything
+else and overrode the `.ways` two-panel grid that this slide uses. Same class
+name, different component, and the later rule won. Removed the dead one, with a
+note in the stylesheet so it does not get re-added. Checked the rest of the
+ported block for the same trap: four other classes have more than one rule, but
+those are the working group's own polish passes refining the same component, not
+collisions.
+
+It also fixed something I had flagged as inherited: the source note on that
+slide no longer runs under the folio, because the left column is shorter now.
+
 ### 1 October 2026 — Click a picture to copy it
 
 All seven images in the deck now go to the clipboard when you click them, so

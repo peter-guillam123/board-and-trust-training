@@ -3243,7 +3243,11 @@ a.chat-bubble:hover { background: var(--guardian-blue); color: var(--paper); }
 .ask-col:nth-child(3) .ask-n { color: var(--guardian-blue); }
 .ask-col h3 { font-family: var(--display); font-weight: 500; font-size: 36px; line-height: 1.1; margin: 0 0 12px; }
 .ask-col p { margin: 0; font-family: var(--body); font-size: 24px; line-height: 1.42; color: var(--ink-soft); }
-.ways { margin-top: 38px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+/* The working group's Part 2 had its own .ways component, a row of
+   chips. Those slides are not in this deck, but its rule came across
+   with the port and overrode the .ways above, which is the two-panel
+   grid on 'It thinks before it answers'. Removed, so the panels sit
+   side by side. Do not re-add without renaming one of them. */
 .ways-l { font-family: var(--ui); font-weight: 700; font-size: 17px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); margin-right: 8px; }
 .rway-chip { font-family: var(--ui); font-weight: 700; font-size: 20px; padding: 9px 18px; border: 1.5px solid var(--ink); border-radius: 999px; color: var(--ink); background: var(--paper-bright); }
 .slide--ask .asks-foot { margin: 30px 0 0; font-family: var(--display); font-weight: 500; font-size: 34px; color: var(--ink); }
